@@ -1,0 +1,33 @@
+{
+  "name": "auth-n-roll-components-styled-components",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "start-storybook -p 6006 -c .storybook",
+    "clean": "rm -rf dist",
+    "build": "babel --config-file ../../.babelrc -d dist src --copy-files",
+    "build:watch": "babel --config-file ../../.babelrc -d dist --watch src --copy-files"
+  },
+  "keywords": [],
+  "author": "Davide Fiorello <davide@codeflyer.com> (http://github.com/codeflyer/)",
+  "license": "ISC",
+  "dependencies": {
+    "auth-n-roll": "^1.0.0",
+    "clean-element": "^1.0.0",
+    "prop-types": "^15.6.1",
+    "react": "^16.4.0",
+    "styled-components": "^3.3.2",
+    "styled-system": "^2.2.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.49",
+    "@babel/core": "^7.0.0-beta.48",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.49",
+    "@babel/preset-env": "^7.0.0-beta.48",
+    "@babel/preset-react": "^7.0.0-beta.48",
+    "babel-core": "^7.0.0-bridge.0",
+    "jest": "^23.1.0"
+  }
+}
