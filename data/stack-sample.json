@@ -1,0 +1,10 @@
+{
+  "UserPoolClientId": "A Key here",
+  "UserPoolId": "eu-west-1_some user pool id",
+  "ClientSecret": "ClientSecret attribute not supported at this time, please use the CLI or Console to retrieve this value",
+  "ApiLambdaFunctionQualifiedArn": "",
+  "IdentityPoolId": "",
+  "ServiceEndpoint": "",
+  "ServerlessDeploymentBucketName": "",
+  "Region": "eu-west-1"
+}
