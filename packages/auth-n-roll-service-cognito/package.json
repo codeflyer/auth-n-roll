@@ -1,0 +1,29 @@
+{
+  "name": "auth-n-roll-service-cognito",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "node test/start.js",
+    "clean": "rm -rf dist",
+    "build": "babel --config-file ../../.babelrc -d dist src",
+    "build:watch": "babel --config-file ../../.babelrc -d dist --watch src"
+  },
+  "author":
+    "Davide Fiorello <davide@codeflyer.com> (http://github.com/codeflyer/)",
+  "license": "ISC",
+  "dependencies": {
+    "auth-n-roll": "^1.0.0",
+    "aws-sdk": "^2.254.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.49",
+    "@babel/core": "^7.0.0-beta.48",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.49",
+    "@babel/preset-env": "^7.0.0-beta.48",
+    "@babel/preset-react": "^7.0.0-beta.48",
+    "babel-core": "^7.0.0-bridge.0",
+    "jest": "^23.1.0",
+    "whatwg-fetch": "^2.0.4"
+  }
+}
