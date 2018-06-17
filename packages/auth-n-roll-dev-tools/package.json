@@ -1,6 +1,6 @@
 {
   "name": "auth-n-roll-dev-tools",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -10,9 +10,9 @@
     "build:watch": "babel --config-file ../../.babelrc -d dist --watch src"
   },
   "author": "Davide Fiorello <davide@codeflyer.com> (http://github.com/codeflyer/)",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "auth-n-roll": "^1.0.0"
+    "auth-n-roll": "^0.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.49",

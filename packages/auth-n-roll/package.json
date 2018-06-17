@@ -1,6 +1,6 @@
 {
   "name": "auth-n-roll",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "build:watch": "babel --config-file ../../.babelrc -d dist --watch src --copy-files"
   },
   "author": "Davide Fiorello <davide@codeflyer.com> (http://github.com/codeflyer/)",
-  "license": "ISC",
+  "license": "MIT",
   "peerDependencies": {
     "react": "^16.4.0"
   },
