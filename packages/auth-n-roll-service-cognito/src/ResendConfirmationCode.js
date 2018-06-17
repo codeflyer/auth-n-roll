@@ -1,3 +1,5 @@
+import { RESEND_VALIDATION_CODE_RESPONSE_ERROR } from 'auth-n-roll'
+
 export const ResendConfirmationCode = async (cognito, stack, username) => {
   if (!username) {
     throw {
@@ -15,6 +17,11 @@ export const ResendConfirmationCode = async (cognito, stack, username) => {
 
     return Object.assign({}, result, { user: { username } })
   } catch (err) {
-    throw { code: err.code, message: err.message, user: { username } }
+    throw {
+      code: RESEND_VALIDATION_CODE_RESPONSE_ERROR,
+      originalCode: err.code,
+      message: err.message,
+      user: { username }
+    }
   }
 }

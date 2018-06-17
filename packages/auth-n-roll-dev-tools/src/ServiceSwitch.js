@@ -1,11 +1,6 @@
 import React from 'react'
 
-import {
-  getSignInResponse,
-  setSignInResponse,
-  setResendValidationCodeResponse,
-  getResendValidationCodeResponse
-} from './ServiceInMemory'
+import { setState, getState } from './ServiceInMemory'
 
 import {
   SIGN_IN_RESPONSE_USER_NOT_FOUND,
@@ -39,10 +34,12 @@ const styles = {
   })
 }
 
-const SwitchButton = ({ getValue, setValue, checkValue , label, update}) => (
+const SwitchButton = ({ name, checkValue, label, update }) => (
   <button
-    style={getValue() === checkValue ? styles.selectedButton : styles.button}
-    onClick={() => update(setValue, checkValue)}
+    style={
+      getState(name) === checkValue ? styles.selectedButton : styles.button
+    }
+    onClick={() => update(setState.bind(null, name), checkValue)}
   >
     {label}
   </button>
@@ -67,37 +64,32 @@ export class ServiceSwitch extends React.Component {
           <div>SignIn</div>
           <div>
             <SwitchButton
-              getValue={getSignInResponse}
+              name="signinResponse"
               checkValue={SIGN_IN_RESPONSE_OK}
-              setValue={setSignInResponse}
               label="OK"
               update={this.handleUpdate}
             />
             <SwitchButton
-              getValue={getSignInResponse}
+              name="signinResponse"
               checkValue={SIGN_IN_RESPONSE_CHANGE_PASSWORD}
-              setValue={setSignInResponse}
               label="Change PWD"
               update={this.handleUpdate}
             />
             <SwitchButton
-              getValue={getSignInResponse}
+              name="signinResponse"
               checkValue={SIGN_IN_RESPONSE_USER_NOT_FOUND}
-              setValue={setSignInResponse}
               label="Not Found"
               update={this.handleUpdate}
             />
             <SwitchButton
-              getValue={getSignInResponse}
+              name="signinResponse"
               checkValue={SIGN_IN_RESPONSE_NOT_AUTHORIZED}
-              setValue={setSignInResponse}
               label="Not Auth"
               update={this.handleUpdate}
             />
             <SwitchButton
-              getValue={getSignInResponse}
+              name="signinResponse"
               checkValue={SIGN_IN_RESPONSE_NOT_CONFIRMED}
-              setValue={setSignInResponse}
               label="Not Confirmed"
               update={this.handleUpdate}
             />
@@ -105,16 +97,14 @@ export class ServiceSwitch extends React.Component {
           <div>Resend Code</div>
           <div>
             <SwitchButton
-              getValue={getResendValidationCodeResponse}
+              name="resendValidationCodeResponse"
               checkValue={RESEND_VALIDATION_CODE_RESPONSE_OK}
-              setValue={setResendValidationCodeResponse}
               label="Success"
               update={this.handleUpdate}
             />
             <SwitchButton
-              getValue={getResendValidationCodeResponse}
+              name="resendValidationCodeResponse"
               checkValue={RESEND_VALIDATION_CODE_RESPONSE_ERROR}
-              setValue={setResendValidationCodeResponse}
               label="Error"
               update={this.handleUpdate}
             />

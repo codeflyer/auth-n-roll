@@ -1,11 +1,12 @@
 import {
   CONFIRM_SIGN_UP_CODE_MISMATCH,
   CONFIRM_SIGN_UP_EXPIRED_CODE,
-  CONFIRM_SIGN_UP_USER_NOT_FOUND
+  CONFIRM_SIGN_UP_USER_NOT_FOUND,
+  CONFIRM_SIGN_UP_ERROR
 } from 'auth-n-roll'
 
 export const ConfirmSignUp = async (
-  cognit,
+  cognito,
   stack,
   username,
   confirmationCode
@@ -19,7 +20,7 @@ export const ConfirmSignUp = async (
 
   try {
     const result = await cognito
-      .resendConfirmationCode({
+      .confirmSignUp({
         ClientId: stack.UserPoolClientId,
         Username: username,
         ConfirmationCode: confirmationCode
@@ -48,8 +49,7 @@ export const ConfirmSignUp = async (
           user: { username }
         }
       default:
-        console.log(err)
-        throw { code: err.code, message: err.message, user: { username } }
+        throw { code: CONFIRM_SIGN_UP_ERROR, originalCode: err.code, message: err.message, user: { username } }
     }
   }
 }
