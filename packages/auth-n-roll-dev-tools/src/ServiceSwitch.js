@@ -14,8 +14,8 @@ import {
   SIGN_IN_RESPONSE_CHANGE_PASSWORD,
   SIGN_IN_RESPONSE_NOT_CONFIRMED,
   SIGN_IN_RESPONSE_SOFTWARE_TOKEN_MFA,
-  RESEND_VALIDATION_CODE_RESPONSE_SENDING_ERROR,
-  RESEND_VALIDATION_CODE_RESPONSE_SENDING_SUCCESS
+  RESEND_VALIDATION_CODE_RESPONSE_OK,
+  RESEND_VALIDATION_CODE_RESPONSE_ERROR
 } from 'auth-n-roll'
 
 const styleButton = {
@@ -106,14 +106,14 @@ export class ServiceSwitch extends React.Component {
           <div>
             <SwitchButton
               getValue={getResendValidationCodeResponse}
-              checkValue={RESEND_VALIDATION_CODE_RESPONSE_SENDING_SUCCESS}
+              checkValue={RESEND_VALIDATION_CODE_RESPONSE_OK}
               setValue={setResendValidationCodeResponse}
               label="Success"
               update={this.handleUpdate}
             />
             <SwitchButton
               getValue={getResendValidationCodeResponse}
-              checkValue={RESEND_VALIDATION_CODE_RESPONSE_SENDING_ERROR}
+              checkValue={RESEND_VALIDATION_CODE_RESPONSE_ERROR}
               setValue={setResendValidationCodeResponse}
               label="Error"
               update={this.handleUpdate}

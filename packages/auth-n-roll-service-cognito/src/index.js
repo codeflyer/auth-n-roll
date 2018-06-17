@@ -14,6 +14,10 @@ import {
 const { CognitoIdentityCredentials } = require('aws-sdk')
 const CognitoIdentityServiceProvider = require('aws-sdk/clients/cognitoidentityserviceprovider')
 
+import { SignIn } from './SignIn'
+import { ConfirmSignUp } from './ConfirmSignUp'
+import { ResendConfirmationCode } from './ResendConfirmationCode'
+
 export const ServiceCognito = stack => {
   const configData = {
     cognitoidentityserviceprovider: '2016-04-18',
@@ -36,89 +40,9 @@ export const ServiceCognito = stack => {
     region: stack.Region
   })
 
-  const resendConfirmationCode = async (username) => {
-    if (!username) {
-      throw { code: SIGN_IN_RESPONSE_VALIDATION_DATA, message: 'Username required' }
-    }
-    try {
-      const result = await
-        cognito.resendConfirmationCode(
-          {
-            ClientId: stack.UserPoolClientId,
-            Username: username
-          }).promise()
-
-      return Object.assign({}, result, { user: { username } })
-    } catch (err) {
-      throw { code: err.code, message: err.message, user: { username } }
-    }
-  }
-
-  const signIn = async (username, password) => {
-    if (!username || !password) {
-      throw { code: SIGN_IN_RESPONSE_VALIDATION_DATA, message: 'Username and password required' }
-    }
-
-    try {
-      const result = await
-        cognito.initiateAuth(
-          {
-            AuthFlow: 'USER_PASSWORD_AUTH',
-            ClientId: stack.UserPoolClientId,
-            AuthParameters: {
-              USERNAME: username,
-              PASSWORD: password
-            }
-          }).promise()
-
-      return Object.assign({}, result, { user: { username } })
-    } catch (err) {
-      switch (err.code) {
-        case 'UserNotFoundException':
-          throw { code: SIGN_IN_RESPONSE_USER_NOT_FOUND, message: err.message, user: { username } }
-        case 'NotAuthorizedException':
-          throw { code: SIGN_IN_RESPONSE_NOT_AUTHORIZED, message: err.message, user: { username } }
-        case 'UserNotConfirmedException':
-          throw { code: SIGN_IN_RESPONSE_NOT_CONFIRMED, message: err.message, user: { username } }
-        default:
-          console.log(err)
-          throw { code: err.code, message: err.message, user: { username } }
-      }
-    }
-  }
-
-  const confirmSignUp = async (username, confirmationCode) => {
-    if (!confirmationCode || !username) {
-      throw { code: SIGN_IN_RESPONSE_VALIDATION_DATA, message: 'Username and ConfirmationCode required' }
-    }
-
-    try {
-      const result = await
-        cognito.resendConfirmationCode(
-          {
-            ClientId: stack.UserPoolClientId,
-            Username: username,
-            ConfirmationCode: confirmationCode
-          }).promise()
-
-      return Object.assign({}, result, { user: { username } })
-    } catch (err) {
-      switch (err.code) {
-        case 'UserNotFoundException':
-          throw { code: CONFIRM_SIGN_UP_USER_NOT_FOUND, message: err.message, user: { username } }
-        case 'CodeMismatchException':
-          throw { code: CONFIRM_SIGN_UP_CODE_MISMATCH, message: err.message, user: { username } }
-        case 'ExpiredCodeException':
-          throw { code: CONFIRM_SIGN_UP_EXPIRED_CODE, message: err.message, user: { username } }
-        default:
-          console.log(err)
-          throw { code: err.code, message: err.message, user: { username } }
-      }
-    }
-  }
-
   return {
-    signIn,
-    resendConfirmationCode
+    signIn: SignIn.bind(null, cognito, stack),
+    confirmSignUp: ConfirmSignUp.bind(null, cognito, stack),
+    resendConfirmationCode: ResendConfirmationCode.bind(null, cognito, stack)
   }
 }

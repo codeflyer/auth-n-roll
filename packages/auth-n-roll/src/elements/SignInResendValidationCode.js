@@ -1,13 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  RESEND_VALIDATION_CODE_RESPONSE_NOT_REQUESTED,
-  RESEND_VALIDATION_CODE_RESPONSE_SENDING,
-  RESEND_VALIDATION_CODE_RESPONSE_SENDING_ERROR,
-  RESEND_VALIDATION_CODE_RESPONSE_SENDING_SUCCESS
-} from '../constants'
-
 import { StateContext, withAuthNRoll2 } from '../contexts'
 import { StateFilter } from '../consumers/StateFilter'
 
@@ -17,7 +10,7 @@ export const SignInResendValidationCodeBase = Component => {
       super(props)
 
       this.state = {
-        sendingState: RESEND_VALIDATION_CODE_RESPONSE_NOT_REQUESTED,
+        sendingState: SignInResendValidationCode.STATE_NOT_REQUESTED,
         error: null,
         user: this.props.authNRoll.user,
         resend: this.handleResend.bind(this)
@@ -26,7 +19,7 @@ export const SignInResendValidationCodeBase = Component => {
 
     async handleResend() {
       this.setState({
-        sendingState: RESEND_VALIDATION_CODE_RESPONSE_SENDING,
+        sendingState: SignInResendValidationCode.STATE_SENDING,
         error: null
       })
 
@@ -35,11 +28,11 @@ export const SignInResendValidationCodeBase = Component => {
           this.state.user.username
         )
         this.setState({
-          sendingState: RESEND_VALIDATION_CODE_RESPONSE_SENDING_SUCCESS
+          sendingState: SignInResendValidationCode.STATE_SENDING_SUCCESS
         })
       } catch (e) {
         this.setState({
-          sendingState: RESEND_VALIDATION_CODE_RESPONSE_SENDING_ERROR,
+          sendingState: SignInResendValidationCode.STATE_SENDING_ERROR,
           error: e.message
         })
       }
@@ -55,12 +48,19 @@ export const SignInResendValidationCodeBase = Component => {
   }
 }
 
-export const SignInResendValidationCode  = withAuthNRoll2(SignInResendValidationCodeBase)
+export const SignInResendValidationCode = withAuthNRoll2(
+  SignInResendValidationCodeBase
+)
+
+SignInResendValidationCode.STATE_NOT_REQUESTED = 'NOT_REQUESTED'
+SignInResendValidationCode.STATE_SENDING = 'SENDING'
+SignInResendValidationCode.STATE_SENDING_ERROR = 'SENDING_ERROR'
+SignInResendValidationCode.STATE_SENDING_SUCCESS = 'SENDING_SUCCESS'
 
 SignInResendValidationCode.MessageSending = ({ children }) => (
   <StateFilter
     name="sendingState"
-    value={RESEND_VALIDATION_CODE_RESPONSE_SENDING}
+    value={SignInResendValidationCode.STATE_SENDING}
   >
     {' '}
     {children}{' '}
@@ -70,7 +70,7 @@ SignInResendValidationCode.MessageSending = ({ children }) => (
 SignInResendValidationCode.MessageSendingSuccess = ({ children }) => (
   <StateFilter
     name="sendingState"
-    value={RESEND_VALIDATION_CODE_RESPONSE_SENDING_SUCCESS}
+    value={SignInResendValidationCode.STATE_SENDING_SUCCESS}
   >
     {children}
   </StateFilter>
@@ -79,7 +79,7 @@ SignInResendValidationCode.MessageSendingSuccess = ({ children }) => (
 SignInResendValidationCode.MessageSendingError = ({ children }) => (
   <StateFilter
     name="sendingState"
-    value={RESEND_VALIDATION_CODE_RESPONSE_SENDING_ERROR}
+    value={SignInResendValidationCode.STATE_SENDING_ERROR}
   >
     {children}
   </StateFilter>
@@ -93,7 +93,7 @@ SignInResendValidationCode.ResendButton = props => (
           React.cloneElement(child, {
             onClick: state.resend,
             disabled:
-              state.sendingState === RESEND_VALIDATION_CODE_RESPONSE_SENDING
+              state.sendingState === SignInResendValidationCode.STATE_SENDING
           })
         )}
       </React.Fragment>
@@ -108,10 +108,10 @@ SignInResendValidationCode.propTypesDefinition = PropTypes.shape({
     fullname: PropTypes.string
   }).isRequired,
   sendingState: PropTypes.oneOf([
-    RESEND_VALIDATION_CODE_RESPONSE_NOT_REQUESTED,
-    RESEND_VALIDATION_CODE_RESPONSE_SENDING,
-    RESEND_VALIDATION_CODE_RESPONSE_SENDING_SUCCESS,
-    RESEND_VALIDATION_CODE_RESPONSE_SENDING_ERROR
+    SignInResendValidationCode.STATE_NOT_REQUESTED,
+    SignInResendValidationCode.STATE_SENDING,
+    SignInResendValidationCode.STATE_SENDING_ERROR,
+    SignInResendValidationCode.STATE_SENDING_SUCCESS
   ]),
   error: PropTypes.string,
   resend: PropTypes.func.isRequired

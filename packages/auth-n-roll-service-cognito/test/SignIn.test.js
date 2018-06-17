@@ -1,14 +1,16 @@
 import 'whatwg-fetch'
-import { ServiceCognito } from '../src/index'
-import stack from '../../../data/stack'
 import {
   SIGN_IN_RESPONSE_NOT_AUTHORIZED,
   SIGN_IN_RESPONSE_NOT_CONFIRMED,
   SIGN_IN_RESPONSE_USER_NOT_FOUND,
   SIGN_IN_RESPONSE_VALIDATION_DATA
-} from '../src'
+} from 'auth-n-roll'
 
-describe('Cognit service', () => {
+import { ServiceCognito } from '../src'
+
+import stack from '../../../data/stack'
+
+describe('SignIn', () => {
   test('Username and password not set', async () => {
     const service = ServiceCognito(stack)
     expect.assertions(1)
@@ -63,7 +65,7 @@ describe('Cognit service', () => {
     }
   })
 
-  test.only('Right credential but Password should be changed', async () => {
+  test('Right credential but Password should be changed', async () => {
     const service = ServiceCognito(stack)
     const result = await service.signIn('davide@codeflyer.com', 'testTEST1234')
     expect(result.ChallengeName).toEqual('NEW_PASSWORD_REQUIRED')

@@ -5,23 +5,19 @@ import {
   SIGN_IN_RESPONSE_CHANGE_PASSWORD,
   SIGN_IN_RESPONSE_NOT_CONFIRMED,
   SIGN_IN_RESPONSE_SOFTWARE_TOKEN_MFA,
-  RESEND_VALIDATION_CODE_RESPONSE_NOT_REQUESTED,
-  RESEND_VALIDATION_CODE_RESPONSE_SENDING,
-  RESEND_VALIDATION_CODE_RESPONSE_SENDING_SUCCESS,
-  RESEND_VALIDATION_CODE_RESPONSE_SENDING_ERROR,
-} from 'auth-n-roll'
-import {
+  SIGN_IN_RESPONSE_VALIDATION_DATA,
   CONFIRM_SIGN_UP_CODE_MISMATCH,
   CONFIRM_SIGN_UP_EXPIRED_CODE,
   CONFIRM_SIGN_UP_USER_NOT_FOUND,
-  SIGN_IN_RESPONSE_VALIDATION_DATA
-} from '../../auth-n-roll/src'
+  RESEND_VALIDATION_CODE_RESPONSE_OK,
+  RESEND_VALIDATION_CODE_RESPONSE_ERROR
+} from 'auth-n-roll'
 
-const delay = (time) => new Promise(resolve => setTimeout(resolve, time))
+const delay = time => new Promise(resolve => setTimeout(resolve, time))
 
 let state = {
   signinResponse: SIGN_IN_RESPONSE_OK,
-  resendValidationCodeResponse: RESEND_VALIDATION_CODE_RESPONSE_SENDING_SUCCESS
+  resendValidationCodeResponse: RESEND_VALIDATION_CODE_RESPONSE_OK
 }
 
 const STORAGE_KEY = 'auth-n-roll-dev-state'
@@ -34,9 +30,7 @@ const restoreState = () => {
   if (stored) {
     try {
       state = JSON.parse(stored)
-    } catch (e) {
-
-    }
+    } catch (e) {}
   }
 }
 
@@ -52,12 +46,12 @@ export const setConfirmSignUpReponse = response => {
 }
 export const getConfirmSignUpReponse = () => state.confirmSignUpResponse
 
-
 export const setResendValidationCodeResponse = response => {
   state.resendValidationCodeResponse = response
   storeState()
 }
-export const getResendValidationCodeResponse = () => state.resendValidationCodeResponse
+export const getResendValidationCodeResponse = () =>
+  state.resendValidationCodeResponse
 
 export const ServiceInMemory = () => {
   restoreState()
@@ -119,12 +113,12 @@ export const ServiceInMemory = () => {
     }
   }
 
-  const resendValidationCode = async (username) => {
+  const resendValidationCode = async username => {
     await delay(1000)
     switch (state.resendValidationCodeResponse) {
-      case RESEND_VALIDATION_CODE_RESPONSE_SENDING_ERROR:
+      case RESEND_VALIDATION_CODE_RESPONSE_ERROR:
         throw {
-          code: RESEND_VALIDATION_CODE_RESPONSE_SENDING_ERROR,
+          code: RESEND_VALIDATION_CODE_RESPONSE_ERROR,
           message: 'Email already verifyed',
           user: { username }
         }
@@ -143,27 +137,42 @@ export const ServiceInMemory = () => {
 
   const confirmSignUp = async (username, confirmationCode) => {
     if (!confirmationCode || !username) {
-      throw { code: SIGN_IN_RESPONSE_VALIDATION_DATA, message: 'Username and ConfirmationCode required' }
+      throw {
+        code: SIGN_IN_RESPONSE_VALIDATION_DATA,
+        message: 'Username and ConfirmationCode required'
+      }
     }
 
     try {
-      const result = await
-        cognito.resendConfirmationCode(
-          {
-            ClientId: stack.UserPoolClientId,
-            Username: username,
-            ConfirmationCode: confirmationCode
-          }).promise()
+      const result = await cognito
+        .resendConfirmationCode({
+          ClientId: stack.UserPoolClientId,
+          Username: username,
+          ConfirmationCode: confirmationCode
+        })
+        .promise()
 
       return Object.assign({}, result, { user: { username } })
     } catch (err) {
       switch (err.code) {
         case 'UserNotFoundException':
-          throw { code: CONFIRM_SIGN_UP_USER_NOT_FOUND, message: err.message, user: { username } }
+          throw {
+            code: CONFIRM_SIGN_UP_USER_NOT_FOUND,
+            message: err.message,
+            user: { username }
+          }
         case 'CodeMismatchException':
-          throw { code: CONFIRM_SIGN_UP_CODE_MISMATCH, message: err.message, user: { username } }
+          throw {
+            code: CONFIRM_SIGN_UP_CODE_MISMATCH,
+            message: err.message,
+            user: { username }
+          }
         case 'ExpiredCodeException':
-          throw { code: CONFIRM_SIGN_UP_EXPIRED_CODE, message: err.message, user: { username } }
+          throw {
+            code: CONFIRM_SIGN_UP_EXPIRED_CODE,
+            message: err.message,
+            user: { username }
+          }
         default:
           console.log(err)
           throw { code: err.code, message: err.message, user: { username } }
