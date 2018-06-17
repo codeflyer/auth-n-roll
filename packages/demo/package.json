@@ -1,0 +1,17 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Davide Fiorello <davide@codeflyer.com> (http://github.com/codeflyer/)",
+  "license": "ISC",
+  "dependencies": {
+    "auth-n-roll": "^1.0.0",
+    "auth-n-roll-components-styled-components": "^1.0.0",
+    "auth-n-roll-dev-tools": "^1.0.0",
+    "auth-n-roll-service-cognito": "^1.0.0"
+  }
+}
