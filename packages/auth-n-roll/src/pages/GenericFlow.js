@@ -19,15 +19,6 @@ export class GenericFlow extends React.Component {
     const indexList = React.Children.toArray(this.props.children).map(
       child => child.props.index
     )
-    React.Children.toArray(this.props.children).forEach(
-      child => {
-        console.log(child)
-        console.log(child.switchIndex)
-        console.log(child.defaultName)
-        console.log(child.name)
-      }
-    )
-    console.log(indexList)
     return (
       <AuthNRollContext.Consumer>
         {authNRoll => (
@@ -35,7 +26,12 @@ export class GenericFlow extends React.Component {
             <Switch index={authNRoll.switch.index || this.props.defaultIndex}>
               {this.props.children}
             </Switch>
-            {authNRoll.debug && this.debugPanel(indexList, authNRoll.switch.index || this.props.defaultIndex, authNRoll.switch.changeIndex)}
+            {authNRoll.debug &&
+              this.debugPanel(
+                indexList,
+                authNRoll.switch.index || this.props.defaultIndex,
+                authNRoll.switch.changeIndex
+              )}
           </React.Fragment>
         )}
       </AuthNRollContext.Consumer>

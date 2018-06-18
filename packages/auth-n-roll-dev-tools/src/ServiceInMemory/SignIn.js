@@ -7,7 +7,7 @@ import {
   SIGN_IN_RESPONSE_SOFTWARE_TOKEN_MFA
 } from 'auth-n-roll'
 
-const SignIn = async (username, password) => {
+export const SignIn = async (username, password) => {
   await delay(1000)
 
   switch (getState('signinResponse')) {

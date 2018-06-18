@@ -19,9 +19,14 @@ export class AuthNRollProvider extends React.Component {
       isLoggedIn: false,
       user: null,
       setUserData: this.handleSetUserData.bind(this),
+      restartSignIn: this.handleRestartSignIn.bind(this),
       switch: {
         index: null,
         changeIndex: this.handleChangeIndex
+      },
+      signIn: {
+        error: 'Add a default error here',
+        setError: this.handleSetError.bind(this, 'signIn')
       }
     }
 
@@ -32,14 +37,33 @@ export class AuthNRollProvider extends React.Component {
     }
   }
 
+  handleRestartSignIn() {
+    this.setState({
+      user: null,
+      switch: {
+        index: null,
+        changeIndex: this.handleChangeIndex
+      },
+      signIn: {
+        error: null,
+        setError: this.handleSetError.bind(this, 'signIn')
+      }
+    })
+  }
+
+  handleSetError(flow, error) {
+    this.setState({
+      [flow]: Object.assign({}, this.state[flow], { error })
+    })
+  }
+
   handleChangeIndex(newIndex) {
     this.setState({
-        switch: {
-          index: newIndex,
-          changeIndex: this.handleChangeIndex
-        }
+      switch: {
+        index: newIndex,
+        changeIndex: this.handleChangeIndex
       }
-    )
+    })
   }
 
   handleSetUserData(user) {
@@ -67,7 +91,7 @@ export class AuthNRollProvider extends React.Component {
     return (
       <AuthNRollContext.Provider value={this.state}>
         {this.props.children}
-        {this.props.debug && <DebugPanel/>}
+        {this.props.debug && <DebugPanel />}
       </AuthNRollContext.Provider>
     )
   }
@@ -79,4 +103,3 @@ AuthNRollProvider.propTypes = {
     PropTypes.node
   ])
 }
-

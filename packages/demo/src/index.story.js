@@ -4,7 +4,8 @@ import { storiesOf } from '@storybook/react'
 import {
   SignInCredentials,
   SignInChangePassword,
-  SignInValidateWithCode
+  SignInValidateWithCode,
+  SignInErrorAndRelogin
 } from 'auth-n-roll-components-styled-components'
 
 import { AuthNRollProvider, SignIn, SignInCredentialElement } from 'auth-n-roll'
@@ -34,7 +35,8 @@ storiesOf('Demo', module)
           <SignIn>
             <SignInCredentials index={SignIn.FLOW_STEP_CREDENTIAL} />
             <SignInChangePassword index={SignIn.FLOW_STEP_CHANGE_PASSWORD} />
-            <SignInValidateWithCode index={SignIn.FLOW_STEP_VALIDATE_CODE} />
+            <SignInValidateWithCode index={SignIn.FLOW_STEP_CONFIRM_CODE} />
+            <SignInErrorAndRelogin index={SignIn.FLOW_STEP_ERROR_AND_RELOGIN} />
           </SignIn>
           <ServiceSwitch />
         </div>
@@ -48,7 +50,8 @@ storiesOf('Demo', module)
           <SignIn>
             <SignInCredentials index={SignIn.FLOW_STEP_CREDENTIAL} />
             <SignInChangePassword index={SignIn.FLOW_STEP_CHANGE_PASSWORD} />
-            <SignInValidateWithCode index={SignIn.FLOW_STEP_VALIDATE_CODE} />
+            <SignInValidateWithCode index={SignIn.FLOW_STEP_CONFIRM_CODE} />
+            <SignInErrorAndRelogin index={SignIn.FLOW_STEP_ERROR_AND_RELOGIN} />
           </SignIn>
           <ServiceSwitch />
         </div>

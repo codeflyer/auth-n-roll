@@ -10,7 +10,13 @@ import {
   SIGN_IN_RESPONSE_NOT_CONFIRMED,
   SIGN_IN_RESPONSE_SOFTWARE_TOKEN_MFA,
   RESEND_VALIDATION_CODE_RESPONSE_OK,
-  RESEND_VALIDATION_CODE_RESPONSE_ERROR
+  RESEND_VALIDATION_CODE_RESPONSE_ERROR,
+  CONFIRM_SIGN_UP_CODE_MISMATCH,
+  CONFIRM_SIGN_UP_USER_NOT_FOUND,
+  CONFIRM_SIGN_UP_EXPIRED_CODE,
+  CONFIRM_SIGN_UP_ERROR,
+  CONFIRM_SIGN_UP_ERROR_RELOGIN,
+  CONFIRM_SIGN_UP_RESPONSE_OK
 } from 'auth-n-roll'
 
 const styleButton = {
@@ -91,6 +97,45 @@ export class ServiceSwitch extends React.Component {
               name="signinResponse"
               checkValue={SIGN_IN_RESPONSE_NOT_CONFIRMED}
               label="Not Confirmed"
+              update={this.handleUpdate}
+            />
+          </div>
+          <div>Confirm Sign UP</div>
+          <div>
+            <SwitchButton
+              name="confirmSignUpResponse"
+              checkValue={CONFIRM_SIGN_UP_RESPONSE_OK}
+              label="Success"
+              update={this.handleUpdate}
+            />
+            <SwitchButton
+              name="confirmSignUpResponse"
+              checkValue={CONFIRM_SIGN_UP_EXPIRED_CODE}
+              label="Code Expired"
+              update={this.handleUpdate}
+            />
+            <SwitchButton
+              name="confirmSignUpResponse"
+              checkValue={CONFIRM_SIGN_UP_USER_NOT_FOUND}
+              label="User not found"
+              update={this.handleUpdate}
+            />
+            <SwitchButton
+              name="confirmSignUpResponse"
+              checkValue={CONFIRM_SIGN_UP_CODE_MISMATCH}
+              label="Code mismatch"
+              update={this.handleUpdate}
+            />
+            <SwitchButton
+              name="confirmSignUpResponse"
+              checkValue={CONFIRM_SIGN_UP_ERROR}
+              label="Error"
+              update={this.handleUpdate}
+            />
+            <SwitchButton
+              name="confirmSignUpResponse"
+              checkValue={CONFIRM_SIGN_UP_ERROR_RELOGIN}
+              label="Error Relogin"
               update={this.handleUpdate}
             />
           </div>

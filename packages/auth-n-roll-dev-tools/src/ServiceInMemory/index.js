@@ -5,6 +5,8 @@ import {
 } from 'auth-n-roll'
 
 import { SignIn } from './SignIn'
+import { ResendValidationCode } from './ResendValidationCode'
+import { ConfirmSignUp } from './ConfirmSignUp'
 
 export const delay = time => new Promise(resolve => setTimeout(resolve, time))
 
