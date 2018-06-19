@@ -18,34 +18,8 @@ const user = {
   username: 'davidefiorello'
 }
 storiesOf('ComponentsStyledComponents/molecules/ResendValidationCode', module)
-  /*
-.add('Default', () => (
-<Box w={'400px'} m={3}>
-  <Card w={'400px'} m={3} mb={3}>
-    <ResendValidationCodeBase
-      sendingState="NOT_SENT"
-      user={user}
-      resend={action('Send')}
-    />
-  </Card>
-  <Card w={'400px'} m={3} mb={3}>
-    <ResendValidationCodeBase
-      sendingState="SENDING"
-      user={user}
-      resend={action('Send')}
-    />
-  </Card>
-  <Card w={'400px'} m={3} mb={3}>
-    <ResendValidationCodeBase
-      sendingState="SENT"
-      user={user}
-      resend={action('Send')}
-    />
-  </Card>
-</Box>
-))*/
   .add('With connector', () => (
-    <AuthNRollProvider authService={Index()} debug>
+    <AuthNRollProvider authService={ServiceInMemory()} debug>
       <Box w={'400px'} m={3}>
         <Card w={'400px'} m={3} mb={3}>
           <ResendValidationCode user={user} />

@@ -1,11 +1,10 @@
 import React from 'react'
+import get from 'lodash/get'
+import { withAuthNRoll } from '../contexts'
 
-import { StateContext } from '../contexts'
-
-export const StateFilter = ({ name, value, children }) => (
-  <StateContext.Consumer>
-    {state =>
-      state[name] === value && <React.Fragment>{children}</React.Fragment>
-    }
-  </StateContext.Consumer>
+export const StateFilter = withAuthNRoll(
+  ({ authNRoll, name, value, children }) =>
+    get(authNRoll, name) === value && (
+      <React.Fragment>{children}</React.Fragment>
+    )
 )

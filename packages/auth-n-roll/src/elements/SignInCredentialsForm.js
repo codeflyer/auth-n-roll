@@ -54,7 +54,6 @@ export const SignInCredentialsWithFormik = withFormik({
       setSubmitting(false)
       // The user created using the command line requires a NEW_PASSWORD
       if (result.ChallengeName === 'NEW_PASSWORD_REQUIRED') {
-        console.log('New password required')
         props.authNRoll.setUserData(
           Object.assign([], result.user, {
             requireAction: 'NEW_PASSWORD_REQUIRED'

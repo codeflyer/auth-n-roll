@@ -5,6 +5,13 @@ import get from 'lodash/get'
 
 import { AuthNRollContext } from '../contexts'
 import { DebugPanel } from '../components/DebugPanel'
+import { SignInResendValidationCode } from '../elements/SignInResendValidationCode'
+import {
+  RESEND_VALIDATION_CODE_STATE_NOT_REQUESTED,
+  RESEND_VALIDATION_CODE_STATE_SENDING,
+  RESEND_VALIDATION_CODE_STATE_SENDING_ERROR,
+  RESEND_VALIDATION_CODE_STATE_SENDING_SUCCESS
+} from '../constants'
 
 const LOGGED_USER_KEY = 'logged_user_key'
 
@@ -27,6 +34,11 @@ export class AuthNRollProvider extends React.Component {
       signIn: {
         error: 'Add a default error here',
         setError: this.handleSetError.bind(this, 'signIn')
+      },
+      resendCode: {
+        sendingState: RESEND_VALIDATION_CODE_STATE_NOT_REQUESTED,
+        error: null,
+        resend: this.handleResendCode.bind(this)
       }
     }
 
@@ -34,6 +46,33 @@ export class AuthNRollProvider extends React.Component {
       const user = props.authService.getLoggedUser()
       this.state.user = user
       this.state.isLoggedIn = !!user
+    }
+  }
+
+  async handleResendCode() {
+    this.setState({
+      resendCode: Object.assign({}, this.state.resendCode, {
+      sendingState: RESEND_VALIDATION_CODE_STATE_SENDING,
+      error: null
+      })
+    })
+
+    try {
+      await this.state.authService.resendValidationCode(
+        this.state.user.username
+      )
+      this.setState({
+        resendCode: Object.assign({}, this.state.resendCode, {
+          sendingState: RESEND_VALIDATION_CODE_STATE_SENDING_SUCCESS
+        })
+      })
+    } catch (e) {
+      this.setState({
+        resendCode: Object.assign({}, this.state.resendCode, {
+          sendingState: RESEND_VALIDATION_CODE_STATE_SENDING_ERROR,
+          error: e.message
+        })
+      })
     }
   }
 
@@ -73,7 +112,6 @@ export class AuthNRollProvider extends React.Component {
 
   componentDidMount() {
     return
-    console.log('AuthNRollProvider')
     const storedUser = storage.get(LOGGED_USER_KEY)
     const expire = get(storedUser, 'signInUserSession.accessToken.payload')
     if (Number((expire - Date.now() / 1000).toFixed(0)) > 60) {

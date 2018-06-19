@@ -5,7 +5,7 @@ import {
 } from 'auth-n-roll'
 
 export const ResendValidationCode = async username => {
-  await delay(1000)
+  await delay(500)
   switch (getState('resendValidationCodeResponse')) {
     case RESEND_VALIDATION_CODE_RESPONSE_ERROR:
       throw {

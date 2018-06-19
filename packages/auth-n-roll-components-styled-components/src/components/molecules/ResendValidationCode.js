@@ -1,39 +1,36 @@
 import React from 'react'
 
 import { Button, Box } from '../atoms'
-import {
-  SignInResendValidationCode
-} from 'auth-n-roll'
+import { SignInResendValidationCode } from 'auth-n-roll'
 
-export const ResendValidationCodeBase = ({
-  user: { username } = {},
+export const ResendValidationCode = ({
+  authNRoll: { user: { username } = {} } = {},
   error
 }) => {
   return (
-    <Box>
-      <SignInResendValidationCode.MessageSending>
-        <div>...sending to {username}</div>
-      </SignInResendValidationCode.MessageSending>
+    <SignInResendValidationCode>
+      <Box>
+        <SignInResendValidationCode.MessageSending>
+          <div>...sending to {username}</div>
+        </SignInResendValidationCode.MessageSending>
 
-      <SignInResendValidationCode.MessageSendingSuccess>
-        <div>...sent to {username}</div>
-      </SignInResendValidationCode.MessageSendingSuccess>
+        <SignInResendValidationCode.MessageSendingSuccess>
+          <div>...sent to {username}</div>
+        </SignInResendValidationCode.MessageSendingSuccess>
 
-      <SignInResendValidationCode.MessageSendingError>
-        <div>...Error on send code {error}</div>
-      </SignInResendValidationCode.MessageSendingError>
+        <SignInResendValidationCode.MessageSendingError>
+          <div>...Error on send code {error}</div>
+        </SignInResendValidationCode.MessageSendingError>
 
-      <SignInResendValidationCode.ResendButton>
-        <Button>Resend the verification code</Button>
-      </SignInResendValidationCode.ResendButton>
-    </Box>
+        <SignInResendValidationCode.ResendButton>
+          <Button>Resend the verification code</Button>
+        </SignInResendValidationCode.ResendButton>
+      </Box>
+    </SignInResendValidationCode>
   )
 }
 
-ResendValidationCodeBase.defaultProps = {}
+ResendValidationCode.defaultProps = {}
 
-ResendValidationCodeBase.propTypes = SignInResendValidationCode.propTypesDefinition
-
-export const ResendValidationCode = SignInResendValidationCode(
-  ResendValidationCodeBase
-)
+ResendValidationCode.propTypes =
+  SignInResendValidationCode.propTypesDefinition

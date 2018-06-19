@@ -15,7 +15,6 @@ import {
   CONFIRM_SIGN_UP_USER_NOT_FOUND,
   CONFIRM_SIGN_UP_EXPIRED_CODE,
   CONFIRM_SIGN_UP_ERROR,
-  CONFIRM_SIGN_UP_ERROR_RELOGIN,
   CONFIRM_SIGN_UP_RESPONSE_OK
 } from 'auth-n-roll'
 
@@ -59,6 +58,7 @@ export class ServiceSwitch extends React.Component {
   }
 
   handleUpdate(func, value) {
+    console.log(func, value)
     func(value)
     this.setState({})
   }
@@ -130,12 +130,6 @@ export class ServiceSwitch extends React.Component {
               name="confirmSignUpResponse"
               checkValue={CONFIRM_SIGN_UP_ERROR}
               label="Error"
-              update={this.handleUpdate}
-            />
-            <SwitchButton
-              name="confirmSignUpResponse"
-              checkValue={CONFIRM_SIGN_UP_ERROR_RELOGIN}
-              label="Error Relogin"
               update={this.handleUpdate}
             />
           </div>

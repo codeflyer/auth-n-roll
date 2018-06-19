@@ -1,66 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import get from 'lodash/get'
 
-import { StateContext, withAuthNRoll2 } from '../contexts'
+import { StateContext, withAuthNRoll2, withAuthNRoll } from '../contexts'
 import { StateFilter } from '../consumers/StateFilter'
+import {
+  RESEND_VALIDATION_CODE_STATE_SENDING,
+  RESEND_VALIDATION_CODE_STATE_SENDING_ERROR,
+  RESEND_VALIDATION_CODE_STATE_SENDING_SUCCESS
+} from '../constants'
 
-export const SignInResendValidationCodeBase = Component => {
-  return class extends React.Component {
-    constructor(props) {
-      super(props)
-
-      this.state = {
-        sendingState: SignInResendValidationCode.STATE_NOT_REQUESTED,
-        error: null,
-        user: this.props.authNRoll.user,
-        resend: this.handleResend.bind(this)
-      }
-    }
-
-    async handleResend() {
-      this.setState({
-        sendingState: SignInResendValidationCode.STATE_SENDING,
-        error: null
-      })
-
-      try {
-        await this.props.authNRoll.authService.resendValidationCode(
-          this.state.user.username
-        )
-        this.setState({
-          sendingState: SignInResendValidationCode.STATE_SENDING_SUCCESS
-        })
-      } catch (e) {
-        this.setState({
-          sendingState: SignInResendValidationCode.STATE_SENDING_ERROR,
-          error: e.message
-        })
-      }
-    }
-
-    render() {
-      return (
-        <StateContext.Provider value={this.state}>
-          <Component {...this.state}>{this.props.children}</Component>
-        </StateContext.Provider>
-      )
-    }
-  }
-}
-
-export const SignInResendValidationCode = withAuthNRoll2(
-  SignInResendValidationCodeBase
-)
-
-SignInResendValidationCode.STATE_NOT_REQUESTED = 'NOT_REQUESTED'
-SignInResendValidationCode.STATE_SENDING = 'SENDING'
-SignInResendValidationCode.STATE_SENDING_ERROR = 'SENDING_ERROR'
-SignInResendValidationCode.STATE_SENDING_SUCCESS = 'SENDING_SUCCESS'
+export const SignInResendValidationCode = ({children})=> <React.Fragment>{children}</React.Fragment>
 
 SignInResendValidationCode.MessageSending = ({ children }) => (
   <StateFilter
-    name="sendingState"
-    value={SignInResendValidationCode.STATE_SENDING}
+    name="resendCode.sendingState"
+    value={RESEND_VALIDATION_CODE_STATE_SENDING}
   >
     {' '}
     {children}{' '}
@@ -69,8 +24,8 @@ SignInResendValidationCode.MessageSending = ({ children }) => (
 
 SignInResendValidationCode.MessageSendingSuccess = ({ children }) => (
   <StateFilter
-    name="sendingState"
-    value={SignInResendValidationCode.STATE_SENDING_SUCCESS}
+    name="resendCode.sendingState"
+    value={RESEND_VALIDATION_CODE_STATE_SENDING_SUCCESS}
   >
     {children}
   </StateFilter>
@@ -78,28 +33,26 @@ SignInResendValidationCode.MessageSendingSuccess = ({ children }) => (
 
 SignInResendValidationCode.MessageSendingError = ({ children }) => (
   <StateFilter
-    name="sendingState"
-    value={SignInResendValidationCode.STATE_SENDING_ERROR}
+    name="resendCode.sendingState"
+    value={RESEND_VALIDATION_CODE_STATE_SENDING_ERROR}
   >
     {children}
   </StateFilter>
 )
 
-SignInResendValidationCode.ResendButton = props => (
-  <StateContext.Consumer>
-    {state => (
-      <React.Fragment>
-        {React.Children.map(props.children, child =>
-          React.cloneElement(child, {
-            onClick: state.resend,
-            disabled:
-              state.sendingState === SignInResendValidationCode.STATE_SENDING
-          })
-        )}
-      </React.Fragment>
-    )}
-  </StateContext.Consumer>
-)
+SignInResendValidationCode.ResendButton = withAuthNRoll(props => {
+  const resentCode = get(props, 'authNRoll.resendCode', {})
+  return (
+    <React.Fragment>
+      {React.Children.map(props.children, child =>
+        React.cloneElement(child, {
+          onClick: resentCode.resend,
+          disabled: resentCode.sendingState === RESEND_VALIDATION_CODE_STATE_SENDING
+        })
+      )}
+    </React.Fragment>
+  )
+})
 
 SignInResendValidationCode.propTypesDefinition = PropTypes.shape({
   user: PropTypes.shape({

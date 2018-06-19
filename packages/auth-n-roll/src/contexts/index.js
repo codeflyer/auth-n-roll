@@ -8,7 +8,7 @@ export function withAuthNRoll(Component) {
   return class extends React.Component {
     render() {
       return <AuthNRollContext.Consumer>
-          {authNRoll => <Component authNRoll={authNRoll}>{this.props.children}</Component>}
+          {authNRoll => <Component authNRoll={authNRoll} {...this.props}/>}
         </AuthNRollContext.Consumer>
     }
   }
