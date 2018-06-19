@@ -7,6 +7,7 @@ import {
 import { SignIn } from './SignIn'
 import { ResendValidationCode } from './ResendValidationCode'
 import { ConfirmSignUp } from './ConfirmSignUp'
+import { ChangePasswordForced } from './ChangePasswordForced'
 
 export const delay = time => new Promise(resolve => setTimeout(resolve, time))
 
@@ -43,15 +44,17 @@ export const ServiceInMemory = () => {
   restoreState()
 
   const getLoggedUser = () => {
-    return {
-      username: 'davide'
-    }
+    return null
+    // {
+    //    username: 'davide'
+    // }
   }
 
   return {
     signIn: SignIn,
     resendValidationCode: ResendValidationCode,
     confirmSignUp: ConfirmSignUp,
+    changePasswordForced: ChangePasswordForced,
     getLoggedUser
   }
 }

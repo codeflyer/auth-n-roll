@@ -68,7 +68,7 @@ describe('SignIn', () => {
   test('Right credential but Password should be changed', async () => {
     const service = ServiceCognito(stack)
     const result = await service.signIn('davide@codeflyer.com', 'testTEST1234')
-    expect(result.ChallengeName).toEqual('NEW_PASSWORD_REQUIRED')
+    expect(result.challenge.ChallengeName).toEqual('NEW_PASSWORD_REQUIRED')
     expect(result.user).toEqual({ username: 'davide@codeflyer.com' })
   })
 
@@ -95,11 +95,11 @@ describe('SignIn', () => {
       'davide.fiorello@nearform.com',
       '1234TESTtest'
     )
-    expect(result.AuthenticationResult.AccessToken).toBeDefined()
-    expect(result.AuthenticationResult.IdToken).toBeDefined()
-    expect(result.AuthenticationResult.RefreshToken).toBeDefined()
-    expect(result.AuthenticationResult.ExpiresIn).toBe(3600)
-    expect(result.AuthenticationResult.TokenType).toBe('Bearer')
+    expect(result.authData.AccessToken).toBeDefined()
+    expect(result.authData.IdToken).toBeDefined()
+    expect(result.authData.RefreshToken).toBeDefined()
+    expect(result.authData.ExpiresIn).toBe(3600)
+    expect(result.authData.TokenType).toBe('Bearer')
     expect(result.user).toEqual({ username: 'davide.fiorello@nearform.com' })
   })
 })

@@ -2,12 +2,23 @@ import React from 'react'
 import { withFormik } from 'formik'
 import { withAuthNRoll, FormContext } from '../contexts'
 
-import { AuthNRollFormFieldPassword, AuthNRollFormButtonSubmit } from '../consumers'
+import {
+  AuthNRollFormFieldPassword,
+  AuthNRollFormButtonSubmit
+} from '../consumers'
 
-import {SignIn} from '../pages/SignIn'
+import { SignIn } from '../pages/SignIn'
+import {
+  CHANGE_PASSWORD_FORCED_USER_NOT_FOUND,
+  CHANGE_PASSWORD_FORCED_ERROR,
+  CHANGE_PASSWORD_FORCED_INVALID_PASSWORD
+} from '../constants'
 
 export const SignInChangePassword = withFormik({
-  mapPropsToValues: props => ({}),
+  mapPropsToValues: props => ({
+    password: 'Davide12345',
+    passwordConfirm: 'Davide12345'
+  }),
   validate: (values, props) => {
     const errors = {}
 
@@ -28,8 +39,7 @@ export const SignInChangePassword = withFormik({
     }
     return errors
   },
-  // Submission handler
-  handleSubmit: (
+  handleSubmit: async (
     values,
     {
       props,
@@ -37,17 +47,27 @@ export const SignInChangePassword = withFormik({
       setErrors /* setValues, setStatus, and other goodies */
     }
   ) => {
-    // Auth.completeNewPassword(props.user, values.password)
-    //   .then(result => {
-    //     setSubmitting(false)
-    //     Hub.dispatch('auth', { event: 'signIn', data: result }, 'Auth')
-    //
-    //     props.onChangePassword && props.onChangePassword(result)
-    //   })
-    //   .catch(err => {
-    //     setSubmitting(false)
-    //     setErrors({ password: err.message })
-    //   })
+    try {
+      const result = await props.authNRoll.authService.changePasswordForced(
+        props.authNRoll.user.username,
+        values.password,
+        props.authNRoll.challenge.Session
+      )
+
+      props.authNRoll.setUserData(result.user)
+      props.authNRoll.setChallenge(null)
+      props.authNRoll.setIsLoggedIn(true)
+    } catch (e) {
+      setSubmitting(false)
+      switch (e.code) {
+        case CHANGE_PASSWORD_FORCED_USER_NOT_FOUND:
+          props.authNRoll.setUserData(null)
+          props.authNRoll.switch.changeIndex(SignIn.FLOW_STEP_CREDENTIAL)
+          return
+        default:
+          setErrors({ password: e.message })
+      }
+    }
   }
 })
 

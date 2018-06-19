@@ -28,7 +28,11 @@ export const SignIn = async (cognito, stack, username, password) => {
       })
       .promise()
 
-    return Object.assign({}, result, { user: { username } })
+    return {
+      user: { username },
+      authData: result.AuthenticationResult,
+      challenge: result.ChallengeName ? result : null
+    }
   } catch (err) {
     switch (err.code) {
       case 'UserNotFoundException':

@@ -17,6 +17,7 @@ const CognitoIdentityServiceProvider = require('aws-sdk/clients/cognitoidentitys
 import { SignIn } from './SignIn'
 import { ConfirmSignUp } from './ConfirmSignUp'
 import { ResendConfirmationCode } from './ResendConfirmationCode'
+import { ChangePasswordForced } from './ChangePasswordForced'
 
 export const ServiceCognito = stack => {
   const configData = {
@@ -43,6 +44,7 @@ export const ServiceCognito = stack => {
   return {
     signIn: SignIn.bind(null, cognito, stack),
     confirmSignUp: ConfirmSignUp.bind(null, cognito, stack),
-    resendConfirmationCode: ResendConfirmationCode.bind(null, cognito, stack)
+    resendConfirmationCode: ResendConfirmationCode.bind(null, cognito, stack),
+    changePasswordForced: ChangePasswordForced.bind(null, cognito, stack)
   }
 }

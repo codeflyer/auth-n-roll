@@ -25,7 +25,10 @@ export class AuthNRollProvider extends React.Component {
       isInitialized: false,
       isLoggedIn: false,
       user: null,
+      challenge: {},
       setUserData: this.handleSetUserData.bind(this),
+      setChallenge: this.handleSetChallenge.bind(this),
+      setIsLoggedIn: this.handleSetIsLoggedIn.bind(this),
       restartSignIn: this.handleRestartSignIn.bind(this),
       switch: {
         index: null,
@@ -52,8 +55,8 @@ export class AuthNRollProvider extends React.Component {
   async handleResendCode() {
     this.setState({
       resendCode: Object.assign({}, this.state.resendCode, {
-      sendingState: RESEND_VALIDATION_CODE_STATE_SENDING,
-      error: null
+        sendingState: RESEND_VALIDATION_CODE_STATE_SENDING,
+        error: null
       })
     })
 
@@ -90,6 +93,12 @@ export class AuthNRollProvider extends React.Component {
     })
   }
 
+  handleSetIsLoggedIn(isLoggedIn) {
+    this.setState({
+      isLoggedIn
+    })
+  }
+
   handleSetError(flow, error) {
     this.setState({
       [flow]: Object.assign({}, this.state[flow], { error })
@@ -107,7 +116,12 @@ export class AuthNRollProvider extends React.Component {
 
   handleSetUserData(user) {
     // storage.set(LOGGED_USER_KEY, user)
-    this.setState({ isInitialized: true, isLoggedIn: true, user })
+    this.setState({ user })
+  }
+
+  handleSetChallenge(challenge) {
+    // storage.set(LOGGED_USER_KEY, user)
+    this.setState({ challenge })
   }
 
   componentDidMount() {
@@ -129,7 +143,7 @@ export class AuthNRollProvider extends React.Component {
     return (
       <AuthNRollContext.Provider value={this.state}>
         {this.props.children}
-        {this.props.debug && <DebugPanel />}
+        {this.props.debug && <DebugPanel/>}
       </AuthNRollContext.Provider>
     )
   }

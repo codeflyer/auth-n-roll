@@ -1,54 +1,51 @@
 import { delay, getState } from './index'
+
 import {
-  SIGN_IN_RESPONSE_USER_NOT_FOUND,
-  SIGN_IN_RESPONSE_NOT_AUTHORIZED,
-  SIGN_IN_RESPONSE_NOT_CONFIRMED,
-  SIGN_IN_RESPONSE_CHANGE_PASSWORD,
-  SIGN_IN_RESPONSE_SOFTWARE_TOKEN_MFA
+  CHANGE_PASSWORD_FORCED_USER_NOT_FOUND,
+  CHANGE_PASSWORD_FORCED_ERROR,
+  CHANGE_PASSWORD_FORCED_INVALID_PASSWORD,
+  SIGN_IN_RESPONSE_VALIDATION_DATA
 } from 'auth-n-roll'
 
-export const SignIn = async (username, password) => {
+export const ChangePasswordForced = async (
+  username,
+  newPassword,
+  session
+) => {
+  if (session !== '1234567890') {
+    throw {
+      code: SIGN_IN_RESPONSE_VALIDATION_DATA,
+      message: 'Session is not valid (expected 1234567890)'
+    }
+  }
+  if (!newPassword || !username || !session) {
+    throw {
+      code: SIGN_IN_RESPONSE_VALIDATION_DATA,
+      message: 'Username, NewPassword and Session required'
+    }
+  }
+
   await delay(1000)
 
-  switch (getState('signinResponse')) {
-    case SIGN_IN_RESPONSE_USER_NOT_FOUND:
+  switch (getState('changePasswordForced')) {
+    case CHANGE_PASSWORD_FORCED_USER_NOT_FOUND:
       throw {
-        code: SIGN_IN_RESPONSE_USER_NOT_FOUND,
-        message: 'User does not exist.',
+        code: CHANGE_PASSWORD_FORCED_USER_NOT_FOUND,
+        message: 'User not found',
         user: { username }
       }
-
-    case SIGN_IN_RESPONSE_NOT_AUTHORIZED:
+    case CHANGE_PASSWORD_FORCED_ERROR:
       throw {
-        code: SIGN_IN_RESPONSE_NOT_AUTHORIZED,
-        message: 'Incorrect username or password.',
+        code: CHANGE_PASSWORD_FORCED_ERROR,
+        message: 'Generic error',
         user: { username }
       }
-
-    case SIGN_IN_RESPONSE_NOT_CONFIRMED:
+    case CHANGE_PASSWORD_FORCED_INVALID_PASSWORD:
       throw {
-        code: SIGN_IN_RESPONSE_NOT_CONFIRMED,
-        message: 'User is not confirmed.',
-        user: { username: username }
-      }
-
-    case SIGN_IN_RESPONSE_CHANGE_PASSWORD:
-      return {
-        challenge: {
-          ChallengeName: 'NEW_PASSWORD_REQUIRED',
-          Session: '1234567890'
-        },
+        code: CHANGE_PASSWORD_FORCED_INVALID_PASSWORD,
+        message:
+          'Password does not conform to policy: Password must have uppercase characters',
         user: { username }
-      }
-
-    case SIGN_IN_RESPONSE_SOFTWARE_TOKEN_MFA:
-      return {
-        challenge: {ChallengeName: 'SOFTWARE_TOKEN_MFA'},
-        user: {
-          username,
-          firstName: 'Davide',
-          lastName: 'Fiorello'
-        }
       }
     default:
       return {

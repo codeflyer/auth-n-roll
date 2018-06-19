@@ -6,7 +6,7 @@ import {
   AuthNRollFormField,
   AuthNRollFormFieldPassword,
   AuthNRollFormButtonSubmit,
-  AuthNRollFormButtonOnClick,
+  AuthNRollFormButtonOnClick
 } from '../consumers'
 import {
   SIGN_IN_RESPONSE_USER_NOT_FOUND,
@@ -47,23 +47,20 @@ export const SignInCredentialsWithFormik = withFormik({
     }
   ) => {
     try {
+      props.authNRoll.setChallenge({})
       const result = await props.authNRoll.authService.signIn(
         values.email,
         values.password
       )
       setSubmitting(false)
       // The user created using the command line requires a NEW_PASSWORD
-      if (result.ChallengeName === 'NEW_PASSWORD_REQUIRED') {
-        props.authNRoll.setUserData(
-          Object.assign([], result.user, {
-            requireAction: 'NEW_PASSWORD_REQUIRED'
-          })
-        )
+      if (get(result, 'challenge.ChallengeName') === 'NEW_PASSWORD_REQUIRED') {
+        props.authNRoll.setUserData(result.user)
+        props.authNRoll.setChallenge(result.challenge)
         props.authNRoll.switch.changeIndex(SignIn.FLOW_STEP_CHANGE_PASSWORD)
       } else {
         props.authNRoll.setUserData(result.user)
-        // props.onLogin && props.onLogin(result)
-        // Hub.dispatch('auth', { event: 'signIn', data: result }, 'Auth')
+        props.authNRoll.setIsLoggedIn(true)
       }
     } catch (e) {
       setSubmitting(false)
@@ -118,5 +115,7 @@ SignInCredentialForm.ButtonSubmit = ({ children }) => (
 )
 
 SignInCredentialForm.ButtonCancel = ({ children }) => (
-  <AuthNRollFormButtonOnClick actionFunctionNameOnState="onCancel">{children}</AuthNRollFormButtonOnClick>
+  <AuthNRollFormButtonOnClick actionFunctionNameOnState="onCancel">
+    {children}
+  </AuthNRollFormButtonOnClick>
 )

@@ -15,7 +15,10 @@ import {
   CONFIRM_SIGN_UP_USER_NOT_FOUND,
   CONFIRM_SIGN_UP_EXPIRED_CODE,
   CONFIRM_SIGN_UP_ERROR,
-  CONFIRM_SIGN_UP_RESPONSE_OK
+  CONFIRM_SIGN_UP_RESPONSE_OK,
+  CHANGE_PASSWORD_FORCED_USER_NOT_FOUND,
+  CHANGE_PASSWORD_FORCED_INVALID_PASSWORD,
+  CHANGE_PASSWORD_FORCED_ERROR
 } from 'auth-n-roll'
 
 const styleButton = {
@@ -58,7 +61,6 @@ export class ServiceSwitch extends React.Component {
   }
 
   handleUpdate(func, value) {
-    console.log(func, value)
     func(value)
     this.setState({})
   }
@@ -145,6 +147,33 @@ export class ServiceSwitch extends React.Component {
               name="resendValidationCodeResponse"
               checkValue={RESEND_VALIDATION_CODE_RESPONSE_ERROR}
               label="Error"
+              update={this.handleUpdate}
+            />
+          </div>
+          <div>Force NEW PWD</div>
+          <div>
+            <SwitchButton
+              name="changePasswordForced"
+              checkValue={''}
+              label="Success"
+              update={this.handleUpdate}
+            />
+            <SwitchButton
+              name="changePasswordForced"
+              checkValue={CHANGE_PASSWORD_FORCED_USER_NOT_FOUND}
+              label="User not found"
+              update={this.handleUpdate}
+            />
+            <SwitchButton
+              name="changePasswordForced"
+              checkValue={CHANGE_PASSWORD_FORCED_INVALID_PASSWORD}
+              label="Invalid password"
+              update={this.handleUpdate}
+            />
+            <SwitchButton
+              name="changePasswordForced"
+              checkValue={CHANGE_PASSWORD_FORCED_ERROR}
+              label="Error on change"
               update={this.handleUpdate}
             />
           </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import get from 'lodash/get'
 import { withAuthNRoll } from '../contexts'
 
 const styles = {
@@ -12,24 +13,28 @@ const styles = {
   }
 }
 
-export const DebugPanel = withAuthNRoll(props => (
-  <div style={styles.wrapper}>
-    <h5>Debug Panel</h5>
-    {!props.authNRoll.user && <div>No user</div>}
-    {props.authNRoll.user && (
-      <React.Fragment>
-        <div>
-          {props.authNRoll.user.username}
-          <br />
-        </div>
-
-        {props.authNRoll.user.requireAction && (
+export const DebugPanel = withAuthNRoll(props => {
+  return (
+    <div style={styles.wrapper}>
+      <h5>Debug Panel</h5>
+      {!props.authNRoll.user && <div>No user</div>}
+      {props.authNRoll.user && (
+        <React.Fragment>
           <div>
-            {props.authNRoll.user.requireAction}
+            {props.authNRoll.user.username}
             <br />
           </div>
-        )}
-      </React.Fragment>
-    )}
-  </div>
-))
+
+          {get(props, 'authNRoll.challenge.ChallengeName') && (
+            <div>
+              {get(props, 'authNRoll.challenge.ChallengeName')}
+              <br />
+            </div>
+          )}
+
+          {props.authNRoll.isLoggedIn ? <div>The user is logged</div> : <div>The user requires action</div>}
+        </React.Fragment>
+      )}
+    </div>
+  )
+})
