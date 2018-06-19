@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { SignInValidateWithCodeForm } from 'auth-n-roll'
+import { SignInConfirmSignUpForm } from 'auth-n-roll'
 
 import { Card, Box, Button, Heading, Text } from './atoms'
 
@@ -8,7 +8,7 @@ import { InputField } from './molecules/InputField'
 
 import { ResendValidationCode } from './molecules/ResendValidationCode'
 
-export const SignInValidateWithCode = () => {
+export const SignInConfirmSignUp = () => {
   return (
     <Card
       boxShadowSize="xl"
@@ -18,26 +18,26 @@ export const SignInValidateWithCode = () => {
       m={0}
       bg="white"
     >
-      <SignInValidateWithCodeForm>
+      <SignInConfirmSignUpForm>
         <Heading.h3>Confirm your code</Heading.h3>
         <Text>The account is not verified yet, verify it using the code you received by mail.</Text>
 
         <Box mt={1}>
           <Box mb={3}>
-            <SignInValidateWithCodeForm.FieldValidationCode>
+            <SignInConfirmSignUpForm.FieldValidationCode>
               <InputField
                 label="code"
                 iconName="lock"
                 placeholder="Add your code"
               />
-            </SignInValidateWithCodeForm.FieldValidationCode>
+            </SignInConfirmSignUpForm.FieldValidationCode>
           </Box>
           <ResendValidationCode/>
-          <SignInValidateWithCodeForm.ButtonSubmit>
+          <SignInConfirmSignUpForm.ButtonSubmit>
             <Button>Confirm</Button>
-          </SignInValidateWithCodeForm.ButtonSubmit>
+          </SignInConfirmSignUpForm.ButtonSubmit>
         </Box>
-      </SignInValidateWithCodeForm>
+      </SignInConfirmSignUpForm>
     </Card>
   )
 }

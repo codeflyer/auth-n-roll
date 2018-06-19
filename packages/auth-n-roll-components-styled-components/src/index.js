@@ -1,4 +1,4 @@
 export { SignInCredentials } from './components/SignInCredentials'
 export { SignInChangePassword } from './components/SignInChangePassword'
-export { SignInValidateWithCode } from './components/SignInValidateWithCode'
+export { SignInConfirmSignUp } from './components/SignInConfirmSignUp'
 export { SignInErrorAndRelogin } from './components/SignInErrorAndRelogin'

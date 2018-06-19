@@ -9,7 +9,7 @@ import {
 } from '../constants'
 import { SignIn } from '../pages/SignIn'
 
-export const SignInValidateWithCode = withFormik({
+export const SignInConfirmSignUp = withFormik({
   mapPropsToValues: props => ({}),
   validate: (values, props) => {
     const errors = {}
@@ -61,17 +61,17 @@ export const SignInValidateWithCode = withFormik({
   }
 })
 
-export const SignInValidateWithCodeForm = withAuthNRoll(
-  SignInValidateWithCode(props => (
+export const SignInConfirmSignUpForm = withAuthNRoll(
+  SignInConfirmSignUp(props => (
     <FormContext.Provider value={props}>
       <form onSubmit={props.handleSubmit}>{props.children}</form>
     </FormContext.Provider>
   ))
 )
 
-SignInValidateWithCodeForm.FieldValidationCode = ({ children }) => (
+SignInConfirmSignUpForm.FieldValidationCode = ({ children }) => (
   <AuthNRollFormField id="code">{children}</AuthNRollFormField>
 )
-SignInValidateWithCodeForm.ButtonSubmit = ({ children }) => (
+SignInConfirmSignUpForm.ButtonSubmit = ({ children }) => (
   <AuthNRollFormButtonSubmit>{children}</AuthNRollFormButtonSubmit>
 )
