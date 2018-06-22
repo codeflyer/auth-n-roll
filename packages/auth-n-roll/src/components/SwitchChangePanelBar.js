@@ -4,6 +4,7 @@ const styles = {
   wrapper: {
     position: 'fixed',
     bottom: 0,
+    left: 0,
     backgroundColor: '#ddd',
     padding: '3px'
   },

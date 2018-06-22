@@ -1,12 +1,10 @@
 import React from 'react'
 
-import {
-  SignInCredentialForm
-} from 'auth-n-roll'
+import { SignInCredentialForm } from 'auth-n-roll'
 
-import { Card, Box, Button, Heading } from './atoms'
+import { Card, Box, Button, Heading } from '../atoms/index'
 
-import { InputField } from './molecules/InputField'
+import { InputField } from '../molecules/InputField'
 
 export const SignInCredentials = () => {
   return (
@@ -50,4 +48,3 @@ export const SignInCredentials = () => {
     </Card>
   )
 }
-

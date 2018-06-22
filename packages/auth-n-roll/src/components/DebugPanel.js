@@ -6,7 +6,7 @@ const styles = {
   wrapper: {
     position: 'fixed',
     top: 0,
-    right: 0,
+    left: 0,
     backgroundColor: '#ddd',
     padding: '10px',
     opacity: 0.6

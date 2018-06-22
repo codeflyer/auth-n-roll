@@ -1,6 +1,6 @@
 import React from 'react'
 import { SignInErrorAndReloginCard } from 'auth-n-roll'
-import { Button } from './atoms'
+import { Button } from '../atoms/index'
 
 export const SignInErrorAndRelogin = (props) => {
   return (

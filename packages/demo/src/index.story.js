@@ -1,43 +1,23 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import {
-  SignInCredentials,
-  SignInChangePassword,
-  SignInConfirmSignUp,
-  SignInErrorAndRelogin
-} from 'auth-n-roll-components-styled-components'
-
-import { AuthNRollProvider, SignIn, SignInCredentialElement } from 'auth-n-roll'
+import { AuthNRollProvider, AuthProtected } from 'auth-n-roll'
 
 import { ServiceInMemory, ServiceSwitch } from 'auth-n-roll-dev-tools'
 import stackData from '../../../data/stack'
 
 import { ServiceCognito } from 'auth-n-roll-service-cognito'
+import { SignInPage } from 'auth-n-roll-components-styled-components'
 
 const styles = {
   wrapper: { width: '300px' }
 }
 storiesOf('Demo', module)
-  .add('Signin Component', () => {
-    return (
-      <AuthNRollProvider authService={ServiceCognito(stackData)}>
-        <div style={styles.wrapper}>
-          <SignInCredentials />
-        </div>
-      </AuthNRollProvider>
-    )
-  })
   .add('Signin Page In Memory', () => {
     return (
       <AuthNRollProvider authService={ServiceInMemory()} debug>
         <div style={styles.wrapper}>
-          <SignIn>
-            <SignInCredentials index={SignIn.FLOW_STEP_CREDENTIAL} />
-            <SignInChangePassword index={SignIn.FLOW_STEP_CHANGE_PASSWORD} />
-            <SignInConfirmSignUp index={SignIn.FLOW_STEP_CONFIRM_CODE} />
-            <SignInErrorAndRelogin index={SignIn.FLOW_STEP_ERROR_AND_RELOGIN} />
-          </SignIn>
+          <SignInPage/>
           <ServiceSwitch />
         </div>
       </AuthNRollProvider>
@@ -47,12 +27,17 @@ storiesOf('Demo', module)
     return (
       <AuthNRollProvider authService={ServiceCognito(stackData)} debug>
         <div style={styles.wrapper}>
-          <SignIn>
-            <SignInCredentials index={SignIn.FLOW_STEP_CREDENTIAL} />
-            <SignInChangePassword index={SignIn.FLOW_STEP_CHANGE_PASSWORD} />
-            <SignInConfirmSignUp index={SignIn.FLOW_STEP_CONFIRM_CODE} />
-            <SignInErrorAndRelogin index={SignIn.FLOW_STEP_ERROR_AND_RELOGIN} />
-          </SignIn>
+          <SignInPage/>
+          <ServiceSwitch />
+        </div>
+      </AuthNRollProvider>
+    )
+  })
+  .add('Protected Page', () => {
+    return (
+      <AuthNRollProvider authService={ServiceInMemory()} debug>
+        <div style={styles.wrapper}>
+          <AuthProtected signInFlowComponent={SignInPage}>This content is reserved</AuthProtected>
           <ServiceSwitch />
         </div>
       </AuthNRollProvider>

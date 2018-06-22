@@ -2,11 +2,11 @@ import React from 'react'
 
 import { SignInConfirmSignUpForm } from 'auth-n-roll'
 
-import { Card, Box, Button, Heading, Text } from './atoms'
+import { Card, Box, Button, Heading, Text } from '../atoms/index'
 
-import { InputField } from './molecules/InputField'
+import { InputField } from '../molecules/InputField'
 
-import { ResendValidationCode } from './molecules/ResendValidationCode'
+import { ResendValidationCode } from '../molecules/ResendValidationCode'
 
 export const SignInConfirmSignUp = () => {
   return (

@@ -3,7 +3,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { Box } from '../src/components/atoms/Box'
-import { SignInCredentials } from '../src/components/SignInCredentials'
+import { SignInCredentials } from '../src/components/organisms/SignInCredentials'
 
 storiesOf('ComponentsStyledComponents/SignInCredentialsWithFormik', module)
   .add('Default', () => (
