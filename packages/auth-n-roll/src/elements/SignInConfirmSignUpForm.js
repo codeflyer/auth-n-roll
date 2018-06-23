@@ -8,6 +8,7 @@ import {
   CONFIRM_SIGN_UP_EXPIRED_CODE
 } from '../constants'
 import { SignIn } from '../pages/SignIn'
+import { getUser } from '../store/selectors'
 
 export const SignInConfirmSignUp = withFormik({
   mapPropsToValues: props => ({}),
@@ -30,8 +31,8 @@ export const SignInConfirmSignUp = withFormik({
   ) => {
     try {
       setSubmitting(true)
-      const result = await props.authNRoll.authService.confirmSignUp(
-        props.authNRoll.user.username,
+      const result = await getAuthService(props.authNRoll).confirmSignUp(
+        getUser(props.authNRoll).username,
         values.code
       )
       setSubmitting(false)
@@ -43,12 +44,12 @@ export const SignInConfirmSignUp = withFormik({
       setSubmitting(false)
       switch (e.code) {
         case CONFIRM_SIGN_UP_USER_NOT_FOUND:
-          props.authNRoll.signIn.setError({
+          props.authNRoll.setSignInError({
             code: CONFIRM_SIGN_UP_USER_NOT_FOUND,
-            message: `The user ${props.authNRoll.user.username} was not found`
+            message: `The user ${getUser(props.authNRoll).username} was not found`
           })
           props.authNRoll.setUserData(null)
-          props.authNRoll.switch.changeIndex(SignIn.FLOW_STEP_ERROR_AND_RELOGIN)
+          props.authNRoll.changeFlowIndex(SignIn.FLOW_STEP_ERROR_AND_RELOGIN)
           return
         case CONFIRM_SIGN_UP_CODE_MISMATCH:
         case CONFIRM_SIGN_UP_EXPIRED_CODE:

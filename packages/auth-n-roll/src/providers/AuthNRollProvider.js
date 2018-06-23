@@ -5,123 +5,41 @@ import get from 'lodash/get'
 
 import { AuthNRollContext } from '../contexts'
 import { DebugPanel } from '../components/DebugPanel'
-import { SignInResendValidationCode } from '../elements/SignInResendValidationCode'
-import {
-  RESEND_VALIDATION_CODE_STATE_NOT_REQUESTED,
-  RESEND_VALIDATION_CODE_STATE_SENDING,
-  RESEND_VALIDATION_CODE_STATE_SENDING_ERROR,
-  RESEND_VALIDATION_CODE_STATE_SENDING_SUCCESS
-} from '../constants'
+
+import { Store } from '../store'
 
 const LOGGED_USER_KEY = 'logged_user_key'
 
 export class AuthNRollProvider extends React.Component {
   constructor(props) {
     super(props)
-    this.handleChangeIndex = this.handleChangeIndex.bind(this)
-    this.state = {
-      authService: props.authService,
-      debug: props.debug,
-      isInitialized: false,
-      isLoggedIn: false,
-      user: null,
-      challenge: {},
-      setUserData: this.handleSetUserData.bind(this),
-      setChallenge: this.handleSetChallenge.bind(this),
-      setIsLoggedIn: this.handleSetIsLoggedIn.bind(this),
-      restartSignIn: this.handleRestartSignIn.bind(this),
-      switch: {
-        index: null,
-        changeIndex: this.handleChangeIndex
-      },
-      signIn: {
-        error: 'Add a default error here',
-        setError: this.handleSetError.bind(this, 'signIn')
-      },
-      resendCode: {
-        sendingState: RESEND_VALIDATION_CODE_STATE_NOT_REQUESTED,
-        error: null,
-        resend: this.handleResendCode.bind(this)
-      }
-    }
-
-    if (props.authService && props.authService.getLoggedUser) {
-      const user = props.authService.getLoggedUser()
-      this.state.user = user
-      this.state.isLoggedIn = !!user
-    }
-  }
-
-  async handleResendCode() {
-    this.setState({
-      resendCode: Object.assign({}, this.state.resendCode, {
-        sendingState: RESEND_VALIDATION_CODE_STATE_SENDING,
-        error: null
-      })
+    const store = new Store({
+      getState: this.getState.bind(this),
+      onStateUpdate: this.onStateUpdate.bind(this),
+      authService: this.props.authService,
+      debug: this.props.debug
     })
+    this.state = store.getDefaultState()
 
-    try {
-      await this.state.authService.resendValidationCode(
-        this.state.user.username
-      )
-      this.setState({
-        resendCode: Object.assign({}, this.state.resendCode, {
-          sendingState: RESEND_VALIDATION_CODE_STATE_SENDING_SUCCESS
-        })
-      })
-    } catch (e) {
-      this.setState({
-        resendCode: Object.assign({}, this.state.resendCode, {
-          sendingState: RESEND_VALIDATION_CODE_STATE_SENDING_ERROR,
-          error: e.message
-        })
-      })
-    }
+//    if (props.authService && props.authService.getLoggedUser) {
+//      const user = props.authService.getLoggedUser()
+//      this.state.user = user
+//      this.state.isLoggedIn = !!user
+//    }
   }
 
-  handleRestartSignIn() {
-    this.setState({
-      user: null,
-      switch: {
-        index: null,
-        changeIndex: this.handleChangeIndex
-      },
-      signIn: {
-        error: null,
-        setError: this.handleSetError.bind(this, 'signIn')
+  getState() {
+    return this.state
+  }
+
+  async onStateUpdate(newState) {
+    return new Promise((resolve, reject) => {
+      try {
+        this.setState(() => newState, () => resolve(newState))
+      } catch (e) {
+        reject(e)
       }
     })
-  }
-
-  handleSetIsLoggedIn(isLoggedIn) {
-    this.setState({
-      isLoggedIn
-    })
-  }
-
-  handleSetError(flow, error) {
-    this.setState({
-      [flow]: Object.assign({}, this.state[flow], { error })
-    })
-  }
-
-  handleChangeIndex(newIndex) {
-    this.setState({
-      switch: {
-        index: newIndex,
-        changeIndex: this.handleChangeIndex
-      }
-    })
-  }
-
-  handleSetUserData(user) {
-    // storage.set(LOGGED_USER_KEY, user)
-    this.setState({ user })
-  }
-
-  handleSetChallenge(challenge) {
-    // storage.set(LOGGED_USER_KEY, user)
-    this.setState({ challenge })
   }
 
   componentDidMount() {
@@ -143,7 +61,7 @@ export class AuthNRollProvider extends React.Component {
     return (
       <AuthNRollContext.Provider value={this.state}>
         {this.props.children}
-        {this.props.debug && <DebugPanel/>}
+        {this.props.debug && <DebugPanel />}
       </AuthNRollContext.Provider>
     )
   }

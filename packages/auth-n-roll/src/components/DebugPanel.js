@@ -1,6 +1,7 @@
 import React from 'react'
 import get from 'lodash/get'
 import { withAuthNRoll } from '../contexts'
+import { isLoggedIn, getUser } from '../store/selectors'
 
 const styles = {
   wrapper: {
@@ -14,14 +15,15 @@ const styles = {
 }
 
 export const DebugPanel = withAuthNRoll(props => {
+  const user = getUser(props.authNRoll)
   return (
     <div style={styles.wrapper}>
       <h5>Debug Panel</h5>
-      {!props.authNRoll.user && <div>No user</div>}
-      {props.authNRoll.user && (
+      {!user && <div>No user</div>}
+      {user && (
         <React.Fragment>
           <div>
-            {props.authNRoll.user.username}
+            {user.username}
             <br />
           </div>
 
@@ -32,7 +34,11 @@ export const DebugPanel = withAuthNRoll(props => {
             </div>
           )}
 
-          {props.authNRoll.isLoggedIn ? <div>The user is logged</div> : <div>The user requires action</div>}
+          {isLoggedIn(props.authNRoll) ? (
+            <div>The user is logged</div>
+          ) : (
+            <div>The user requires action</div>
+          )}
         </React.Fragment>
       )}
     </div>

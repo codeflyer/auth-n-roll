@@ -3,8 +3,8 @@ import get from 'lodash/get'
 import { withAuthNRoll } from '../contexts'
 
 export const StateFilter = withAuthNRoll(
-  ({ authNRoll, name, value, children }) =>
-    get(authNRoll, name) === value && (
+  ({ authNRoll, getStateFunction, value, children }) =>
+    getStateFunction(authNRoll) === value && (
       <React.Fragment>{children}</React.Fragment>
     )
 )

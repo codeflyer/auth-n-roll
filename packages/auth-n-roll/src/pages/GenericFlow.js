@@ -3,14 +3,15 @@ import React from 'react'
 import { Switch } from '../components/Switch'
 import { AuthNRollContext } from '../contexts'
 import { SwitchChangePanelBar } from '../components/SwitchChangePanelBar'
+import { getCurrentFlowIndex } from '../store/selectors'
 
 export class GenericFlow extends React.Component {
-  debugPanel(indexList, currentIndex, changeIndex) {
+  debugPanel(indexList, currentIndex, changeFlowIndex) {
     return (
       <SwitchChangePanelBar
         indexList={indexList}
         currentIndex={currentIndex}
-        onClick={changeIndex}
+        onClick={changeFlowIndex}
       />
     )
   }
@@ -23,14 +24,14 @@ export class GenericFlow extends React.Component {
       <AuthNRollContext.Consumer>
         {authNRoll => (
           <React.Fragment>
-            <Switch index={authNRoll.switch.index || this.props.defaultIndex}>
+            <Switch index={getCurrentFlowIndex(authNRoll) || this.props.defaultIndex}>
               {this.props.children}
             </Switch>
             {authNRoll.debug &&
               this.debugPanel(
                 indexList,
-                authNRoll.switch.index || this.props.defaultIndex,
-                authNRoll.switch.changeIndex
+                getCurrentFlowIndex(authNRoll) || this.props.defaultIndex,
+                authNRoll.changeFlowIndex
               )}
           </React.Fragment>
         )}

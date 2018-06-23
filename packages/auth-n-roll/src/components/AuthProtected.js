@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { withAuthNRoll } from '../contexts'
+import { isLoggedIn } from '../store/selectors'
 
 class AuthProtectedBase extends React.Component {
   renderLoginProcess() {
@@ -10,7 +11,7 @@ class AuthProtectedBase extends React.Component {
   }
 
   render() {
-    if (!this.props.authNRoll.isLoggedIn) {
+    if (!isLoggedIn(this.props.authNRoll)) {
       return this.renderLoginProcess()
     }
     return <React.Fragment>{this.props.children}</React.Fragment>
@@ -22,9 +23,7 @@ AuthProtectedBase.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
-  authNRoll: PropTypes.shape({
-    isLoggedIn: PropTypes.bool
-  })
+  authNRoll: PropTypes.object
 }
 
 export const AuthProtected = withAuthNRoll(AuthProtectedBase)

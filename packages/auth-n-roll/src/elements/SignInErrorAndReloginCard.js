@@ -1,34 +1,14 @@
 import React from 'react'
-import get from 'lodash/get'
 import { withAuthNRoll } from '../contexts'
-import { SignInResendValidationCode } from './SignInResendValidationCode'
+import { getSignInError } from '../store/selectors'
 
 export const SignInErrorAndReloginCard = ({ children }) => (
   <React.Fragment>{children}</React.Fragment>
 )
 
-// export class SignInErrorAndReloginCard extends React.Component {
-//   render() {
-//     return (
-//       <div>
-//         Add something here
-//         {this.props.children}
-//         <hr />
-//       </div>
-//     )
-//   }
-// }
-//
-
 SignInErrorAndReloginCard.ErrorMessage = withAuthNRoll(({ authNRoll }) => {
   return (
-    <React.Fragment>{get(authNRoll, 'signIn.error.message')}</React.Fragment>
-  )
-})
-
-SignInErrorAndReloginCard.BackToLoginButton = withAuthNRoll(({ authNRoll }) => {
-  return (
-    <React.Fragment>{get(authNRoll, 'signIn.error.message')}</React.Fragment>
+    <React.Fragment>{getSignInError(authNRoll).message || ''}</React.Fragment>
   )
 })
 

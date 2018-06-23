@@ -20,6 +20,7 @@ import {
 import { SignIn } from '../pages/SignIn'
 
 import { withAuthNRoll, FormContext } from '../contexts'
+import { getAuthService } from '../store/selectors'
 
 export const SignInCredentialsWithFormik = withFormik({
   mapPropsToValues: props => ({
@@ -48,7 +49,7 @@ export const SignInCredentialsWithFormik = withFormik({
   ) => {
     try {
       props.authNRoll.setChallenge({})
-      const result = await props.authNRoll.authService.signIn(
+      const result = await getAuthService(props.authNRoll).signIn(
         values.email,
         values.password
       )
@@ -57,7 +58,7 @@ export const SignInCredentialsWithFormik = withFormik({
       if (get(result, 'challenge.ChallengeName') === 'NEW_PASSWORD_REQUIRED') {
         props.authNRoll.setUserData(result.user)
         props.authNRoll.setChallenge(result.challenge)
-        props.authNRoll.switch.changeIndex(SignIn.FLOW_STEP_CHANGE_PASSWORD)
+        props.authNRoll.changeFlowIndex(SignIn.FLOW_STEP_CHANGE_PASSWORD)
       } else {
         props.authNRoll.setUserData(result.user)
         props.authNRoll.setIsLoggedIn(true)
@@ -68,7 +69,7 @@ export const SignInCredentialsWithFormik = withFormik({
         props.authNRoll.setUserData(
           Object.assign([], e.user, { requireAction: 'USER_NOT_CONFIRMED' })
         )
-        props.authNRoll.switch.changeIndex(SignIn.FLOW_STEP_CONFIRM_CODE)
+        props.authNRoll.changeFlowIndex(SignIn.FLOW_STEP_CONFIRM_CODE)
         return
       }
       setErrors({ email: e.message })

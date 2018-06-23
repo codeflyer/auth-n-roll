@@ -2,6 +2,8 @@ import React from 'react'
 import { withFormik } from 'formik'
 import { withAuthNRoll, FormContext } from '../contexts'
 
+import { getUser, getChallenge, getAuthService } from '../store/selectors'
+
 import {
   AuthNRollFormFieldPassword,
   AuthNRollFormButtonSubmit
@@ -48,10 +50,10 @@ export const SignInChangePassword = withFormik({
     }
   ) => {
     try {
-      const result = await props.authNRoll.authService.changePasswordForced(
-        props.authNRoll.user.username,
+      const result = await getAuthService(props.authNRoll).changePasswordForced(
+        getUser(props.authNRoll).username,
         values.password,
-        props.authNRoll.challenge.Session
+        getChallenge(props.authNRoll).Session
       )
 
       props.authNRoll.setUserData(result.user)
@@ -62,7 +64,7 @@ export const SignInChangePassword = withFormik({
       switch (e.code) {
         case CHANGE_PASSWORD_FORCED_USER_NOT_FOUND:
           props.authNRoll.setUserData(null)
-          props.authNRoll.switch.changeIndex(SignIn.FLOW_STEP_CREDENTIAL)
+          props.authNRoll.changeFlowIndex(SignIn.FLOW_STEP_CREDENTIAL)
           return
         default:
           setErrors({ password: e.message })
