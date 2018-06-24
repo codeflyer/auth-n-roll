@@ -11,7 +11,7 @@ import { SignIn } from '../pages/SignIn'
 import { getAuthService, getUser } from '../store/selectors'
 
 export const SignInConfirmSignUp = withFormik({
-  mapPropsToValues: props => ({}),
+  mapPropsToValues: props => ({code: ''}),
   validate: (values, props) => {
     const errors = {}
 
