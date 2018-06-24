@@ -4,7 +4,7 @@ import {
   RESEND_VALIDATION_CODE_STATE_SENDING_ERROR,
   RESEND_VALIDATION_CODE_STATE_SENDING_SUCCESS
 } from '../constants'
-import { getAuthService } from './selectors'
+import { getAuthService, getUser } from './selectors'
 
 export function getDefaultState() {
   return {
@@ -30,7 +30,7 @@ async function resendValidationCode() {
   })
 
   try {
-    await getAuthService(this.state).resendValidationCode(this.state.user.username)
+    await getAuthService(this.state).resendValidationCode(getUser(this.state).username)
     this.updateState({
       resendValidationCodeState: Object.assign({}, this.state.resendCode, {
         sendingState: RESEND_VALIDATION_CODE_STATE_SENDING_SUCCESS

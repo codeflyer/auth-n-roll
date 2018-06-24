@@ -48,7 +48,7 @@ export const SignInConfirmSignUp = withFormik({
             code: CONFIRM_SIGN_UP_USER_NOT_FOUND,
             message: `The user ${getUser(props.authNRoll).username} was not found`
           })
-          props.authNRoll.setUserData(null)
+          props.authNRoll.setUser(null)
           props.authNRoll.changeFlowIndex(SignIn.FLOW_STEP_ERROR_AND_RELOGIN)
           return
         case CONFIRM_SIGN_UP_CODE_MISMATCH:

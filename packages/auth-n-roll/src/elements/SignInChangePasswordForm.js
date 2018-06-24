@@ -56,14 +56,14 @@ export const SignInChangePassword = withFormik({
         getChallenge(props.authNRoll).Session
       )
 
-      props.authNRoll.setUserData(result.user)
+      props.authNRoll.setUser(result.user)
       props.authNRoll.setChallenge(null)
       props.authNRoll.setIsLoggedIn(true)
     } catch (e) {
       setSubmitting(false)
       switch (e.code) {
         case CHANGE_PASSWORD_FORCED_USER_NOT_FOUND:
-          props.authNRoll.setUserData(null)
+          props.authNRoll.setUser(null)
           props.authNRoll.changeFlowIndex(SignIn.FLOW_STEP_CREDENTIAL)
           return
         default:

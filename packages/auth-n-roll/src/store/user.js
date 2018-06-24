@@ -12,7 +12,7 @@ function setIsLoggedIn(isLoggedIn) {
   })
 }
 
-function setUserData(user) {
+function setUser(user) {
   this.updateState({ user })
 }
 
@@ -22,7 +22,7 @@ function setChallenge(challenge) {
 
 export function getActions(store) {
   return {
-    setUserData: setUserData.bind(store),
+    setUser: setUser.bind(store),
     setChallenge: setChallenge.bind(store),
     setIsLoggedIn: setIsLoggedIn.bind(store)
   }

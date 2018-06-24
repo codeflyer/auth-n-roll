@@ -56,17 +56,17 @@ export const SignInCredentialsWithFormik = withFormik({
       setSubmitting(false)
       // The user created using the command line requires a NEW_PASSWORD
       if (get(result, 'challenge.ChallengeName') === 'NEW_PASSWORD_REQUIRED') {
-        props.authNRoll.setUserData(result.user)
+        props.authNRoll.setUser(result.user)
         props.authNRoll.setChallenge(result.challenge)
         props.authNRoll.changeFlowIndex(SignIn.FLOW_STEP_CHANGE_PASSWORD)
       } else {
-        props.authNRoll.setUserData(result.user)
+        props.authNRoll.setUser(result.user)
         props.authNRoll.setIsLoggedIn(true)
       }
     } catch (e) {
       setSubmitting(false)
       if (e.code === SIGN_IN_RESPONSE_NOT_CONFIRMED) {
-        props.authNRoll.setUserData(
+        props.authNRoll.setUser(
           Object.assign([], e.user, { requireAction: 'USER_NOT_CONFIRMED' })
         )
         props.authNRoll.changeFlowIndex(SignIn.FLOW_STEP_CONFIRM_CODE)
