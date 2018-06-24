@@ -1,17 +1,17 @@
 import {
-  SIGN_IN_RESPONSE_USER_NOT_FOUND,
-  SIGN_IN_RESPONSE_NOT_AUTHORIZED,
-  SIGN_IN_RESPONSE_OK,
-  SIGN_IN_RESPONSE_CHANGE_PASSWORD,
-  SIGN_IN_RESPONSE_NOT_CONFIRMED,
-  SIGN_IN_RESPONSE_SOFTWARE_TOKEN_MFA,
-  SIGN_IN_RESPONSE_VALIDATION_DATA
+  USER_NOT_FOUND_ERROR,
+  NOT_AUTHORIZED_ERROR,
+  RESPONSE_SUCCESS,
+  FORCE_CHANGE_PASSWORD_CHALLENGE,
+  USER_NOT_CONFIRMED_ERROR,
+  SOFTWARE_TOKEN_MFA_CHALLENGE,
+  VALIDATION_DATA_ERROR
 } from 'auth-n-roll'
 
 export const SignIn = async (cognito, stack, username, password) => {
   if (!username || !password) {
     throw {
-      code: SIGN_IN_RESPONSE_VALIDATION_DATA,
+      code: VALIDATION_DATA_ERROR,
       message: 'Username and password required'
     }
   }
@@ -37,19 +37,19 @@ export const SignIn = async (cognito, stack, username, password) => {
     switch (err.code) {
       case 'UserNotFoundException':
         throw {
-          code: SIGN_IN_RESPONSE_USER_NOT_FOUND,
+          code: USER_NOT_FOUND_ERROR,
           message: err.message,
           user: { username }
         }
       case 'NotAuthorizedException':
         throw {
-          code: SIGN_IN_RESPONSE_NOT_AUTHORIZED,
+          code: NOT_AUTHORIZED_ERROR,
           message: err.message,
           user: { username }
         }
       case 'UserNotConfirmedException':
         throw {
-          code: SIGN_IN_RESPONSE_NOT_CONFIRMED,
+          code: USER_NOT_CONFIRMED_ERROR,
           message: err.message,
           user: { username }
         }

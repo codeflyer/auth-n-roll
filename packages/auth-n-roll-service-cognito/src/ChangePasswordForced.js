@@ -1,8 +1,8 @@
 import {
-  CHANGE_PASSWORD_FORCED_USER_NOT_FOUND,
-  CHANGE_PASSWORD_FORCED_ERROR,
-  CHANGE_PASSWORD_FORCED_INVALID_PASSWORD,
-  SIGN_IN_RESPONSE_VALIDATION_DATA
+  USER_NOT_FOUND_ERROR,
+  GENERIC_ERROR,
+  INVALID_PASSWORD_ERROR,
+  VALIDATION_DATA_ERROR
 } from 'auth-n-roll'
 
 export const ChangePasswordForced = async (
@@ -14,7 +14,7 @@ export const ChangePasswordForced = async (
 ) => {
   if (!newPassword || !username || !session) {
     throw {
-      code: SIGN_IN_RESPONSE_VALIDATION_DATA,
+      code: VALIDATION_DATA_ERROR,
       message: 'Username, NewPassword and Session required'
     }
   }
@@ -41,18 +41,18 @@ export const ChangePasswordForced = async (
     switch (err.code) {
       case 'UserNotFoundException':
         throw {
-          code: CHANGE_PASSWORD_FORCED_USER_NOT_FOUND,
+          code: USER_NOT_FOUND_ERROR,
           message: err.message,
           user: { username }
         }
       case 'InvalidPasswordException':
         throw {
-          code: CHANGE_PASSWORD_FORCED_INVALID_PASSWORD,
+          code: INVALID_PASSWORD_ERROR,
           message: err.message,
           user: { username }
         }
       default:
-        throw { code: CHANGE_PASSWORD_FORCED_ERROR, originalCode: err.code, message: err.message, user: { username } }
+        throw { code: GENERIC_ERROR, originalCode: err.code, message: err.message, user: { username } }
     }
   }
 }

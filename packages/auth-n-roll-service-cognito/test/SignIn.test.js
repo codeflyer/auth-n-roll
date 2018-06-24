@@ -1,9 +1,9 @@
 import 'whatwg-fetch'
 import {
-  SIGN_IN_RESPONSE_NOT_AUTHORIZED,
-  SIGN_IN_RESPONSE_NOT_CONFIRMED,
-  SIGN_IN_RESPONSE_USER_NOT_FOUND,
-  SIGN_IN_RESPONSE_VALIDATION_DATA
+  NOT_AUTHORIZED_ERROR,
+  USER_NOT_CONFIRMED_ERROR,
+  USER_NOT_FOUND_ERROR,
+  VALIDATION_DATA_ERROR
 } from 'auth-n-roll'
 
 import { ServiceCognito } from '../src'
@@ -18,7 +18,7 @@ describe('SignIn', () => {
       await service.signIn()
     } catch (e) {
       expect(e).toEqual({
-        code: SIGN_IN_RESPONSE_VALIDATION_DATA,
+        code: VALIDATION_DATA_ERROR,
         message: 'Username and password required'
       })
     }
@@ -31,7 +31,7 @@ describe('SignIn', () => {
       await service.signIn('davide@codeflyer.com')
     } catch (e) {
       expect(e).toEqual({
-        code: SIGN_IN_RESPONSE_VALIDATION_DATA,
+        code: VALIDATION_DATA_ERROR,
         message: 'Username and password required'
       })
     }
@@ -44,7 +44,7 @@ describe('SignIn', () => {
       await service.signIn('some@test.it', 'somepassword')
     } catch (e) {
       expect(e).toEqual({
-        code: SIGN_IN_RESPONSE_USER_NOT_FOUND,
+        code: USER_NOT_FOUND_ERROR,
         message: 'User does not exist.',
         user: { username: 'some@test.it' }
       })
@@ -58,7 +58,7 @@ describe('SignIn', () => {
       await service.signIn('davide@codeflyer.com', 'somepassword')
     } catch (e) {
       expect(e).toEqual({
-        code: SIGN_IN_RESPONSE_NOT_AUTHORIZED,
+        code: NOT_AUTHORIZED_ERROR,
         message: 'Incorrect username or password.',
         user: { username: 'davide@codeflyer.com' }
       })
@@ -82,7 +82,7 @@ describe('SignIn', () => {
       )
     } catch (e) {
       expect(e).toEqual({
-        code: SIGN_IN_RESPONSE_NOT_CONFIRMED,
+        code: USER_NOT_CONFIRMED_ERROR,
         message: 'User is not confirmed.',
         user: { username: 'davide.fiorello@gmail.com' }
       })

@@ -27,7 +27,7 @@ export class SignInPage extends React.Component {
       <ModalWrapper>
         <Wrapper>
           <SignIn>
-            <SignInCredentials index={SignIn.FLOW_STEP_CREDENTIAL} />
+            <SignInCredentials index={SignIn.FLOW_STEP_CREDENTIALS} />
             <SignInChangePassword index={SignIn.FLOW_STEP_CHANGE_PASSWORD} />
             <SignInConfirmSignUp index={SignIn.FLOW_STEP_CONFIRM_CODE} />
             <SignInErrorAndRelogin index={SignIn.FLOW_STEP_ERROR_AND_RELOGIN} />

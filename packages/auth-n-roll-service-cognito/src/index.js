@@ -1,16 +1,3 @@
-import {
-  SIGN_IN_RESPONSE_USER_NOT_FOUND,
-  SIGN_IN_RESPONSE_NOT_AUTHORIZED,
-  SIGN_IN_RESPONSE_OK,
-  SIGN_IN_RESPONSE_CHANGE_PASSWORD,
-  SIGN_IN_RESPONSE_NOT_CONFIRMED,
-  SIGN_IN_RESPONSE_SOFTWARE_TOKEN_MFA,
-  SIGN_IN_RESPONSE_VALIDATION_DATA,
-  CONFIRM_SIGN_UP_CODE_MISMATCH,
-  CONFIRM_SIGN_UP_EXPIRED_CODE,
-  CONFIRM_SIGN_UP_USER_NOT_FOUND
-} from 'auth-n-roll'
-
 const { CognitoIdentityCredentials } = require('aws-sdk')
 const CognitoIdentityServiceProvider = require('aws-sdk/clients/cognitoidentityserviceprovider')
 

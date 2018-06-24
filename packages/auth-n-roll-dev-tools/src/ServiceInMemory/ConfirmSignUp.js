@@ -1,16 +1,17 @@
 import { delay, getState } from './index'
 
 import {
-  SIGN_IN_RESPONSE_VALIDATION_DATA,
-  CONFIRM_SIGN_UP_USER_NOT_FOUND,
-  CONFIRM_SIGN_UP_CODE_MISMATCH,
-  CONFIRM_SIGN_UP_EXPIRED_CODE
+  VALIDATION_DATA_ERROR,
+  USER_NOT_FOUND_ERROR,
+  VALIDATION_CODE_MISMATCH_ERROR,
+  EXPIRED_VALIDATION_CODE_ERROR
 } from 'auth-n-roll'
+import { GENERIC_ERROR } from '../../../auth-n-roll/src'
 
 export const ConfirmSignUp = async (username, confirmationCode) => {
   if (!confirmationCode || !username) {
     throw {
-      code: SIGN_IN_RESPONSE_VALIDATION_DATA,
+      code: VALIDATION_DATA_ERROR,
       message: 'Username and ConfirmationCode required'
     }
   }
@@ -18,22 +19,28 @@ export const ConfirmSignUp = async (username, confirmationCode) => {
   await delay(1000)
 
   switch (getState('confirmSignUpResponse')) {
-    case CONFIRM_SIGN_UP_CODE_MISMATCH:
+    case VALIDATION_CODE_MISMATCH_ERROR:
       throw {
-        code: CONFIRM_SIGN_UP_CODE_MISMATCH,
+        code: VALIDATION_CODE_MISMATCH_ERROR,
         message: 'Code not valid',
         user: { username }
       }
-    case CONFIRM_SIGN_UP_USER_NOT_FOUND:
+    case USER_NOT_FOUND_ERROR:
       throw {
-        code: CONFIRM_SIGN_UP_USER_NOT_FOUND,
+        code: USER_NOT_FOUND_ERROR,
         message: 'User not found',
         user: { username }
       }
-    case CONFIRM_SIGN_UP_EXPIRED_CODE:
+    case EXPIRED_VALIDATION_CODE_ERROR:
       throw {
-        code: CONFIRM_SIGN_UP_EXPIRED_CODE,
+        code: EXPIRED_VALIDATION_CODE_ERROR,
         message: 'Expired code',
+        user: { username }
+      }
+    case GENERIC_ERROR:
+      throw {
+        code: GENERIC_ERROR,
+        message: 'Not managed error',
         user: { username }
       }
     default:

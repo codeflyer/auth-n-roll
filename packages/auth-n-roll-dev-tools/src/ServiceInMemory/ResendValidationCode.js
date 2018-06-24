@@ -1,15 +1,15 @@
 import { delay, getState } from './index'
 
 import {
-  RESEND_VALIDATION_CODE_RESPONSE_ERROR
+  GENERIC_ERROR
 } from 'auth-n-roll'
 
 export const ResendValidationCode = async username => {
   await delay(500)
   switch (getState('resendValidationCodeResponse')) {
-    case RESEND_VALIDATION_CODE_RESPONSE_ERROR:
+    case GENERIC_ERROR:
       throw {
-        code: RESEND_VALIDATION_CODE_RESPONSE_ERROR,
+        code: GENERIC_ERROR,
         message: 'Email already verifyed',
         user: { username }
       }

@@ -1,10 +1,10 @@
 import { delay, getState } from './index'
 
 import {
-  CHANGE_PASSWORD_FORCED_USER_NOT_FOUND,
-  CHANGE_PASSWORD_FORCED_ERROR,
-  CHANGE_PASSWORD_FORCED_INVALID_PASSWORD,
-  SIGN_IN_RESPONSE_VALIDATION_DATA
+  USER_NOT_FOUND_ERROR,
+  GENERIC_ERROR,
+  INVALID_PASSWORD_ERROR,
+  VALIDATION_DATA_ERROR
 } from 'auth-n-roll'
 
 export const ChangePasswordForced = async (
@@ -14,13 +14,13 @@ export const ChangePasswordForced = async (
 ) => {
   if (session !== '1234567890') {
     throw {
-      code: SIGN_IN_RESPONSE_VALIDATION_DATA,
+      code: VALIDATION_DATA_ERROR,
       message: 'Session is not valid (expected 1234567890)'
     }
   }
   if (!newPassword || !username || !session) {
     throw {
-      code: SIGN_IN_RESPONSE_VALIDATION_DATA,
+      code: VALIDATION_DATA_ERROR,
       message: 'Username, NewPassword and Session required'
     }
   }
@@ -28,21 +28,21 @@ export const ChangePasswordForced = async (
   await delay(1000)
 
   switch (getState('changePasswordForced')) {
-    case CHANGE_PASSWORD_FORCED_USER_NOT_FOUND:
+    case USER_NOT_FOUND_ERROR:
       throw {
-        code: CHANGE_PASSWORD_FORCED_USER_NOT_FOUND,
+        code: USER_NOT_FOUND_ERROR,
         message: 'User not found',
         user: { username }
       }
-    case CHANGE_PASSWORD_FORCED_ERROR:
+    case GENERIC_ERROR:
       throw {
-        code: CHANGE_PASSWORD_FORCED_ERROR,
+        code: GENERIC_ERROR,
         message: 'Generic error',
         user: { username }
       }
-    case CHANGE_PASSWORD_FORCED_INVALID_PASSWORD:
+    case INVALID_PASSWORD_ERROR:
       throw {
-        code: CHANGE_PASSWORD_FORCED_INVALID_PASSWORD,
+        code: INVALID_PASSWORD_ERROR,
         message:
           'Password does not conform to policy: Password must have uppercase characters',
         user: { username }

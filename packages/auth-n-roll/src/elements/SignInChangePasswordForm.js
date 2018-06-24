@@ -11,9 +11,9 @@ import {
 
 import { SignIn } from '../pages/SignIn'
 import {
-  CHANGE_PASSWORD_FORCED_USER_NOT_FOUND,
-  CHANGE_PASSWORD_FORCED_ERROR,
-  CHANGE_PASSWORD_FORCED_INVALID_PASSWORD
+  USER_NOT_FOUND_ERROR,
+  GENERIC_ERROR,
+  INVALID_PASSWORD_ERROR
 } from '../constants'
 
 export const SignInChangePassword = withFormik({
@@ -49,9 +49,10 @@ export const SignInChangePassword = withFormik({
       setErrors /* setValues, setStatus, and other goodies */
     }
   ) => {
+    const user = getUser(props.authNRoll)
     try {
       const result = await getAuthService(props.authNRoll).changePasswordForced(
-        getUser(props.authNRoll).username,
+        user.username,
         values.password,
         getChallenge(props.authNRoll).Session
       )
@@ -62,9 +63,10 @@ export const SignInChangePassword = withFormik({
     } catch (e) {
       setSubmitting(false)
       switch (e.code) {
-        case CHANGE_PASSWORD_FORCED_USER_NOT_FOUND:
+        case USER_NOT_FOUND_ERROR:
+          props.authNRollActions.setSignInError({message: `The user ${user.username} was not found`})
           props.authNRollActions.setUser(null)
-          props.authNRollActions.changeFlowIndex(SignIn.FLOW_STEP_CREDENTIAL)
+          props.authNRollActions.changeFlowIndex(SignIn.FLOW_STEP_ERROR_AND_RELOGIN)
           return
         default:
           setErrors({ password: e.message })

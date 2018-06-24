@@ -1,7 +1,5 @@
 import {
-  SIGN_IN_RESPONSE_OK,
-  RESEND_VALIDATION_CODE_RESPONSE_OK,
-  CONFIRM_SIGN_UP_RESPONSE_OK,
+  RESPONSE_SUCCESS
 } from 'auth-n-roll'
 
 import { SignIn } from './SignIn'
@@ -12,9 +10,9 @@ import { ChangePasswordForced } from './ChangePasswordForced'
 export const delay = time => new Promise(resolve => setTimeout(resolve, time))
 
 let state = {
-  signinResponse: SIGN_IN_RESPONSE_OK,
-  resendValidationCodeResponse: RESEND_VALIDATION_CODE_RESPONSE_OK,
-  confirmSignUpResponse: CONFIRM_SIGN_UP_RESPONSE_OK
+  signinResponse: RESPONSE_SUCCESS,
+  resendValidationCodeResponse: RESPONSE_SUCCESS,
+  confirmSignUpResponse: RESPONSE_SUCCESS
 }
 
 const STORAGE_KEY = 'auth-n-roll-dev-state'

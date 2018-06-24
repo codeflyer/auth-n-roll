@@ -1,8 +1,8 @@
 import {
-  CONFIRM_SIGN_UP_CODE_MISMATCH,
-  CONFIRM_SIGN_UP_EXPIRED_CODE,
-  CONFIRM_SIGN_UP_USER_NOT_FOUND,
-  CONFIRM_SIGN_UP_ERROR
+  VALIDATION_CODE_MISMATCH_ERROR,
+  EXPIRED_VALIDATION_CODE_ERROR,
+  USER_NOT_FOUND_ERROR,
+  UNMANAGED_ERROR
 } from 'auth-n-roll'
 
 export const ConfirmSignUp = async (
@@ -13,7 +13,7 @@ export const ConfirmSignUp = async (
 ) => {
   if (!confirmationCode || !username) {
     throw {
-      code: SIGN_IN_RESPONSE_VALIDATION_DATA,
+      code: VALIDATION_DATA_ERROR,
       message: 'Username and ConfirmationCode required'
     }
   }
@@ -32,24 +32,24 @@ export const ConfirmSignUp = async (
     switch (err.code) {
       case 'UserNotFoundException':
         throw {
-          code: CONFIRM_SIGN_UP_USER_NOT_FOUND,
+          code: USER_NOT_FOUND_ERROR,
           message: err.message,
           user: { username }
         }
       case 'CodeMismatchException':
         throw {
-          code: CONFIRM_SIGN_UP_CODE_MISMATCH,
+          code: VALIDATION_CODE_MISMATCH_ERROR,
           message: err.message,
           user: { username }
         }
       case 'ExpiredCodeException':
         throw {
-          code: CONFIRM_SIGN_UP_EXPIRED_CODE,
+          code: EXPIRED_VALIDATION_CODE_ERROR,
           message: err.message,
           user: { username }
         }
       default:
-        throw { code: CONFIRM_SIGN_UP_ERROR, originalCode: err.code, message: err.message, user: { username } }
+        throw { code: UNMANAGED_ERROR, originalCode: err.code, message: err.message, user: { username } }
     }
   }
 }

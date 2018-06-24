@@ -3,12 +3,12 @@ import { withFormik } from 'formik'
 import { withAuthNRoll, FormContext } from '../contexts'
 import { AuthNRollFormField, AuthNRollFormButtonSubmit } from '../consumers'
 import {
-  CONFIRM_SIGN_UP_USER_NOT_FOUND,
-  CONFIRM_SIGN_UP_CODE_MISMATCH,
-  CONFIRM_SIGN_UP_EXPIRED_CODE
+  USER_NOT_FOUND_ERROR,
+  VALIDATION_CODE_MISMATCH_ERROR,
+  EXPIRED_VALIDATION_CODE_ERROR
 } from '../constants'
 import { SignIn } from '../pages/SignIn'
-import { getUser } from '../store/selectors'
+import { getAuthService, getUser } from '../store/selectors'
 
 export const SignInConfirmSignUp = withFormik({
   mapPropsToValues: props => ({}),
@@ -43,16 +43,16 @@ export const SignInConfirmSignUp = withFormik({
     } catch (e) {
       setSubmitting(false)
       switch (e.code) {
-        case CONFIRM_SIGN_UP_USER_NOT_FOUND:
+        case USER_NOT_FOUND_ERROR:
           props.authNRollActions.setSignInError({
-            code: CONFIRM_SIGN_UP_USER_NOT_FOUND,
+            code: USER_NOT_FOUND_ERROR,
             message: `The user ${getUser(props.authNRoll).username} was not found`
           })
           props.authNRollActions.setUser(null)
           props.authNRollActions.changeFlowIndex(SignIn.FLOW_STEP_ERROR_AND_RELOGIN)
           return
-        case CONFIRM_SIGN_UP_CODE_MISMATCH:
-        case CONFIRM_SIGN_UP_EXPIRED_CODE:
+        case VALIDATION_CODE_MISMATCH_ERROR:
+        case EXPIRED_VALIDATION_CODE_ERROR:
           setErrors({ code: e.message })
           break
         default:

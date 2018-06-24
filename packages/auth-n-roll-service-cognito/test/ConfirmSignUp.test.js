@@ -1,7 +1,7 @@
 import 'whatwg-fetch'
 import {
-  RESEND_VALIDATION_CODE_RESPONSE_OK,
-  RESEND_VALIDATION_CODE_RESPONSE_ERROR
+  RESPONSE_SUCCESS,
+  GENERIC_ERROR
 } from 'auth-n-roll'
 
 import { ServiceCognito } from '../src'
@@ -19,7 +19,7 @@ describe('ConfirmSignUp', () => {
       )
     } catch (e) {
       expect(e).toEqual({
-        code: 'CONFIRM_SIGN_UP_ERROR',
+        code: 'UNMANAGED_ERROR',
         message: 'User cannot confirm because user status is not UNCONFIRMED.',
         originalCode: 'NotAuthorizedException',
         user: { username: 'davide@codeflyer.com' }

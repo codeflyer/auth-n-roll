@@ -3,22 +3,16 @@ import React from 'react'
 import { setState, getState } from './ServiceInMemory'
 
 import {
-  SIGN_IN_RESPONSE_USER_NOT_FOUND,
-  SIGN_IN_RESPONSE_NOT_AUTHORIZED,
-  SIGN_IN_RESPONSE_OK,
-  SIGN_IN_RESPONSE_CHANGE_PASSWORD,
-  SIGN_IN_RESPONSE_NOT_CONFIRMED,
-  SIGN_IN_RESPONSE_SOFTWARE_TOKEN_MFA,
-  RESEND_VALIDATION_CODE_RESPONSE_OK,
-  RESEND_VALIDATION_CODE_RESPONSE_ERROR,
-  CONFIRM_SIGN_UP_CODE_MISMATCH,
-  CONFIRM_SIGN_UP_USER_NOT_FOUND,
-  CONFIRM_SIGN_UP_EXPIRED_CODE,
-  CONFIRM_SIGN_UP_ERROR,
-  CONFIRM_SIGN_UP_RESPONSE_OK,
-  CHANGE_PASSWORD_FORCED_USER_NOT_FOUND,
-  CHANGE_PASSWORD_FORCED_INVALID_PASSWORD,
-  CHANGE_PASSWORD_FORCED_ERROR
+  USER_NOT_FOUND_ERROR,
+  NOT_AUTHORIZED_ERROR,
+  RESPONSE_SUCCESS,
+  FORCE_CHANGE_PASSWORD_CHALLENGE,
+  USER_NOT_CONFIRMED_ERROR,
+  GENERIC_ERROR,
+  VALIDATION_CODE_MISMATCH_ERROR,
+  EXPIRED_VALIDATION_CODE_ERROR,
+  UNMANAGED_ERROR,
+  INVALID_PASSWORD_ERROR
 } from 'auth-n-roll'
 
 const styleButton = {
@@ -73,31 +67,31 @@ export class ServiceSwitch extends React.Component {
           <div>
             <SwitchButton
               name="signinResponse"
-              checkValue={SIGN_IN_RESPONSE_OK}
+              checkValue={RESPONSE_SUCCESS}
               label="OK"
               update={this.handleUpdate}
             />
             <SwitchButton
               name="signinResponse"
-              checkValue={SIGN_IN_RESPONSE_CHANGE_PASSWORD}
+              checkValue={FORCE_CHANGE_PASSWORD_CHALLENGE}
               label="Change PWD"
               update={this.handleUpdate}
             />
             <SwitchButton
               name="signinResponse"
-              checkValue={SIGN_IN_RESPONSE_USER_NOT_FOUND}
+              checkValue={USER_NOT_FOUND_ERROR}
               label="Not Found"
               update={this.handleUpdate}
             />
             <SwitchButton
               name="signinResponse"
-              checkValue={SIGN_IN_RESPONSE_NOT_AUTHORIZED}
+              checkValue={NOT_AUTHORIZED_ERROR}
               label="Not Auth"
               update={this.handleUpdate}
             />
             <SwitchButton
               name="signinResponse"
-              checkValue={SIGN_IN_RESPONSE_NOT_CONFIRMED}
+              checkValue={USER_NOT_CONFIRMED_ERROR}
               label="Not Confirmed"
               update={this.handleUpdate}
             />
@@ -106,31 +100,31 @@ export class ServiceSwitch extends React.Component {
           <div>
             <SwitchButton
               name="confirmSignUpResponse"
-              checkValue={CONFIRM_SIGN_UP_RESPONSE_OK}
+              checkValue={RESPONSE_SUCCESS}
               label="Success"
               update={this.handleUpdate}
             />
             <SwitchButton
               name="confirmSignUpResponse"
-              checkValue={CONFIRM_SIGN_UP_EXPIRED_CODE}
+              checkValue={EXPIRED_VALIDATION_CODE_ERROR}
               label="Code Expired"
               update={this.handleUpdate}
             />
             <SwitchButton
               name="confirmSignUpResponse"
-              checkValue={CONFIRM_SIGN_UP_USER_NOT_FOUND}
+              checkValue={USER_NOT_FOUND_ERROR}
               label="User not found"
               update={this.handleUpdate}
             />
             <SwitchButton
               name="confirmSignUpResponse"
-              checkValue={CONFIRM_SIGN_UP_CODE_MISMATCH}
+              checkValue={VALIDATION_CODE_MISMATCH_ERROR}
               label="Code mismatch"
               update={this.handleUpdate}
             />
             <SwitchButton
               name="confirmSignUpResponse"
-              checkValue={CONFIRM_SIGN_UP_ERROR}
+              checkValue={GENERIC_ERROR}
               label="Error"
               update={this.handleUpdate}
             />
@@ -139,13 +133,13 @@ export class ServiceSwitch extends React.Component {
           <div>
             <SwitchButton
               name="resendValidationCodeResponse"
-              checkValue={RESEND_VALIDATION_CODE_RESPONSE_OK}
+              checkValue={RESPONSE_SUCCESS}
               label="Success"
               update={this.handleUpdate}
             />
             <SwitchButton
               name="resendValidationCodeResponse"
-              checkValue={RESEND_VALIDATION_CODE_RESPONSE_ERROR}
+              checkValue={GENERIC_ERROR}
               label="Error"
               update={this.handleUpdate}
             />
@@ -160,19 +154,19 @@ export class ServiceSwitch extends React.Component {
             />
             <SwitchButton
               name="changePasswordForced"
-              checkValue={CHANGE_PASSWORD_FORCED_USER_NOT_FOUND}
+              checkValue={USER_NOT_FOUND_ERROR}
               label="User not found"
               update={this.handleUpdate}
             />
             <SwitchButton
               name="changePasswordForced"
-              checkValue={CHANGE_PASSWORD_FORCED_INVALID_PASSWORD}
+              checkValue={INVALID_PASSWORD_ERROR}
               label="Invalid password"
               update={this.handleUpdate}
             />
             <SwitchButton
               name="changePasswordForced"
-              checkValue={CHANGE_PASSWORD_FORCED_ERROR}
+              checkValue={GENERIC_ERROR}
               label="Error on change"
               update={this.handleUpdate}
             />

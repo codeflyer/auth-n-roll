@@ -9,12 +9,12 @@ import {
   AuthNRollFormButtonOnClick
 } from '../consumers'
 import {
-  SIGN_IN_RESPONSE_USER_NOT_FOUND,
-  SIGN_IN_RESPONSE_NOT_AUTHORIZED,
-  SIGN_IN_RESPONSE_OK,
-  SIGN_IN_RESPONSE_CHANGE_PASSWORD,
-  SIGN_IN_RESPONSE_NOT_CONFIRMED,
-  SIGN_IN_RESPONSE_SOFTWARE_TOKEN_MFA
+  USER_NOT_FOUND_ERROR,
+  NOT_AUTHORIZED_ERROR,
+  RESPONSE_SUCCESS,
+  FORCE_CHANGE_PASSWORD_CHALLENGE,
+  USER_NOT_CONFIRMED_ERROR,
+  SOFTWARE_TOKEN_MFA_CHALLENGE
 } from '../constants'
 
 import { SignIn } from '../pages/SignIn'
@@ -65,7 +65,7 @@ export const SignInCredentialsWithFormik = withFormik({
       }
     } catch (e) {
       setSubmitting(false)
-      if (e.code === SIGN_IN_RESPONSE_NOT_CONFIRMED) {
+      if (e.code === USER_NOT_CONFIRMED_ERROR) {
         props.authNRollActions.setUser(
           Object.assign([], e.user, { requireAction: 'USER_NOT_CONFIRMED' })
         )

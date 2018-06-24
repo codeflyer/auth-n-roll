@@ -1,7 +1,7 @@
 import 'whatwg-fetch'
 import {
-  RESEND_VALIDATION_CODE_RESPONSE_OK,
-  RESEND_VALIDATION_CODE_RESPONSE_ERROR
+  RESPONSE_SUCCESS,
+  GENERIC_ERROR
 } from 'auth-n-roll'
 
 import { ServiceCognito } from '../src'
@@ -18,7 +18,7 @@ describe('ResendConfirmationCode', () => {
       )
     } catch (e) {
       expect(e).toEqual({
-        code: 'RESEND_VALIDATION_CODE_RESPONSE_ERROR',
+        code: 'GENERIC_ERROR',
         message: "Can't resend confirmation code for this user",
         originalCode: 'NotAuthorizedException',
         user: { username: 'davide@codeflyer.com' }

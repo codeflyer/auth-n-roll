@@ -1,38 +1,38 @@
 import { delay, getState } from './index'
 import {
-  SIGN_IN_RESPONSE_USER_NOT_FOUND,
-  SIGN_IN_RESPONSE_NOT_AUTHORIZED,
-  SIGN_IN_RESPONSE_NOT_CONFIRMED,
-  SIGN_IN_RESPONSE_CHANGE_PASSWORD,
-  SIGN_IN_RESPONSE_SOFTWARE_TOKEN_MFA
+  USER_NOT_FOUND_ERROR,
+  NOT_AUTHORIZED_ERROR,
+  USER_NOT_CONFIRMED_ERROR,
+  FORCE_CHANGE_PASSWORD_CHALLENGE,
+  SOFTWARE_TOKEN_MFA_CHALLENGE
 } from 'auth-n-roll'
 
 export const SignIn = async (username, password) => {
   await delay(1000)
 
   switch (getState('signinResponse')) {
-    case SIGN_IN_RESPONSE_USER_NOT_FOUND:
+    case USER_NOT_FOUND_ERROR:
       throw {
-        code: SIGN_IN_RESPONSE_USER_NOT_FOUND,
+        code: USER_NOT_FOUND_ERROR,
         message: 'User does not exist.',
         user: { username }
       }
 
-    case SIGN_IN_RESPONSE_NOT_AUTHORIZED:
+    case NOT_AUTHORIZED_ERROR:
       throw {
-        code: SIGN_IN_RESPONSE_NOT_AUTHORIZED,
+        code: NOT_AUTHORIZED_ERROR,
         message: 'Incorrect username or password.',
         user: { username }
       }
 
-    case SIGN_IN_RESPONSE_NOT_CONFIRMED:
+    case USER_NOT_CONFIRMED_ERROR:
       throw {
-        code: SIGN_IN_RESPONSE_NOT_CONFIRMED,
+        code: USER_NOT_CONFIRMED_ERROR,
         message: 'User is not confirmed.',
         user: { username: username }
       }
 
-    case SIGN_IN_RESPONSE_CHANGE_PASSWORD:
+    case FORCE_CHANGE_PASSWORD_CHALLENGE:
       return {
         challenge: {
           ChallengeName: 'NEW_PASSWORD_REQUIRED',
@@ -41,7 +41,7 @@ export const SignIn = async (username, password) => {
         user: { username }
       }
 
-    case SIGN_IN_RESPONSE_SOFTWARE_TOKEN_MFA:
+    case SOFTWARE_TOKEN_MFA_CHALLENGE:
       return {
         challenge: {ChallengeName: 'SOFTWARE_TOKEN_MFA'},
         user: {
