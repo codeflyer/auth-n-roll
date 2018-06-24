@@ -20,7 +20,6 @@ describe('Store/user', () => {
   test('Defaults', () => {
     expect(isLoggedIn(store.state)).toBeFalsy()
     expect(getUser(store.state)).toBeNull()
-    expect(getChallenge(store.state)).toEqual({})
   })
 
   test('Set is loggedIn', () => {
@@ -31,10 +30,5 @@ describe('Store/user', () => {
   test('Set user', () => {
     store.state.setUser({username: 'davide'})
     expect(getUser(store.state)).toEqual({username: 'davide'})
-  })
-
-  test('Set challenge', () => {
-    store.state.setChallenge({ChallengeName: 'NEW_PASSWORD'})
-    expect(getChallenge(store.state)).toEqual({ChallengeName: 'NEW_PASSWORD'})
   })
 })

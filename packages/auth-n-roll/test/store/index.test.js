@@ -19,7 +19,6 @@ describe('Store', () => {
     expect(store.getDefaultState()).toEqual(
       expect.objectContaining({
         authService: expect.any(Object),
-        challenge: {},
         debug: undefined,
         flows: { index: null },
         isLoggedIn: false,
@@ -27,7 +26,7 @@ describe('Store', () => {
           error: null,
           sendingState: 'NOT_REQUESTED'
         },
-        signIn: { error: null },
+        signIn: { error: null, challenge: {} },
         user: null
       })
     )

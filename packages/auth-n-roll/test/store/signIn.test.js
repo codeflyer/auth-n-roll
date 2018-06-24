@@ -1,5 +1,5 @@
 import { Store } from '../../src/store'
-import { getSignInError } from '../../src/store/signIn'
+import { getSignInError, getChallenge } from '../../src/store/signIn'
 
 describe('Store/signIn', () => {
   let state
@@ -20,6 +20,7 @@ describe('Store/signIn', () => {
 
   test('Defaults', () => {
     expect(getSignInError(store.state)).toEqual({})
+    expect(getChallenge(store.state)).toEqual({})
   })
 
   test('setSignInError', () => {
@@ -34,12 +35,16 @@ describe('Store/signIn', () => {
     store.state.restartSignIn()
     expect(store.state).toEqual(
       expect.objectContaining({
-        challenge: {},
         flows: { index: null },
         isLoggedIn: false,
-        signIn: { error: null },
+        signIn: { error: null, challenge: {} },
         user: null
       })
     )
+  })
+
+  test('Set challenge', () => {
+    store.state.setChallenge({ChallengeName: 'NEW_PASSWORD'})
+    expect(getChallenge(store.state)).toEqual({ChallengeName: 'NEW_PASSWORD'})
   })
 })
