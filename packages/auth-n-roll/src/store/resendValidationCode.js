@@ -30,7 +30,9 @@ async function resendValidationCode() {
   })
 
   try {
-    await getAuthService(this.state).resendValidationCode(getUser(this.state).username)
+    await getAuthService(this.state).resendValidationCode(
+      getUser(this.state).username
+    )
     this.updateState({
       resendValidationCodeState: Object.assign({}, this.state.resendCode, {
         sendingState: RESEND_VALIDATION_CODE_STATE_SENDING_SUCCESS
@@ -46,8 +48,10 @@ async function resendValidationCode() {
   }
 }
 
-export const getResendValidationCodeSendingState = state =>
-  state.resendValidationCodeState.sendingState
+export const getResendValidationCodeSendingState = ({
+  resendValidationCodeState = {}
+} = {}) => resendValidationCodeState.sendingState
 
-export const getResendValidationCodeSendingError = state =>
-  state.resendValidationCodeState.error || {}
+export const getResendValidationCodeSendingError = ({
+  resendValidationCodeState = {}
+} = {}) => resendValidationCodeState.error || {}

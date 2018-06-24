@@ -2,7 +2,7 @@ import React from 'react'
 
 import { SignInConfirmSignUpForm } from 'auth-n-roll'
 
-import { Card, Box, Button, Heading, Text } from '../atoms/index'
+import { Card, Box, Button, Heading, Text, Flex } from '../atoms/index'
 
 import { InputField } from '../molecules/InputField'
 
@@ -33,9 +33,23 @@ export const SignInConfirmSignUp = () => {
             </SignInConfirmSignUpForm.FieldValidationCode>
           </Box>
           <ResendValidationCode/>
-          <SignInConfirmSignUpForm.ButtonSubmit>
-            <Button>Confirm</Button>
-          </SignInConfirmSignUpForm.ButtonSubmit>
+          <Flex justifyContent="space-between">
+            <Box w={1 / 2} mr={1}>
+              <SignInConfirmSignUpForm.ButtonSubmit>
+                <Button fullWidth size="medium">
+                  Confirm
+                </Button>
+              </SignInConfirmSignUpForm.ButtonSubmit>
+            </Box>
+            <Box w={1 / 2} ml={1}>
+              <SignInConfirmSignUpForm.ButtonCancel>
+                <Button fullWidth secondary size="medium">
+                  Cancel
+                </Button>
+              </SignInConfirmSignUpForm.ButtonCancel>
+            </Box>
+          </Flex>
+
         </Box>
       </SignInConfirmSignUpForm>
     </Card>

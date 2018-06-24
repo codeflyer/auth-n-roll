@@ -28,6 +28,33 @@ const size = props => {
   }
 }
 
+const role = props => {
+  if (props.primary) {
+    return {
+      backgroundColor: props.theme.colors.blue,
+      color: props.theme.colors.white
+    }
+  }
+  if (props.secondary) {
+    return {
+      backgroundColor: props.theme.colors.red,
+      color: props.theme.colors.white,
+      '&:hover': {
+        backgroundColor: props.disabled ? null : props.theme.colors.darkRed
+      }
+    }
+  }
+  if (props.tertiary) {
+    return {
+      backgroundColor: props.theme.colors.green,
+      color: props.theme.colors.white,
+      '&:hover': {
+        backgroundColor: props.disabled ? null : props.theme.colors.darkGreen
+      }
+    }
+  }
+}
+
 const fullWidth = props => (props.fullWidth ? { width: '100%' } : null)
 
 export const Button = styled.button`
@@ -52,10 +79,10 @@ export const Button = styled.button`
 
   &:hover {
     background-color: ${props =>
-  props.disabled ? null : props.theme.colors.darkBlue};
+      props.disabled ? null : props.theme.colors.darkBlue};
   }
 
-  ${fullWidth} ${size} ${space};
+  ${fullWidth} ${size} ${space} ${role};
 `
 
 const numberStringOrArray = PropTypes.oneOfType([

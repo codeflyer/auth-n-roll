@@ -2,7 +2,7 @@ import React from 'react'
 
 import { SignInChangePasswordForm } from 'auth-n-roll'
 
-import { Card, Box, Button, Heading, Text } from '../atoms/index'
+import { Card, Box, Button, Heading, Text, Flex } from '../atoms/index'
 import { InputField } from '../molecules/InputField'
 
 export const SignInChangePassword = () => {

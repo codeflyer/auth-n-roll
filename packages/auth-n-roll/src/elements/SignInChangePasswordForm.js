@@ -6,7 +6,8 @@ import { getUser, getChallenge, getAuthService } from '../store/selectors'
 
 import {
   AuthNRollFormFieldPassword,
-  AuthNRollFormButtonSubmit
+  AuthNRollFormButtonSubmit,
+  AuthNRollFormButtonOnClick
 } from '../consumers'
 
 import { SignIn } from '../pages/SignIn'
@@ -97,4 +98,10 @@ SignInChangePasswordForm.FieldPasswordConfirm = ({ children }) => (
 
 SignInChangePasswordForm.ButtonSubmit = ({ children }) => (
   <AuthNRollFormButtonSubmit>{children}</AuthNRollFormButtonSubmit>
+)
+
+SignInChangePasswordForm.ButtonCancel = ({ children }) => (
+  <AuthNRollFormButtonOnClick actionFunctionNameOnState="onCancel">
+    {children}
+  </AuthNRollFormButtonOnClick>
 )

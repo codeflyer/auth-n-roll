@@ -1,7 +1,7 @@
 import React from 'react'
 import { withFormik } from 'formik'
 import { withAuthNRoll, FormContext } from '../contexts'
-import { AuthNRollFormField, AuthNRollFormButtonSubmit } from '../consumers'
+import { AuthNRollFormField, AuthNRollFormButtonSubmit, AuthNRollFormButtonOnClick } from '../consumers'
 import {
   USER_NOT_FOUND_ERROR,
   VALIDATION_CODE_MISMATCH_ERROR,
@@ -75,4 +75,10 @@ SignInConfirmSignUpForm.FieldValidationCode = ({ children }) => (
 )
 SignInConfirmSignUpForm.ButtonSubmit = ({ children }) => (
   <AuthNRollFormButtonSubmit>{children}</AuthNRollFormButtonSubmit>
+)
+
+SignInConfirmSignUpForm.ButtonCancel = ({ children }) => (
+  <AuthNRollFormButtonOnClick actionFunctionNameOnState="onCancel">
+    {children}
+  </AuthNRollFormButtonOnClick>
 )
