@@ -32,25 +32,34 @@ export class Store {
       debug: this.debug,
 
       ...getUserDefaultState(),
-      ...getUserActions(this),
 
       ...getFlowsDefaultState(),
-      ...getFlowsActions(this),
 
       ...getResendValidationCodeDefaultState(),
-      ...getResendValidationCodeActions(this),
 
-      ...getSignInDefaultState(),
+      ...getSignInDefaultState()
+    }
+  }
+
+  getActions() {
+    return {
+      ...getUserActions(this),
+      ...getFlowsActions(this),
+      ...getResendValidationCodeActions(this),
       ...getSignInActions(this)
     }
   }
 
   get state() {
-    return this.getState()
+    return this.getState().state
+  }
+
+  get actions() {
+    return this.getState().actions
   }
 
   updateState(state) {
     const newState = Object.assign({}, this.state, state)
-    return this.onStateUpdate(newState)
+    return this.onStateUpdate(Object.assign({}, this.getState(), { state: newState }))
   }
 }

@@ -44,7 +44,7 @@ SignInResendValidationCode.ResendButton = withAuthNRoll(props => {
     <React.Fragment>
       {React.Children.map(props.children, child =>
         React.cloneElement(child, {
-          onClick: props.authNRoll.resendValidationCode,
+          onClick: props.authNRollActions.resendValidationCode,
           disabled: getResendValidationCodeSendingState(props.authNRoll) === RESEND_VALIDATION_CODE_STATE_SENDING
         })
       )}

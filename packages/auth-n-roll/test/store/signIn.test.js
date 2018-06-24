@@ -1,38 +1,26 @@
 import { Store } from '../../src/store'
 import { getSignInError, getChallenge } from '../../src/store/signIn'
+import { createStore } from '../helpers/storeMock'
 
 describe('Store/signIn', () => {
-  let state
-  let store
-
-  const setState = newState => (state = Object.assign({}, state, newState))
-  const getState = () => state
-
-  beforeEach(() => {
-    state = {}
-    store = new Store({
-      authService: {},
-      getState: getState,
-      onStateUpdate: setState
-    })
-    store.updateState(store.getDefaultState())
-  })
-
   test('Defaults', () => {
+    const store = createStore()
     expect(getSignInError(store.state)).toEqual({})
     expect(getChallenge(store.state)).toEqual({})
   })
 
   test('setSignInError', () => {
-    store.state.setSignInError({code: 10, message: 'err'})
+    const store = createStore()
+    store.actions.setSignInError({code: 10, message: 'err'})
     expect(getSignInError(store.state)).toEqual({code: 10, message: 'err'})
   })
 
   test('restartSignIn', () => {
-    store.state.setUser({username: 'davide'})
-    store.state.setIsLoggedIn(true)
-    store.state.changeFlowIndex('new-index')
-    store.state.restartSignIn()
+    const store = createStore()
+    store.actions.setUser({username: 'davide'})
+    store.actions.setIsLoggedIn(true)
+    store.actions.changeFlowIndex('new-index')
+    store.actions.restartSignIn()
     expect(store.state).toEqual(
       expect.objectContaining({
         flows: { index: null },
@@ -44,7 +32,8 @@ describe('Store/signIn', () => {
   })
 
   test('Set challenge', () => {
-    store.state.setChallenge({ChallengeName: 'NEW_PASSWORD'})
+    const store = createStore()
+    store.actions.setChallenge({ChallengeName: 'NEW_PASSWORD'})
     expect(getChallenge(store.state)).toEqual({ChallengeName: 'NEW_PASSWORD'})
   })
 })

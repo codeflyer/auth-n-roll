@@ -24,14 +24,14 @@ export class GenericFlow extends React.Component {
       <AuthNRollContext.Consumer>
         {authNRoll => (
           <React.Fragment>
-            <Switch index={getCurrentFlowIndex(authNRoll) || this.props.defaultIndex}>
+            <Switch index={getCurrentFlowIndex(authNRoll.state) || this.props.defaultIndex}>
               {this.props.children}
             </Switch>
             {authNRoll.debug &&
               this.debugPanel(
                 indexList,
-                getCurrentFlowIndex(authNRoll) || this.props.defaultIndex,
-                authNRoll.changeFlowIndex
+                getCurrentFlowIndex(authNRoll.state) || this.props.defaultIndex,
+                authNRoll.actions.changeFlowIndex
               )}
           </React.Fragment>
         )}

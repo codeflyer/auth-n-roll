@@ -1,34 +1,22 @@
-import { Store } from '../../src/store'
 import { isLoggedIn, getUser, getChallenge } from '../../src/store/user'
+import { createStore } from '../helpers/storeMock'
 
 describe('Store/user', () => {
-  let state
-  let store
-  const setState = newState => (state = Object.assign({}, state, newState))
-  const getState = () => state
-
-  beforeEach(() => {
-    state = {}
-    store = new Store({
-      authService: {},
-      getState: getState,
-      onStateUpdate: setState
-    })
-    store.updateState(store.getDefaultState())
-  })
-
   test('Defaults', () => {
+    const store = createStore()
     expect(isLoggedIn(store.state)).toBeFalsy()
     expect(getUser(store.state)).toBeNull()
   })
 
   test('Set is loggedIn', () => {
-    store.state.setIsLoggedIn(true)
+    const store = createStore()
+    store.actions.setIsLoggedIn(true)
     expect(isLoggedIn(store.state)).toBeTruthy()
   })
 
   test('Set user', () => {
-    store.state.setUser({username: 'davide'})
+    const store = createStore()
+    store.actions.setUser({username: 'davide'})
     expect(getUser(store.state)).toEqual({username: 'davide'})
   })
 })

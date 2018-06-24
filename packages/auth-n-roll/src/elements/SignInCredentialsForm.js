@@ -48,7 +48,7 @@ export const SignInCredentialsWithFormik = withFormik({
     }
   ) => {
     try {
-      props.authNRoll.setChallenge({})
+      props.authNRollActions.setChallenge({})
       const result = await getAuthService(props.authNRoll).signIn(
         values.email,
         values.password
@@ -56,20 +56,20 @@ export const SignInCredentialsWithFormik = withFormik({
       setSubmitting(false)
       // The user created using the command line requires a NEW_PASSWORD
       if (get(result, 'challenge.ChallengeName') === 'NEW_PASSWORD_REQUIRED') {
-        props.authNRoll.setUser(result.user)
-        props.authNRoll.setChallenge(result.challenge)
-        props.authNRoll.changeFlowIndex(SignIn.FLOW_STEP_CHANGE_PASSWORD)
+        props.authNRollActions.setUser(result.user)
+        props.authNRollActions.setChallenge(result.challenge)
+        props.authNRollActions.changeFlowIndex(SignIn.FLOW_STEP_CHANGE_PASSWORD)
       } else {
-        props.authNRoll.setUser(result.user)
-        props.authNRoll.setIsLoggedIn(true)
+        props.authNRollActions.setUser(result.user)
+        props.authNRollActions.setIsLoggedIn(true)
       }
     } catch (e) {
       setSubmitting(false)
       if (e.code === SIGN_IN_RESPONSE_NOT_CONFIRMED) {
-        props.authNRoll.setUser(
+        props.authNRollActions.setUser(
           Object.assign([], e.user, { requireAction: 'USER_NOT_CONFIRMED' })
         )
-        props.authNRoll.changeFlowIndex(SignIn.FLOW_STEP_CONFIRM_CODE)
+        props.authNRollActions.changeFlowIndex(SignIn.FLOW_STEP_CONFIRM_CODE)
         return
       }
       setErrors({ email: e.message })

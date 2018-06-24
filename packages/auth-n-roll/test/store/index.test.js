@@ -1,21 +1,8 @@
-import { Store } from '../../src/store'
+import { createStore } from '../helpers/storeMock'
 
 describe('Store', () => {
-  let state
-  let store
-  const setState = newState => (state = Object.assign({}, state, newState))
-  const getState = () => state
-
-  beforeEach(() => {
-    state = {}
-    store = new Store({
-      authService: {},
-      getState: getState,
-      onStateUpdate: setState
-    })
-  })
-
   test('Initialization', () => {
+    const store = createStore()
     expect(store.getDefaultState()).toEqual(
       expect.objectContaining({
         authService: expect.any(Object),
@@ -33,6 +20,7 @@ describe('Store', () => {
   })
 
   test('setState', () => {
+    const store = createStore({initialValues: {}})
     store.updateState({ foo: 'bar' })
     expect(store.state).toEqual({ foo: 'bar' })
 

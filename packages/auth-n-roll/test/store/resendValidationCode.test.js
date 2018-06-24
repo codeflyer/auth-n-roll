@@ -1,34 +1,22 @@
-import { Store } from '../../src/store'
 import {
   getResendValidationCodeSendingError,
   getResendValidationCodeSendingState
 } from '../../src/store/resendValidationCode'
 
+import { createStore } from '../helpers/storeMock'
+
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 describe('Store/resendValidationCode', () => {
-  let state
-  let store
-  let resendValidationCodeMockPromise
-  const setState = newState => (state = Object.assign({}, state, newState))
-  const getState = () => state
-
-  beforeEach(() => {
-    state = {}
-    resendValidationCodeMockPromise = jest.fn()
-    store = new Store({
-      authService: { resendValidationCode: resendValidationCodeMockPromise },
-      getState: getState,
-      onStateUpdate: setState
-    })
-    store.updateState(store.getDefaultState())
-  })
-
   test('Defaults', () => {
+    const store = createStore()
     expect(getResendValidationCodeSendingState(store.state)).toEqual('NOT_REQUESTED')
     expect(getResendValidationCodeSendingError(store.state)).toEqual({})
   })
 
   test('resendValidationCode Success', async () => {
+    const resendValidationCodeMockPromise = jest.fn()
+    const store = createStore({authService: { resendValidationCode: resendValidationCodeMockPromise }})
+
     let done
     let error
     const promise = new Promise((resolve, reject) => {
@@ -37,14 +25,17 @@ describe('Store/resendValidationCode', () => {
     })
     resendValidationCodeMockPromise.mockReturnValue(promise)
 
-    store.state.setUser({ username: 'davide' })
-    store.state.resendValidationCode()
+    store.actions.setUser({ username: 'davide' })
+    store.actions.resendValidationCode()
     expect(getResendValidationCodeSendingState(store.state)).toEqual('SENDING')
     await done()
     expect(getResendValidationCodeSendingState(store.state)).toEqual('SENDING_SUCCESS')
   })
 
   test('resendValidationCode Error', async () => {
+    const resendValidationCodeMockPromise = jest.fn()
+    const store = createStore({authService: { resendValidationCode: resendValidationCodeMockPromise }})
+
     let done
     let error
     const promise = new Promise((resolve, reject) => {
@@ -52,8 +43,8 @@ describe('Store/resendValidationCode', () => {
       error = reject
     })
     resendValidationCodeMockPromise.mockReturnValue(promise)
-    store.state.setUser({ username: 'davide' })
-    store.state.resendValidationCode()
+    store.actions.setUser({ username: 'davide' })
+    store.actions.resendValidationCode()
     expect(getResendValidationCodeSendingState(store.state)).toEqual('SENDING')
     await error({ message: 'some_error' })
     expect(getResendValidationCodeSendingState(store.state)).toEqual('SENDING_ERROR')

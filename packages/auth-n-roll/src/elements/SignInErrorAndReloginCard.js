@@ -12,12 +12,12 @@ SignInErrorAndReloginCard.ErrorMessage = withAuthNRoll(({ authNRoll }) => {
   )
 })
 
-SignInErrorAndReloginCard.RestartSignInButton = withAuthNRoll(({ authNRoll, children }) => {
+SignInErrorAndReloginCard.RestartSignInButton = withAuthNRoll(({ authNRoll, authNRollActions, children }) => {
   return (
     <React.Fragment>
       {React.Children.map(children, child =>
         React.cloneElement(child, {
-          onClick: authNRoll.restartSignIn
+          onClick: authNRollActions.restartSignIn
         })
       )}
     </React.Fragment>

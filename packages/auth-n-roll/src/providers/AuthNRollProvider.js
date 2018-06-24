@@ -19,13 +19,13 @@ export class AuthNRollProvider extends React.Component {
       authService: this.props.authService,
       debug: this.props.debug
     })
-    this.state = store.getDefaultState()
+    this.state = { state: store.getDefaultState(), actions: store.getActions() }
 
-//    if (props.authService && props.authService.getLoggedUser) {
-//      const user = props.authService.getLoggedUser()
-//      this.state.user = user
-//      this.state.isLoggedIn = !!user
-//    }
+    //    if (props.authService && props.authService.getLoggedUser) {
+    //      const user = props.authService.getLoggedUser()
+    //      this.state.user = user
+    //      this.state.isLoggedIn = !!user
+    //    }
   }
 
   getState() {
