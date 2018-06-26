@@ -42,11 +42,24 @@ export class Store {
   }
 
   getActions() {
+    const {
+      signIn,
+      confirmSignUp,
+      resendConfirmationCode,
+      changePasswordForced
+    } = this.authService
+
     return {
       ...getUserActions(this),
       ...getFlowsActions(this),
       ...getResendValidationCodeActions(this),
-      ...getSignInActions(this)
+      ...getSignInActions(this),
+
+      // TODO These actions are currently used directly from the service, wrap it in an actions
+      signIn,
+      confirmSignUp,
+      resendConfirmationCode,
+      changePasswordForced
     }
   }
 
@@ -60,6 +73,8 @@ export class Store {
 
   updateState(state) {
     const newState = Object.assign({}, this.state, state)
-    return this.onStateUpdate(Object.assign({}, this.getState(), { state: newState }))
+    return this.onStateUpdate(
+      Object.assign({}, this.getState(), { state: newState })
+    )
   }
 }

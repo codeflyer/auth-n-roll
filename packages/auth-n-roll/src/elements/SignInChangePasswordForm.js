@@ -2,7 +2,7 @@ import React from 'react'
 import { withFormik } from 'formik'
 import { withAuthNRoll, FormContext } from '../contexts'
 
-import { getUser, getChallenge, getAuthService } from '../store/selectors'
+import { getUser, getChallenge } from '../store/selectors'
 
 import {
   AuthNRollFormFieldPassword,
@@ -52,7 +52,7 @@ export const SignInChangePassword = withFormik({
   ) => {
     const user = getUser(props.authNRoll)
     try {
-      const result = await getAuthService(props.authNRoll).changePasswordForced(
+      const result = await props.authNRollActions.changePasswordForced(
         user.username,
         values.password,
         getChallenge(props.authNRoll).Session

@@ -8,7 +8,7 @@ import {
   EXPIRED_VALIDATION_CODE_ERROR
 } from '../constants'
 import { SignIn } from '../pages/SignIn'
-import { getAuthService, getUser } from '../store/selectors'
+import { getUser } from '../store/selectors'
 
 export const SignInConfirmSignUp = withFormik({
   mapPropsToValues: props => ({code: ''}),
@@ -31,7 +31,7 @@ export const SignInConfirmSignUp = withFormik({
   ) => {
     try {
       setSubmitting(true)
-      const result = await getAuthService(props.authNRoll).confirmSignUp(
+      const result = await props.authNRollActions.confirmSignUp(
         getUser(props.authNRoll).username,
         values.code
       )

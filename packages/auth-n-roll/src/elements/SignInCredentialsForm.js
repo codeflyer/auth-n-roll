@@ -20,7 +20,6 @@ import {
 import { SignIn } from '../pages/SignIn'
 
 import { withAuthNRoll, FormContext } from '../contexts'
-import { getAuthService } from '../store/selectors'
 
 export const SignInCredentialsWithFormik = withFormik({
   mapPropsToValues: props => ({
@@ -49,7 +48,7 @@ export const SignInCredentialsWithFormik = withFormik({
   ) => {
     try {
       props.authNRollActions.setChallenge({})
-      const result = await getAuthService(props.authNRoll).signIn(
+      const result = await props.authNRollActions.signIn(
         values.email,
         values.password
       )
