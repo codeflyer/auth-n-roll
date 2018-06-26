@@ -3,6 +3,17 @@
 
 Auth-n-Roll is a suite of different components that allow to connect to different authentication provider (AWS cognito is currently implemented) and an easy way to build your own layout around the logic provided by the core.
 
+## Demo
+
+```
+npm install
+
+npm run storybook
+```
+
+open the page at `http://localhost:6006/`
+
+
 ## Quick start
 
 Install the components
