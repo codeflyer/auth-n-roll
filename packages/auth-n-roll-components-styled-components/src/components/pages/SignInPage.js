@@ -6,7 +6,7 @@ import { SignIn } from 'auth-n-roll'
 import { SignInCredentials } from '../organisms/SignInCredentials'
 import { SignInChangePassword } from '../organisms/SignInChangePassword'
 import { SignInConfirmSignUp } from '../organisms/SignInConfirmSignUp'
-import { SignInErrorAndRelogin } from '../organisms/SignInErrorAndRelogin'
+import { SignInMessageAndRelogin } from '../organisms/SignInMessageAndRelogin'
 
 const ModalWrapper = styled.div`
   display: flex;
@@ -30,7 +30,7 @@ export class SignInPage extends React.Component {
             <SignInCredentials index={SignIn.FLOW_STEP_CREDENTIALS} />
             <SignInChangePassword index={SignIn.FLOW_STEP_CHANGE_PASSWORD} />
             <SignInConfirmSignUp index={SignIn.FLOW_STEP_CONFIRM_CODE} />
-            <SignInErrorAndRelogin index={SignIn.FLOW_STEP_ERROR_AND_RELOGIN} />
+            <SignInMessageAndRelogin index={SignIn.FLOW_STEP_MESSAGE_AND_RELOGIN} />
           </SignIn>
         </Wrapper>
       </ModalWrapper>

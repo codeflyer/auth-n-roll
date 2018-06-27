@@ -58,16 +58,18 @@ export const SignInChangePassword = withFormik({
         getChallenge(props.authNRoll).Session
       )
 
-      props.authNRollActions.setUser(result.user)
-      props.authNRollActions.setChallenge(null)
-      props.authNRollActions.setIsLoggedIn(true)
+      props.authNRollActions.setLoggedInUser(result.user)
     } catch (e) {
       setSubmitting(false)
       switch (e.code) {
         case USER_NOT_FOUND_ERROR:
-          props.authNRollActions.setSignInError({message: `The user ${user.username} was not found`})
+          props.authNRollActions.setSignInMessage({
+            message: `The user ${user.username} was not found`,
+            type: 'error',
+            from: 'change-password-forced'
+          })
           props.authNRollActions.setUser(null)
-          props.authNRollActions.changeFlowIndex(SignIn.FLOW_STEP_ERROR_AND_RELOGIN)
+          props.authNRollActions.changeFlowIndex(SignIn.FLOW_STEP_MESSAGE_AND_RELOGIN)
           return
         default:
           setErrors({ password: e.message })

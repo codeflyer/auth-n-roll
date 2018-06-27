@@ -18,4 +18,4 @@ export class SignIn extends React.Component {
 SignIn.FLOW_STEP_CREDENTIALS = 'credentials'
 SignIn.FLOW_STEP_CHANGE_PASSWORD = 'change_password'
 SignIn.FLOW_STEP_CONFIRM_CODE = 'confirm_code'
-SignIn.FLOW_STEP_ERROR_AND_RELOGIN = 'error_and_relogin'
+SignIn.FLOW_STEP_MESSAGE_AND_RELOGIN = 'message_and_relogin'

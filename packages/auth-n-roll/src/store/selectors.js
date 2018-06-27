@@ -1,6 +1,6 @@
 export { isLoggedIn, getUser } from './user'
 export { getCurrentFlowIndex } from './flows'
-export { getChallenge, getSignInError } from './signIn'
+export { getChallenge, getSignInMessage } from './signIn'
 export {
   getResendValidationCodeSendingState,
   getResendValidationCodeSendingError

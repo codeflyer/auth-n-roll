@@ -1,3 +1,4 @@
+import get from 'lodash/get'
 import {
   RESEND_VALIDATION_CODE_STATE_NOT_REQUESTED,
   RESEND_VALIDATION_CODE_STATE_SENDING,
@@ -48,10 +49,6 @@ async function resendValidationCode() {
   }
 }
 
-export const getResendValidationCodeSendingState = ({
-  resendValidationCodeState = {}
-} = {}) => resendValidationCodeState.sendingState
+export const getResendValidationCodeSendingState = (state) => get(state, 'resendValidationCodeState.sendingState')
 
-export const getResendValidationCodeSendingError = ({
-  resendValidationCodeState = {}
-} = {}) => resendValidationCodeState.error || {}
+export const getResendValidationCodeSendingError = (state) => get(state, 'resendValidationCodeState.error') || {}

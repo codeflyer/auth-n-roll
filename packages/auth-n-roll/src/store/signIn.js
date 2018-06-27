@@ -4,7 +4,7 @@ import { getDefaultState as getUserDefaultState } from './user'
 export function getDefaultState() {
   return {
     signIn: {
-      error: null,
+      message: null,
       challenge: {}
     }
   }
@@ -14,7 +14,7 @@ export function getActions(store) {
   return {
     restartSignIn: restartSignIn.bind(store),
     setChallenge: setChallenge.bind(store),
-    setSignInError: setSignInError.bind(store)
+    setSignInMessage: setSignInMessage.bind(store)
   }
 }
 
@@ -26,10 +26,10 @@ function setChallenge(challenge) {
   })
 }
 
-function setSignInError(error) {
+function setSignInMessage(message) {
   this.updateState({
     signIn: Object.assign({}, this.state.signIn, {
-      error
+      message
     })
   })
 }
@@ -44,5 +44,5 @@ function restartSignIn() {
 
 export const getChallenge = (state) => state.signIn.challenge
 
-export const getSignInError = state =>
-  state.signIn.error || {}
+export const getSignInMessage = state =>
+  state.signIn.message || {}

@@ -59,8 +59,7 @@ export const SignInCredentialsWithFormik = withFormik({
         props.authNRollActions.setChallenge(result.challenge)
         props.authNRollActions.changeFlowIndex(SignIn.FLOW_STEP_CHANGE_PASSWORD)
       } else {
-        props.authNRollActions.setUser(result.user)
-        props.authNRollActions.setIsLoggedIn(true)
+        props.authNRollActions.setLoggedInUser(result.user)
       }
     } catch (e) {
       setSubmitting(false)

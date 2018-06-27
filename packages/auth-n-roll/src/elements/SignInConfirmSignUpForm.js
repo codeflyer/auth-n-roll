@@ -1,7 +1,11 @@
 import React from 'react'
 import { withFormik } from 'formik'
 import { withAuthNRoll, FormContext } from '../contexts'
-import { AuthNRollFormField, AuthNRollFormButtonSubmit, AuthNRollFormButtonOnClick } from '../consumers'
+import {
+  AuthNRollFormField,
+  AuthNRollFormButtonSubmit,
+  AuthNRollFormButtonOnClick
+} from '../consumers'
 import {
   USER_NOT_FOUND_ERROR,
   VALIDATION_CODE_MISMATCH_ERROR,
@@ -11,7 +15,7 @@ import { SignIn } from '../pages/SignIn'
 import { getUser } from '../store/selectors'
 
 export const SignInConfirmSignUp = withFormik({
-  mapPropsToValues: props => ({code: ''}),
+  mapPropsToValues: props => ({ code: '' }),
   validate: (values, props) => {
     const errors = {}
 
@@ -31,25 +35,36 @@ export const SignInConfirmSignUp = withFormik({
   ) => {
     try {
       setSubmitting(true)
+      const user = getUser(props.authNRoll)
       const result = await props.authNRollActions.confirmSignUp(
-        getUser(props.authNRoll).username,
+        user.username,
         values.code
       )
       setSubmitting(false)
 
-      // DO THE RIGHT REDIRECT
-
-      console.log('Redirect to the right panel')
+      props.authNRollActions.setSignInMessage({
+        message: `The user ${user.username} was correctly verified.`,
+        type: 'success',
+        from: 'confirm-sign-up'
+      })
+      props.authNRollActions.setUser(null)
+      props.authNRollActions.changeFlowIndex(
+        SignIn.FLOW_STEP_MESSAGE_AND_RELOGIN
+      )
     } catch (e) {
       setSubmitting(false)
       switch (e.code) {
         case USER_NOT_FOUND_ERROR:
-          props.authNRollActions.setSignInError({
+          props.authNRollActions.setSignInMessage({
             code: USER_NOT_FOUND_ERROR,
-            message: `The user ${getUser(props.authNRoll).username} was not found`
+            message: `The user ${
+              getUser(props.authNRoll).username
+            } was not found`
           })
           props.authNRollActions.setUser(null)
-          props.authNRollActions.changeFlowIndex(SignIn.FLOW_STEP_ERROR_AND_RELOGIN)
+          props.authNRollActions.changeFlowIndex(
+            SignIn.FLOW_STEP_MESSAGE_AND_RELOGIN
+          )
           return
         case VALIDATION_CODE_MISMATCH_ERROR:
         case EXPIRED_VALIDATION_CODE_ERROR:

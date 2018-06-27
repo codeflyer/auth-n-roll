@@ -13,19 +13,13 @@ const LOGGED_USER_KEY = 'logged_user_key'
 export class AuthNRollProvider extends React.Component {
   constructor(props) {
     super(props)
-    const store = new Store({
+    this.store = new Store({
       getState: this.getState.bind(this),
       onStateUpdate: this.onStateUpdate.bind(this),
       authService: this.props.authService,
       debug: this.props.debug
     })
-    this.state = { state: store.getDefaultState(), actions: store.getActions() }
-
-    //    if (props.authService && props.authService.getLoggedUser) {
-    //      const user = props.authService.getLoggedUser()
-    //      this.state.user = user
-    //      this.state.isLoggedIn = !!user
-    //    }
+    this.state = { state: this.store.getDefaultState(), actions: this.store.getActions() }
   }
 
   getState() {
@@ -43,18 +37,7 @@ export class AuthNRollProvider extends React.Component {
   }
 
   componentDidMount() {
-    return
-    const storedUser = storage.get(LOGGED_USER_KEY)
-    const expire = get(storedUser, 'signInUserSession.accessToken.payload')
-    if (Number((expire - Date.now() / 1000).toFixed(0)) > 60) {
-      // TODO add session refresh here
-    } else {
-      this.setState({
-        isInitialized: true,
-        isLoggedIn: true,
-        loggedInUser: storedUser
-      })
-    }
+    this.state.actions.rehydrateUser()
   }
 
   render() {

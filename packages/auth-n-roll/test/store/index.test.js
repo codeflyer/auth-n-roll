@@ -13,7 +13,7 @@ describe('Store', () => {
           error: null,
           sendingState: 'NOT_REQUESTED'
         },
-        signIn: { error: null, challenge: {} },
+        signIn: { message: null, challenge: {} },
         user: null
       })
     )

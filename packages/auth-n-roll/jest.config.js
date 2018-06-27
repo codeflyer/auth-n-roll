@@ -6,5 +6,6 @@ module.exports = {
   coveragePathIgnorePatterns: ['node_modules', 'src/index.js'],
   coverageReporters: ['text', 'html'],
   testMatch: ['**/*.test.js', '**/*.test.jsx'],
-  setupTestFrameworkScriptFile: './test/config.js'
+  setupTestFrameworkScriptFile: './test/config.js',
+  testEnvironment: 'jest-environment-jsdom-global'
 }
