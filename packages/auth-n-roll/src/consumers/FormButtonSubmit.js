@@ -8,7 +8,8 @@ export const AuthNRollFormButtonSubmit = props => (
       <React.Fragment>
         {React.Children.map(props.children, child =>
           React.cloneElement(child, {
-            authForm: { isSubmitting: state.isSubmitting, type: 'submit' }
+            authForm: { isSubmitting: state.isSubmitting },
+            onClick: state.handleSubmit
           })
         )}
       </React.Fragment>
