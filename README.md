@@ -27,7 +27,7 @@ Create your app
 import React from 'react'
 import { AuthNRollProvider, AuthProtected } from 'auth-n-roll'
 import { ServiceCognito } from 'auth-n-roll-service-cognito'
-import { SignInPage } from 'auth-n-roll-components-styled-components'
+import { SignInPage } from 'auth-n-roll-components-material-ui'
 
 const awsStackData = {
   UserPoolClientId: 'A Key here',
@@ -59,6 +59,9 @@ Is the service provider that allow auth-n-roll to use `aws-cognito` as authentic
 
 ### [auth-n-roll-components-styled-components](./packages/auth-n-roll-components-styled-components/README.md)
 Is the component library that implement the design. It uses the styled-components. Is very easy to build a custom library.
+
+### [auth-n-roll-components-material-ui](./packages/auth-n-roll-components-material-ui/README.md)
+Is the component library that implement the design. It uses the material-ui react library.
 
 ### [auth-n-roll-dev-tools](./packages/auth-n-roll-dev-tools/README.md)
 A bunch of utility that can be used in the development environment. An InMemoryService is provided that allow to use the authentication flow without a provider.
