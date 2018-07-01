@@ -3,16 +3,18 @@
   "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006 -c .storybook",
     "clean": "rm -rf dist",
     "build": "babel --config-file ../../.babelrc -d dist src --copy-files",
-    "build:watch": "babel --config-file ../../.babelrc -d dist --watch src --copy-files"
+    "build:watch": "babel --config-file ../../.babelrc -d dist --watch src --copy-files",
+    "prepublish": "npm run build"
   },
   "keywords": [],
   "author": "Davide Fiorello <davide@codeflyer.com> (http://github.com/codeflyer/)",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
     "auth-n-roll": "^0.0.1",
     "auth-n-roll-dev-tools": "^0.0.1",

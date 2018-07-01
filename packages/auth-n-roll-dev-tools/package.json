@@ -7,10 +7,11 @@
     "test": "node test/start.js",
     "clean": "rm -rf dist",
     "build": "babel --config-file ../../.babelrc -d dist src",
-    "build:watch": "babel --config-file ../../.babelrc -d dist --watch src"
+    "build:watch": "babel --config-file ../../.babelrc -d dist --watch src",
+    "prepublish": "npm run build"
   },
   "author": "Davide Fiorello <davide@codeflyer.com> (http://github.com/codeflyer/)",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
     "auth-n-roll": "^0.0.1"
   },

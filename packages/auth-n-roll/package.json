@@ -2,15 +2,16 @@
   "name": "auth-n-roll",
   "version": "0.0.1",
   "description": "",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "node test/start.js",
     "clean": "rm -rf dist",
     "build": "babel --config-file ../../.babelrc -d dist src --copy-files",
-    "build:watch": "babel --config-file ../../.babelrc -d dist --watch src --copy-files"
+    "build:watch": "babel --config-file ../../.babelrc -d dist --watch src --copy-files",
+    "prepublish": "npm run build"
   },
   "author": "Davide Fiorello <davide@codeflyer.com> (http://github.com/codeflyer/)",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "peerDependencies": {
     "react": "^16.4.0"
   },
