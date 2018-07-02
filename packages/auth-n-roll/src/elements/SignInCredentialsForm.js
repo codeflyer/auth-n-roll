@@ -83,7 +83,7 @@ class SignInCredentialFormBase extends React.Component {
   }
 
   handleCancel() {
-    console.log('Cancel me')
+    this.props.authNRollActions.loginCancel()
   }
 
   render() {

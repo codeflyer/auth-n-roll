@@ -52,12 +52,21 @@ export const SignInChangePasswordBase = props => {
                 />
               </SignInChangePasswordForm.FieldPasswordConfirm>
             </Grid>
-            <Grid item xs={12}>
-              <SignInChangePasswordForm.ButtonSubmit>
-                <Button variant="contained" color="primary" fullWidth>
-                  Set new password
-                </Button>
-              </SignInChangePasswordForm.ButtonSubmit>
+            <Grid container className={classes.root} spacing={16}>
+              <Grid item xs={6}>
+                <SignInChangePasswordForm.ButtonSubmit>
+                  <Button variant="contained" color="primary" fullWidth>
+                    Confirm
+                  </Button>
+                </SignInChangePasswordForm.ButtonSubmit>
+              </Grid>
+              <Grid item xs={6}>
+                <SignInChangePasswordForm.ButtonCancel>
+                  <Button variant="contained" color="secondary" fullWidth>
+                    Cancel
+                  </Button>
+                </SignInChangePasswordForm.ButtonCancel>
+              </Grid>
             </Grid>
           </Grid>
         </SignInChangePasswordForm>

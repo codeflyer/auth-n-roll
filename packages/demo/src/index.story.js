@@ -1,5 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
 
 import { AuthNRollProvider, AuthProtected } from 'auth-n-roll'
 
@@ -7,7 +8,7 @@ import { ServiceInMemory, ServiceSwitch } from 'auth-n-roll-dev-tools'
 import stackData from '../../../data/stack'
 
 import { ServiceCognito } from 'auth-n-roll-service-cognito'
-import { SignInPage } from 'auth-n-roll-components-styled-components'
+import { SignInPage } from 'auth-n-roll-components-material-ui'
 
 const styles = {
   wrapper: { width: '300px' }
@@ -35,7 +36,11 @@ storiesOf('Demo', module)
   })
   .add('Protected Page', () => {
     return (
-      <AuthNRollProvider authService={ServiceInMemory()} debug>
+      <AuthNRollProvider
+        authService={ServiceInMemory()}
+        onLoginCancel={action('Login Cancel')}
+        debug
+      >
         <div style={styles.wrapper}>
           <AuthProtected signInFlowComponent={SignInPage}>This content is reserved</AuthProtected>
           <ServiceSwitch />

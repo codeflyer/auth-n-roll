@@ -7,7 +7,7 @@ import { isLoggedIn } from '../store/selectors'
 class AuthProtectedBase extends React.Component {
   renderLoginProcess() {
     const SignInFlowComponent = this.props.signInFlowComponent
-    return <SignInFlowComponent />
+    return <SignInFlowComponent onLoginCancel={this.props.onLoginCancel}/>
   }
 
   render() {

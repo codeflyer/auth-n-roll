@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
-// import storage from 'adapters/storage'
 
 import { AuthNRollContext } from '../contexts'
 import { DebugPanel } from '../components/DebugPanel'
@@ -19,7 +18,13 @@ export class AuthNRollProvider extends React.Component {
       authService: this.props.authService,
       debug: this.props.debug
     })
-    this.state = { state: this.store.getDefaultState(), actions: this.store.getActions() }
+    this.state = {
+      state: this.store.getDefaultState(),
+      actions: {
+        ...this.store.getActions(),
+        loginCancel: props.onLoginCancel
+      }
+    }
   }
 
   getState() {

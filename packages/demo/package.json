@@ -12,6 +12,7 @@
   "dependencies": {
     "auth-n-roll": "^0.0.5",
     "auth-n-roll-components-styled-components": "^0.0.5",
+    "auth-n-roll-components-material-ui": "^0.0.5",
     "auth-n-roll-dev-tools": "^0.0.5",
     "auth-n-roll-service-cognito": "^0.0.5"
   }

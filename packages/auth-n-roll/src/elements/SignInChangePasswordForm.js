@@ -17,7 +17,7 @@ import {
   INVALID_PASSWORD_ERROR
 } from '../constants'
 
-export const SignInChangePassword = withFormik({
+export const SignInChangePasswordWithFormik = withFormik({
   mapPropsToValues: props => ({
     password: 'Davide12345',
     passwordConfirm: 'Davide12345'
@@ -78,12 +78,30 @@ export const SignInChangePassword = withFormik({
   }
 })
 
+class SignInChangePasswordFormBase extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.handleCancel = this.handleCancel.bind(this)
+  }
+
+  handleCancel() {
+    this.props.authNRollActions.loginCancel()
+  }
+
+  render() {
+    return (
+      <FormContext.Provider
+        value={Object.assign({}, this.props, { onCancel: this.handleCancel })}
+      >
+        <form onSubmit={this.props.handleSubmit}>{this.props.children}</form>
+      </FormContext.Provider>
+    )
+  }
+}
+
 export const SignInChangePasswordForm = withAuthNRoll(
-  SignInChangePassword(props => (
-    <FormContext.Provider value={props}>
-      <form onSubmit={props.handleSubmit}>{props.children}</form>
-    </FormContext.Provider>
-  ))
+  SignInChangePasswordWithFormik(SignInChangePasswordFormBase)
 )
 
 SignInChangePasswordForm.FieldPassword = ({ children }) => (

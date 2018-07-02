@@ -14,7 +14,7 @@ import {
 import { SignIn } from '../pages/SignIn'
 import { getUser } from '../store/selectors'
 
-export const SignInConfirmSignUp = withFormik({
+export const SignInConfirmSignUpWithFormik = withFormik({
   mapPropsToValues: props => ({ code: '' }),
   validate: (values, props) => {
     const errors = {}
@@ -77,12 +77,30 @@ export const SignInConfirmSignUp = withFormik({
   }
 })
 
+class SignInConfirmSignUpFormBase extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.handleCancel = this.handleCancel.bind(this)
+  }
+
+  handleCancel() {
+    this.props.authNRollActions.loginCancel()
+  }
+
+  render() {
+    return (
+      <FormContext.Provider
+        value={Object.assign({}, this.props, { onCancel: this.handleCancel })}
+      >
+        <form onSubmit={this.props.handleSubmit}>{this.props.children}</form>
+      </FormContext.Provider>
+    )
+  }
+}
+
 export const SignInConfirmSignUpForm = withAuthNRoll(
-  SignInConfirmSignUp(props => (
-    <FormContext.Provider value={props}>
-      <form onSubmit={props.handleSubmit}>{props.children}</form>
-    </FormContext.Provider>
-  ))
+  SignInConfirmSignUpWithFormik(SignInConfirmSignUpFormBase)
 )
 
 SignInConfirmSignUpForm.FieldValidationCode = ({ children }) => (
