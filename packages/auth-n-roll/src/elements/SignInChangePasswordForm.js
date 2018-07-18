@@ -19,8 +19,8 @@ import {
 
 export const SignInChangePasswordWithFormik = withFormik({
   mapPropsToValues: props => ({
-    password: 'Davide12345',
-    passwordConfirm: 'Davide12345'
+    password: '',
+    passwordConfirm: ''
   }),
   validate: (values, props) => {
     const errors = {}

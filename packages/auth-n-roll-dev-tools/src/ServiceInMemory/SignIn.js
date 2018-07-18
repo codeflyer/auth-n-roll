@@ -14,21 +14,21 @@ export const SignIn = async (username, password) => {
     case USER_NOT_FOUND_ERROR:
       throw {
         code: USER_NOT_FOUND_ERROR,
-        message: 'User does not exist.',
+        message: 'SIGNIN_USER_NOT_FOUND_ERROR',
         user: { username }
       }
 
     case NOT_AUTHORIZED_ERROR:
       throw {
         code: NOT_AUTHORIZED_ERROR,
-        message: 'Incorrect username or password.',
+        message: 'SIGNIN_NOT_AUTHORIZED_ERROR',
         user: { username }
       }
 
     case USER_NOT_CONFIRMED_ERROR:
       throw {
         code: USER_NOT_CONFIRMED_ERROR,
-        message: 'User is not confirmed.',
+        message: 'SIGNIN_USER_NOT_CONFIRMED_ERROR',
         user: { username: username }
       }
 

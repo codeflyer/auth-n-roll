@@ -1,5 +1,6 @@
 import React from 'react'
 import { withFormik } from 'formik'
+import sprintf from 'sprintf'
 import { withAuthNRoll, FormContext } from '../contexts'
 import {
   AuthNRollFormField,
@@ -30,7 +31,7 @@ export const SignInConfirmSignUpWithFormik = withFormik({
     {
       props,
       setSubmitting,
-      setErrors /* setValues, setStatus, and other goodies */
+      setErrors
     }
   ) => {
     try {
@@ -43,7 +44,9 @@ export const SignInConfirmSignUpWithFormik = withFormik({
       setSubmitting(false)
 
       props.authNRollActions.setSignInMessage({
-        message: `The user ${user.username} was correctly verified.`,
+        message: sprintf(props.authNRoll.labels.SIGNIN_CONFIRMATION_SUCCESS, {
+          user
+        }),
         type: 'success',
         from: 'confirm-sign-up'
       })
@@ -57,9 +60,10 @@ export const SignInConfirmSignUpWithFormik = withFormik({
         case USER_NOT_FOUND_ERROR:
           props.authNRollActions.setSignInMessage({
             code: USER_NOT_FOUND_ERROR,
-            message: `The user ${
-              getUser(props.authNRoll).username
-            } was not found`
+            message: sprintf(
+              props.authNRoll.labels.SIGNIN_CONFIRMATION_USER_NOT_FOUND,
+              { user: getUser(props.authNRoll) }
+            )
           })
           props.authNRollActions.setUser(null)
           props.authNRollActions.changeFlowIndex(

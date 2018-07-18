@@ -22,28 +22,21 @@ SignInResendValidationCode.MessageSending = ({ children }) => (
   <StateFilter
     getStateFunction={getResendValidationCodeSendingState}
     value={RESEND_VALIDATION_CODE_STATE_SENDING}
-  >
-    {' '}
-    {children}{' '}
-  </StateFilter>
+  >{children}</StateFilter>
 )
 
 SignInResendValidationCode.MessageSendingSuccess = ({ children }) => (
   <StateFilter
     getStateFunction={getResendValidationCodeSendingState}
     value={RESEND_VALIDATION_CODE_STATE_SENDING_SUCCESS}
-  >
-    {children}
-  </StateFilter>
+  >{children}</StateFilter>
 )
 
 SignInResendValidationCode.MessageSendingError = ({ children }) => (
   <StateFilter
     getStateFunction={getResendValidationCodeSendingState}
     value={RESEND_VALIDATION_CODE_STATE_SENDING_ERROR}
-  >
-    {children}
-  </StateFilter>
+  >{children}</StateFilter>
 )
 
 SignInResendValidationCode.ResendButton = withAuthNRoll(props => {

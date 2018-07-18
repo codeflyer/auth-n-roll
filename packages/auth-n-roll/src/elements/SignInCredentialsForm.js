@@ -1,6 +1,7 @@
 import React from 'react'
 import { withFormik } from 'formik'
 import { get } from 'lodash'
+import { sprintf } from 'sprintf-js'
 
 import {
   AuthNRollFormField,
@@ -8,14 +9,8 @@ import {
   AuthNRollFormButtonSubmit,
   AuthNRollFormButtonOnClick
 } from '../consumers'
-import {
-  USER_NOT_FOUND_ERROR,
-  NOT_AUTHORIZED_ERROR,
-  RESPONSE_SUCCESS,
-  FORCE_CHANGE_PASSWORD_CHALLENGE,
-  USER_NOT_CONFIRMED_ERROR,
-  SOFTWARE_TOKEN_MFA_CHALLENGE
-} from '../constants'
+
+import { USER_NOT_CONFIRMED_ERROR } from '../constants'
 
 import { SignIn } from '../pages/SignIn'
 
@@ -23,8 +18,8 @@ import { withAuthNRoll, FormContext } from '../contexts'
 
 export const SignInCredentialsWithFormik = withFormik({
   mapPropsToValues: props => ({
-    email: get(props, 'initialValues.email', 'davide@codeflyer.com'),
-    password: get(props, 'initialValues.password', '123456')
+    email: get(props, 'initialValues.email', ''),
+    password: get(props, 'initialValues.password', '')
   }),
   validate: (values, props) => {
     const errors = {}
@@ -70,7 +65,7 @@ export const SignInCredentialsWithFormik = withFormik({
         props.authNRollActions.changeFlowIndex(SignIn.FLOW_STEP_CONFIRM_CODE)
         return
       }
-      setErrors({ email: e.message })
+      setErrors({ email: sprintf(props.authNRoll.labels[e.message], { user: e.user } ) })
     }
   }
 })

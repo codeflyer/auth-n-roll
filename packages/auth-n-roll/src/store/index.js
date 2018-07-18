@@ -18,6 +18,8 @@ import {
   getActions as getSignInActions
 } from './signIn'
 
+import labels from './labels'
+
 export class Store {
   constructor({ getState, onStateUpdate, authService, debug }) {
     this.authService = authService
@@ -30,6 +32,7 @@ export class Store {
     return {
       authService: this.authService,
       debug: this.debug,
+      labels: labels,
 
       ...getUserDefaultState(),
 

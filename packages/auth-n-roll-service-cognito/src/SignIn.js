@@ -12,7 +12,7 @@ export const SignIn = async (cognito, stack, username, password) => {
   if (!username || !password) {
     throw {
       code: VALIDATION_DATA_ERROR,
-      message: 'Username and password required'
+      message: 'SIGNIN_VALIDATION_DATA_ERROR'
     }
   }
 
@@ -38,19 +38,19 @@ export const SignIn = async (cognito, stack, username, password) => {
       case 'UserNotFoundException':
         throw {
           code: USER_NOT_FOUND_ERROR,
-          message: err.message,
+          message: 'SIGNIN_USER_NOT_FOUND_ERROR',
           user: { username }
         }
       case 'NotAuthorizedException':
         throw {
           code: NOT_AUTHORIZED_ERROR,
-          message: err.message,
+          message: 'SIGNIN_NOT_AUTHORIZED_ERROR',
           user: { username }
         }
       case 'UserNotConfirmedException':
         throw {
           code: USER_NOT_CONFIRMED_ERROR,
-          message: err.message,
+          message: 'SIGNIN_USER_NOT_CONFIRMED_ERROR',
           user: { username }
         }
       default:

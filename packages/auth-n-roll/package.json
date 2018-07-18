@@ -17,7 +17,9 @@
   },
   "dependencies": {
     "formik": "^0.11.11",
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.10",
+    "sprintf": "^0.1.5",
+    "sprintf-js": "^1.1.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.49",
