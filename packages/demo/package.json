@@ -1,6 +1,6 @@
 {
   "name": "demo",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "",
   "main": "index.js",
   "private": true,
@@ -14,6 +14,6 @@
     "auth-n-roll-components-material-ui": "^0.0.8",
     "auth-n-roll-components-styled-components": "^0.0.8",
     "auth-n-roll-dev-tools": "^0.0.8",
-    "auth-n-roll-service-cognito": "^0.0.8"
+    "auth-n-roll-service-cognito": "^0.0.9"
   }
 }
