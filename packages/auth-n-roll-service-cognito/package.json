@@ -1,6 +1,6 @@
 {
   "name": "auth-n-roll-service-cognito",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   "author": "Davide Fiorello <davide@codeflyer.com> (http://github.com/codeflyer/)",
   "license": "Apache-2.0",
   "dependencies": {
-    "auth-n-roll": "^0.0.6",
+    "auth-n-roll": "^0.0.7",
     "aws-sdk": "^2.254.1"
   },
   "devDependencies": {
