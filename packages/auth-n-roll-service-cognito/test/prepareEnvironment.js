@@ -3,7 +3,7 @@ const AWS = require('aws-sdk')
 const stack = require('../../../data/stack')
 
 AWS.config.credentials = new AWS.SharedIniFileCredentials({
-  profile: 'cognito'
+  profile: 'nearform-dev'
 })
 
 const cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider({

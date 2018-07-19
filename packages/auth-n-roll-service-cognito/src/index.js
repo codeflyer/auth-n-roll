@@ -9,17 +9,14 @@ import { ChangePasswordForced } from './ChangePasswordForced'
 export const ServiceCognito = stack => {
   const configData = {
     cognitoidentityserviceprovider: '2016-04-18',
-    UserPoolId: stack.UserPoolId, // Your user pool id here
     region: stack.Region,
+    UserPoolId: stack.UserPoolId, // Your user pool id here
+    IdentityPoolId: stack.IdentityPoolId,
     credentials: new CognitoIdentityCredentials({
       UserPoolId: stack.UserPoolId,
+      IdentityPoolId: stack.IdentityPoolId,
       region: stack.Region
     })
-  }
-
-  if(stack.IdentityPoolId) {
-    configData.IdentityPoolId = stack.IdentityPoolId
-    configData.credentials.IdentityPoolId = stack.IdentityPoolId
   }
 
   if (typeof AWS !== 'undefined') {

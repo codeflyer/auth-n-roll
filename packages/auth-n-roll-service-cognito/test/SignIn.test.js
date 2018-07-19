@@ -18,8 +18,8 @@ describe('SignIn', () => {
       await service.signIn()
     } catch (e) {
       expect(e).toEqual({
-        code: VALIDATION_DATA_ERROR,
-        message: 'Username and password required'
+        code: 'VALIDATION_DATA_ERROR',
+        message: 'SIGNIN_VALIDATION_DATA_ERROR'
       })
     }
   })
@@ -31,8 +31,8 @@ describe('SignIn', () => {
       await service.signIn('davide@codeflyer.com')
     } catch (e) {
       expect(e).toEqual({
-        code: VALIDATION_DATA_ERROR,
-        message: 'Username and password required'
+        code: 'VALIDATION_DATA_ERROR',
+        message: 'SIGNIN_VALIDATION_DATA_ERROR'
       })
     }
   })
@@ -44,8 +44,8 @@ describe('SignIn', () => {
       await service.signIn('some@test.it', 'somepassword')
     } catch (e) {
       expect(e).toEqual({
-        code: USER_NOT_FOUND_ERROR,
-        message: 'User does not exist.',
+        code: 'USER_NOT_FOUND_ERROR',
+        message: 'SIGNIN_USER_NOT_FOUND_ERROR',
         user: { username: 'some@test.it' }
       })
     }
@@ -58,8 +58,8 @@ describe('SignIn', () => {
       await service.signIn('davide@codeflyer.com', 'somepassword')
     } catch (e) {
       expect(e).toEqual({
-        code: NOT_AUTHORIZED_ERROR,
-        message: 'Incorrect username or password.',
+        code: 'NOT_AUTHORIZED_ERROR',
+        message: 'SIGNIN_NOT_AUTHORIZED_ERROR',
         user: { username: 'davide@codeflyer.com' }
       })
     }
@@ -82,24 +82,28 @@ describe('SignIn', () => {
       )
     } catch (e) {
       expect(e).toEqual({
-        code: USER_NOT_CONFIRMED_ERROR,
-        message: 'User is not confirmed.',
+        code: 'USER_NOT_CONFIRMED_ERROR',
+        message: 'SIGNIN_USER_NOT_CONFIRMED_ERROR',
         user: { username: 'davide.fiorello@gmail.com' }
       })
     }
   })
 
-  test('Right credential', async () => {
+  test.only('Right credential', async () => {
     const service = ServiceCognito(stack)
-    const result = await service.signIn(
-      'davide.fiorello@nearform.com',
-      '1234TESTtest'
-    )
-    expect(result.authData.AccessToken).toBeDefined()
-    expect(result.authData.IdToken).toBeDefined()
-    expect(result.authData.RefreshToken).toBeDefined()
-    expect(result.authData.ExpiresIn).toBe(3600)
-    expect(result.authData.TokenType).toBe('Bearer')
-    expect(result.user).toEqual({ username: 'davide.fiorello@nearform.com' })
+    try {
+      const result = await service.signIn(
+        'davide.fiorello@nearform.com',
+        '1234TESTtest'
+      )
+      expect(result.authData.AccessToken).toBeDefined()
+      expect(result.authData.IdToken).toBeDefined()
+      expect(result.authData.RefreshToken).toBeDefined()
+      expect(result.authData.ExpiresIn).toBe(3600)
+      expect(result.authData.TokenType).toBe('Bearer')
+      expect(result.user).toEqual({ username: 'davide.fiorello@nearform.com' })
+    } catch (e) {
+      console.log(e)
+    }
   })
 })

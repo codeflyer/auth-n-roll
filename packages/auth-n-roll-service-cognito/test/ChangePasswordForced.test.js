@@ -40,7 +40,7 @@ describe('ChangePasswordForced', () => {
       )
     } catch (e) {
       expect(e).toEqual({
-        code: 'INVALID_PASSWORD',
+        code: 'INVALID_PASSWORD_ERROR',
         message:
           'Password does not conform to policy: Password must have uppercase characters',
         user: {
