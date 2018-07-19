@@ -1,6 +1,6 @@
 {
   "name": "demo",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "",
   "main": "index.js",
   "private": true,
@@ -10,10 +10,10 @@
   "author": "Davide Fiorello <davide@codeflyer.com> (http://github.com/codeflyer/)",
   "license": "Apache-2.0",
   "dependencies": {
-    "auth-n-roll": "^0.0.8",
-    "auth-n-roll-components-material-ui": "^0.0.8",
-    "auth-n-roll-components-styled-components": "^0.0.8",
-    "auth-n-roll-dev-tools": "^0.0.8",
-    "auth-n-roll-service-cognito": "^0.0.9"
+    "auth-n-roll": "^0.0.10",
+    "auth-n-roll-components-material-ui": "^0.0.10",
+    "auth-n-roll-components-styled-components": "^0.0.10",
+    "auth-n-roll-dev-tools": "^0.0.10",
+    "auth-n-roll-service-cognito": "^0.0.10"
   }
 }
