@@ -39,6 +39,7 @@ export const SignInConfirmSignUpBase = ({ classes }) => {
                   label="code"
                   IconComponent={VerifiedUserIcon}
                   placeholder="Add your code"
+                  autoComplete="off"
                 />
               </SignInConfirmSignUpForm.FieldValidationCode>
             </Grid>

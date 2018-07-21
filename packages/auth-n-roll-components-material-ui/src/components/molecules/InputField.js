@@ -10,7 +10,8 @@ export const InputField = props => {
     type,
     id,
     IconComponent,
-    required
+    required,
+    autoComplete
   } = props
 
   let inputProps = {}
@@ -23,6 +24,7 @@ export const InputField = props => {
       )
     }
   }
+
   return (
     <TextField
       form={authForm}
@@ -33,6 +35,7 @@ export const InputField = props => {
         required,
         placeholder,
         type: type || authForm.type,
+        autoComplete: autoComplete || 'on',
         value: authForm.values[id],
         onChange: authForm.handleChange,
         onBlur: authForm.handleBlur,

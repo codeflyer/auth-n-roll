@@ -40,6 +40,7 @@ export const SignInChangePasswordBase = props => {
                   label="Password"
                   IconComponent={LockIcon}
                   placeholder="Place your password"
+                  autoComplete="new-password"
                 />
               </SignInChangePasswordForm.FieldPassword>
             </Grid>
@@ -49,6 +50,7 @@ export const SignInChangePasswordBase = props => {
                   label="Password Confirm"
                   IconComponent={LockIcon}
                   placeholder="Verify your password"
+                  autoComplete="new-password"
                 />
               </SignInChangePasswordForm.FieldPasswordConfirm>
             </Grid>

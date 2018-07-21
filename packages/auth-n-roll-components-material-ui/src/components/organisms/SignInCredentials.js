@@ -46,6 +46,7 @@ export const SignInCredentialsBase = ({ classes }) => {
                   label="Password"
                   IconComponent={LockIcon}
                   placeholder="Place password"
+                  autoComplete="current-password"
                 />
               </SignInCredentialForm.FieldPassword>
             </Grid>
