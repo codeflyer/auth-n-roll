@@ -58,7 +58,7 @@ export const SignInChangePasswordWithFormik = withFormik({
         getChallenge(props.authNRoll).Session
       )
 
-      props.authNRollActions.setLoggedInUser(result.user)
+      props.authNRollActions.setLoggedInUser(result.user, result.authData)
     } catch (e) {
       setSubmitting(false)
       switch (e.code) {

@@ -3,6 +3,7 @@ import {
 } from 'auth-n-roll'
 
 import { SignIn } from './SignIn'
+import { Refresh } from './Refresh'
 import { ResendValidationCode } from './ResendValidationCode'
 import { ConfirmSignUp } from './ConfirmSignUp'
 import { ChangePasswordForced } from './ChangePasswordForced'
@@ -50,6 +51,7 @@ export const ServiceInMemory = () => {
 
   return {
     signIn: SignIn,
+    refresh: Refresh,
     resendValidationCode: ResendValidationCode,
     confirmSignUp: ConfirmSignUp,
     changePasswordForced: ChangePasswordForced,

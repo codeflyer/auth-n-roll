@@ -16,7 +16,8 @@ export class AuthNRollProvider extends React.Component {
       getState: this.getState.bind(this),
       onStateUpdate: this.onStateUpdate.bind(this),
       authService: this.props.authService,
-      debug: this.props.debug
+      debug: this.props.debug,
+      cookiePrefix: this.props.cookiePrefix
     })
     this.state = {
       state: this.store.getDefaultState(),

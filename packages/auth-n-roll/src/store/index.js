@@ -1,4 +1,6 @@
 import {
+  setCookiePrefix,
+  setAuthService,
   getDefaultState as getUserDefaultState,
   getActions as getUserActions
 } from './user'
@@ -21,11 +23,14 @@ import {
 import labels from './labels'
 
 export class Store {
-  constructor({ getState, onStateUpdate, authService, debug }) {
+  constructor({ getState, onStateUpdate, authService, debug, cookiePrefix }) {
     this.authService = authService
     this.getState = getState
     this.onStateUpdate = onStateUpdate
     this.debug = debug
+    this.cookiePrefix = cookiePrefix
+    setCookiePrefix(cookiePrefix)
+    setAuthService(authService)
   }
 
   getDefaultState() {
@@ -49,7 +54,8 @@ export class Store {
       signIn,
       confirmSignUp,
       resendConfirmationCode,
-      changePasswordForced
+      changePasswordForced,
+      refresh
     } = this.authService
 
     return {
@@ -62,7 +68,8 @@ export class Store {
       signIn,
       confirmSignUp,
       resendConfirmationCode,
-      changePasswordForced
+      changePasswordForced,
+      refresh
     }
   }
 

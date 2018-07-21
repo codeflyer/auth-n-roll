@@ -30,7 +30,9 @@ export const SignIn = async (cognito, stack, username, password) => {
 
     return {
       user: { username },
-      authData: result.AuthenticationResult,
+      authData: Object.assign({}, result.AuthenticationResult, {
+        Expires: Math.floor(Date.now() / 1000) + result.AuthenticationResult.ExpiresIn
+      }),
       challenge: result.ChallengeName ? result : null
     }
   } catch (err) {
@@ -54,8 +56,7 @@ export const SignIn = async (cognito, stack, username, password) => {
           user: { username }
         }
       default:
-        console.log(err)
-        throw { code: err.code, message: err.message, user: { username } }
+        throw { code: err.code, message: err.message, user: { username }, sourceError: err }
     }
   }
 }

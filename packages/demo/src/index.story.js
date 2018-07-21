@@ -26,7 +26,7 @@ storiesOf('Demo', module)
   })
   .add('Signin Page Cognito', () => {
     return (
-      <AuthNRollProvider authService={ServiceCognito(stackData)} debug>
+      <AuthNRollProvider cookiePrefix='cognito-' authService={ServiceCognito(stackData)} debug>
         <div style={styles.wrapper}>
           <SignInPage/>
           <ServiceSwitch />
