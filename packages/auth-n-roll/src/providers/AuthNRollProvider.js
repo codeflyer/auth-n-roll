@@ -6,6 +6,8 @@ import { AuthNRollContext } from '../contexts'
 import { DebugPanel } from '../components/DebugPanel'
 
 import { Store } from '../store'
+import { FLOW_ACTIONS_SIGNIN, FLOW_ACTIONS_SIGNUP } from '../constants'
+import { isLoggedIn, getCurrentFlowAction } from '../store/selectors'
 
 const LOGGED_USER_KEY = 'logged_user_key'
 
@@ -22,8 +24,9 @@ export class AuthNRollProvider extends React.Component {
     this.state = {
       state: this.store.getDefaultState(),
       actions: {
-        ...this.store.getActions(),
-        loginCancel: props.onLoginCancel
+        ...this.store.getActions(this.props),
+        signInCancel: props.onSignInCancel,
+        signUpCancel: props.onSignUpCancel
       }
     }
   }
@@ -46,9 +49,29 @@ export class AuthNRollProvider extends React.Component {
     this.state.actions.rehydrateUser()
   }
 
+  renderLoginProcess() {
+    const SignInFlowComponent = this.props.signInFlowComponent
+    return <SignInFlowComponent onSignInCancel={this.props.onSignInCancel} />
+  }
+
+  renderSignupProcess() {
+    const SignUpFlowComponent = this.props.signUpFlowComponent
+    if(SignUpFlowComponent) {
+
+    return <SignUpFlowComponent />
+    } else {
+      return <div>NE</div>
+    }
+  }
+
   render() {
+    const isLogged = isLoggedIn(this.state.state)
+    const currentFlowAction = getCurrentFlowAction(this.state.state)
+
     return (
       <AuthNRollContext.Provider value={this.state}>
+        {!isLogged && currentFlowAction === FLOW_ACTIONS_SIGNIN && this.renderLoginProcess()}
+        {!isLogged && currentFlowAction === FLOW_ACTIONS_SIGNUP && this.renderSignupProcess()}
         {this.props.children}
         {this.props.debug && <DebugPanel />}
       </AuthNRollContext.Provider>

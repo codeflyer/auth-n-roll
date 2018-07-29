@@ -2,19 +2,53 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { withAuthNRoll } from '../contexts'
-import { isLoggedIn } from '../store/selectors'
+import { isLoggedIn, getCurrentFlowAction } from '../store/selectors'
 
 class AuthProtectedBase extends React.Component {
-  renderLoginProcess() {
-    const SignInFlowComponent = this.props.signInFlowComponent
-    return <SignInFlowComponent onLoginCancel={this.props.onLoginCancel}/>
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+  renderRehydratePage() {
+    const RehydrateMessageComponent = this.props.rehydrateMessageComponent
+    return RehydrateMessageComponent ? (
+      <RehydrateMessageComponent onSignInCancel={this.props.onSignInCancel} />
+    ) : (
+      <div>Rehydrating...</div>
+    )
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const isLogged = isLoggedIn(nextProps.authNRoll)
+    return {
+      isLoggedIn: isLogged,
+      requireLogin: !prevState.requireLogin && !isLogged
+    }
+  }
+
+  componentDidMount() {
+    if(this.state.requireLogin && !getCurrentFlowAction(this.props.authNRoll)) {
+      this.props.authNRollActions.requestSignIn()
+    }
+  }
+
+  componentDidUpdate() {
+    if(this.state.requireLogin && !getCurrentFlowAction(this.props.authNRoll)) {
+      this.props.authNRollActions.requestSignIn()
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.authNRollActions.resetFlows()
+
   }
 
   render() {
-    if (!isLoggedIn(this.props.authNRoll)) {
-      return this.renderLoginProcess()
-    }
-    return <React.Fragment>{this.props.children}</React.Fragment>
+    return (
+      <React.Fragment>
+        {this.props.children}
+      </React.Fragment>
+    )
   }
 }
 

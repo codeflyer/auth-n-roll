@@ -49,8 +49,9 @@ export class Store {
     }
   }
 
-  getActions() {
+  getActions(props) {
     const {
+      signUp,
       signIn,
       confirmSignUp,
       resendConfirmationCode,
@@ -65,6 +66,7 @@ export class Store {
       ...getSignInActions(this),
 
       // TODO These actions are currently used directly from the service, wrap it in an actions
+      signUp,
       signIn,
       confirmSignUp,
       resendConfirmationCode,

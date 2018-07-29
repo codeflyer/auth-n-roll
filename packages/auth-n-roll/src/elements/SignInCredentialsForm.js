@@ -75,16 +75,21 @@ class SignInCredentialFormBase extends React.Component {
     super(props)
 
     this.handleCancel = this.handleCancel.bind(this)
+    this.handleRequestSignUp = this.handleRequestSignUp.bind(this)
   }
 
   handleCancel() {
-    this.props.authNRollActions.loginCancel()
+    this.props.authNRollActions.signInCancel()
+  }
+
+  handleRequestSignUp() {
+    this.props.authNRollActions.requestSignUp()
   }
 
   render() {
     return (
       <FormContext.Provider
-        value={Object.assign({}, this.props, { onCancel: this.handleCancel })}
+        value={Object.assign({}, this.props, { onCancel: this.handleCancel, onRequestSignUp: this.handleRequestSignUp })}
       >
         <form onSubmit={this.props.handleSubmit}>{this.props.children}</form>
       </FormContext.Provider>
@@ -104,6 +109,13 @@ SignInCredentialForm.FieldPassword = ({ children }) => (
     {children}
   </AuthNRollFormFieldPassword>
 )
+
+SignInCredentialForm.RequestSignUp = ({ children }) => (
+  <AuthNRollFormButtonOnClick actionFunctionNameOnState="onRequestSignUp">
+    {children}
+  </AuthNRollFormButtonOnClick>
+)
+
 SignInCredentialForm.ButtonSubmit = ({ children }) => (
   <AuthNRollFormButtonSubmit>{children}</AuthNRollFormButtonSubmit>
 )

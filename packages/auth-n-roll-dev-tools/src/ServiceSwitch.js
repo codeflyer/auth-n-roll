@@ -12,7 +12,8 @@ import {
   VALIDATION_CODE_MISMATCH_ERROR,
   EXPIRED_VALIDATION_CODE_ERROR,
   UNMANAGED_ERROR,
-  INVALID_PASSWORD_ERROR
+  INVALID_PASSWORD_ERROR,
+  USERNAME_EXISTS_ERROR
 } from 'auth-n-roll'
 
 const styleButton = {
@@ -166,6 +167,33 @@ export class ServiceSwitch extends React.Component {
             />
             <SwitchButton
               name="changePasswordForced"
+              checkValue={GENERIC_ERROR}
+              label="Error on change"
+              update={this.handleUpdate}
+            />
+          </div>
+          <div>SignUP</div>
+          <div>
+            <SwitchButton
+              name="signupResponse"
+              checkValue={''}
+              label="Success"
+              update={this.handleUpdate}
+            />
+            <SwitchButton
+              name="signupResponse"
+              checkValue={USERNAME_EXISTS_ERROR}
+              label="User name exists"
+              update={this.handleUpdate}
+            />
+            <SwitchButton
+              name="signupResponse"
+              checkValue={INVALID_PASSWORD_ERROR}
+              label="Invalid password"
+              update={this.handleUpdate}
+            />
+            <SwitchButton
+              name="signupResponse"
               checkValue={GENERIC_ERROR}
               label="Error on change"
               update={this.handleUpdate}

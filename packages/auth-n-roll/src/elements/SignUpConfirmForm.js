@@ -12,10 +12,10 @@ import {
   VALIDATION_CODE_MISMATCH_ERROR,
   EXPIRED_VALIDATION_CODE_ERROR
 } from '../constants'
-import { SignIn } from '../pages/SignIn'
-import { getUser } from '../store/selectors'
+import { SignUp } from '../pages/SignUp'
+import { getSignUpUser } from '../store/selectors'
 
-export const SignInConfirmSignUpWithFormik = withFormik({
+export const SignUpConfirmWithFormik = withFormik({
   mapPropsToValues: props => ({ code: '' }),
   validate: (values, props) => {
     const errors = {}
@@ -26,24 +26,17 @@ export const SignInConfirmSignUpWithFormik = withFormik({
     return errors
   },
   // Submission handler
-  handleSubmit: async (
-    values,
-    {
-      props,
-      setSubmitting,
-      setErrors
-    }
-  ) => {
+  handleSubmit: async (values, { props, setSubmitting, setErrors }) => {
     try {
       setSubmitting(true)
-      const user = getUser(props.authNRoll)
+      const user = getSignUpUser(props.authNRoll)
       const result = await props.authNRollActions.confirmSignUp(
         user.username,
         values.code
       )
       setSubmitting(false)
 
-      props.authNRollActions.setSignInMessage({
+      props.authNRollActions.setSignUpMessage({
         message: sprintf(props.authNRoll.labels.SIGNIN_CONFIRMATION_SUCCESS, {
           user
         }),
@@ -51,14 +44,12 @@ export const SignInConfirmSignUpWithFormik = withFormik({
         from: 'confirm-sign-up'
       })
       props.authNRollActions.setUser(null)
-      props.authNRollActions.changeFlowIndex(
-        SignIn.FLOW_STEP_MESSAGE_AND_RELOGIN
-      )
+      props.authNRollActions.changeFlowIndex(SignUp.FLOW_STEP_MESSAGE_AND_LOGIN)
     } catch (e) {
       setSubmitting(false)
       switch (e.code) {
         case USER_NOT_FOUND_ERROR:
-          props.authNRollActions.setSignInMessage({
+          props.authNRollActions.setSignUpMessage({
             code: USER_NOT_FOUND_ERROR,
             message: sprintf(
               props.authNRoll.labels.SIGNIN_CONFIRMATION_USER_NOT_FOUND,
@@ -67,7 +58,7 @@ export const SignInConfirmSignUpWithFormik = withFormik({
           })
           props.authNRollActions.setUser(null)
           props.authNRollActions.changeFlowIndex(
-            SignIn.FLOW_STEP_MESSAGE_AND_RELOGIN
+            SignUp.FLOW_STEP_MESSAGE_AND_LOGIN
           )
           return
         case VALIDATION_CODE_MISMATCH_ERROR:
@@ -81,15 +72,14 @@ export const SignInConfirmSignUpWithFormik = withFormik({
   }
 })
 
-class SignInConfirmSignUpFormBase extends React.Component {
+class SignUpConfirmFormBase extends React.Component {
   constructor(props) {
     super(props)
-
     this.handleCancel = this.handleCancel.bind(this)
   }
 
   handleCancel() {
-    this.props.authNRollActions.signInCancel()
+    this.props.authNRollActions.signUpCancel()
   }
 
   render() {
@@ -103,18 +93,19 @@ class SignInConfirmSignUpFormBase extends React.Component {
   }
 }
 
-export const SignInConfirmSignUpForm = withAuthNRoll(
-  SignInConfirmSignUpWithFormik(SignInConfirmSignUpFormBase)
+export const SignUpConfirmForm = withAuthNRoll(
+  SignUpConfirmWithFormik(SignUpConfirmFormBase)
 )
 
-SignInConfirmSignUpForm.FieldValidationCode = ({ children }) => (
+SignUpConfirmForm.FieldValidationCode = ({ children }) => (
   <AuthNRollFormField id="code">{children}</AuthNRollFormField>
 )
-SignInConfirmSignUpForm.ButtonSubmit = ({ children }) => (
+
+SignUpConfirmForm.ButtonSubmit = ({ children }) => (
   <AuthNRollFormButtonSubmit>{children}</AuthNRollFormButtonSubmit>
 )
 
-SignInConfirmSignUpForm.ButtonCancel = ({ children }) => (
+SignUpConfirmForm.ButtonCancel = ({ children }) => (
   <AuthNRollFormButtonOnClick actionFunctionNameOnState="onCancel">
     {children}
   </AuthNRollFormButtonOnClick>

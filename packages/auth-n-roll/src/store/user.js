@@ -14,7 +14,9 @@ export function getDefaultState() {
   return {
     isLoggedIn: false,
     authData: null,
-    user: null
+    user: null,
+    signUpUser: null,
+    isRehydrating: false
   }
 }
 
@@ -29,9 +31,11 @@ async function refresh(store, user, authData) {
     )
     await store.updateState({
       user,
+      signUpUser: null,
       authData: result.authData,
       isLoggedIn: true,
-      signIn: null
+      signIn: null,
+      isRehydrating: false
     })
 
     const refreshIn =
@@ -46,10 +50,12 @@ async function refresh(store, user, authData) {
   } catch (e) {
     await store.updateState({
       user: null,
+      signUpUser: null,
       authData: null,
       isLoggedIn: false,
       signIn: null,
-      refreshLastError: e
+      refreshLastError: e,
+      isRehydrating: false
     })
   }
 }
@@ -80,12 +86,40 @@ function setUser(user) {
   this.updateState({ user })
 }
 
+function setSignUpUser(signUpUser) {
+  this.updateState({ signUpUser })
+}
+
+
+async function signOut(store) {
+  await authService.signOut()
+
+  if (refreshFunc) clearTimeout(refreshFunc)
+
+  if (window.localStorage) {
+    window.localStorage.removeItem(`${cookiePrefix}auth-n-roll-user`)
+    window.localStorage.removeItem(`${cookiePrefix}auth-n-roll-auth-data`)
+  }
+
+  this.updateState({
+    user: null,
+    signUpUser: null,
+    authData: null,
+    isLoggedIn: false,
+    signIn: null,
+    refreshLastError: null,
+    isRehydrating: false,
+  })
+}
+
 export function getActions(store) {
   return {
     setUser: setUser.bind(store),
+    setSignUpUser: setSignUpUser.bind(store),
     setLoggedInUser: setLoggedInUser.bind(store),
     rehydrateUser: rehydrateUser.bind(store),
-    storeUser: storeUser.bind(store)
+    storeUser: storeUser.bind(store),
+    signOut: signOut.bind(store)
   }
 }
 
@@ -93,6 +127,7 @@ function rehydrateUser() {
   if (!window.localStorage) return
 
   try {
+
     const user = JSON.parse(
       window.localStorage.getItem(`${cookiePrefix}auth-n-roll-user`)
     )
@@ -102,13 +137,16 @@ function rehydrateUser() {
 
     if (!user || !authData) return
 
+    this.updateState({ isRehydrating: true })
     if (authData.Expires && (authData.Expires - Math.floor(Date.now() / 1000) > 0)) {
       return refresh(this, user, authData)
     } else {
       window.localStorage.removeItem(`${cookiePrefix}auth-n-roll-user`)
       window.localStorage.removeItem(`${cookiePrefix}auth-n-roll-auth-data`)
     }
-  } catch (e) {}
+  } catch (e) {
+    this.updateState({ isRehydrating: false })
+  }
 }
 
 async function storeUser(user, authData) {
@@ -125,4 +163,6 @@ async function storeUser(user, authData) {
 }
 
 export const isLoggedIn = state => state.isLoggedIn
+export const isRehydrating = state => state.isRehydrating
 export const getUser = state => state.user
+export const getSignUpUser = state => state.signUpUser

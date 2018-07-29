@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { SignInCredentialForm } from 'auth-n-roll'
+import { SignUpCredentialForm } from 'auth-n-roll'
 import { withStyles } from '@material-ui/core/styles/index'
 
 import { Heading } from '../atoms/index'
@@ -21,65 +21,74 @@ const styles = theme => ({
   }
 })
 
-export const SignInCredentialsBase = ({ classes }) => {
+export const SignUpCredentialsBase = ({ classes }) => {
   return (
     <Card>
       <CardContent>
-        <SignInCredentialForm>
+        <SignUpCredentialForm>
           <Typography gutterBottom variant="headline" component="h2">
-            Login
+            Sign Up
           </Typography>
           <Grid container className={classes.root} spacing={16}>
             <Grid item xs={12}>
-              <SignInCredentialForm.FieldUsername>
+              <SignUpCredentialForm.FieldUsername>
                 <InputField
                   label="Email"
                   iconName="email"
                   IconComponent={EmailIcon}
                   placeholder="Place here your username"
                 />
-              </SignInCredentialForm.FieldUsername>
+              </SignUpCredentialForm.FieldUsername>
             </Grid>
             <Grid item xs={12}>
-              <SignInCredentialForm.FieldPassword>
+              <SignUpCredentialForm.FieldPassword>
                 <InputField
                   label="Password"
                   IconComponent={LockIcon}
                   placeholder="Place password"
                   autoComplete="current-password"
                 />
-              </SignInCredentialForm.FieldPassword>
+              </SignUpCredentialForm.FieldPassword>
+            </Grid>
+            <Grid item xs={12}>
+              <SignUpCredentialForm.FieldPasswordConfirm>
+                <InputField
+                  label="Password Confirm"
+                  IconComponent={LockIcon}
+                  placeholder="Verify your password"
+                  autoComplete="new-password"
+                />
+              </SignUpCredentialForm.FieldPasswordConfirm>
             </Grid>
 
             <Grid item xs={12}>
-              <SignInCredentialForm.RequestSignUp>
-                <Button>I don't have an account</Button>
-              </SignInCredentialForm.RequestSignUp>
+              <SignUpCredentialForm.RequestSignIn>
+                <Button>I already have an account</Button>
+              </SignUpCredentialForm.RequestSignIn>
             </Grid>
-
             <Grid item xs={12}>
               <Grid container className={classes.root} spacing={16}>
                 <Grid item xs={6}>
-                  <SignInCredentialForm.ButtonSubmit>
+                  <SignUpCredentialForm.ButtonSubmit>
                     <Button variant="contained" color="primary" fullWidth>
-                      Login
+                      Sign Up
                     </Button>
-                  </SignInCredentialForm.ButtonSubmit>
+                  </SignUpCredentialForm.ButtonSubmit>
                 </Grid>
                 <Grid item xs={6}>
-                  <SignInCredentialForm.ButtonCancel>
+                  <SignUpCredentialForm.ButtonCancel>
                     <Button variant="contained" color="secondary" fullWidth>
                       Cancel
                     </Button>
-                  </SignInCredentialForm.ButtonCancel>
+                  </SignUpCredentialForm.ButtonCancel>
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </SignInCredentialForm>
+        </SignUpCredentialForm>
       </CardContent>
     </Card>
   )
 }
 
-export const SignInCredentials = withStyles(styles)(SignInCredentialsBase)
+export const SignUpCredentials = withStyles(styles)(SignUpCredentialsBase)

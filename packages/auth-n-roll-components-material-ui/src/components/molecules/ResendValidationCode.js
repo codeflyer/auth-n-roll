@@ -13,12 +13,15 @@ const styles = theme => ({
   }
 })
 
-export const ResendValidationCodeBase = ({ classes }) => {
+export const ResendValidationCodeBase = ({ classes, signUp }) => {
+  const UsernameLabel = signUp ? Labels.SignUpUsername : Labels.Username
+
+
   return (
     <SignInResendValidationCode>
       <Grid container className={classes.root} spacing={16}>
         <Grid item xs={12}>
-          <SignInResendValidationCode.ResendButton>
+          <SignInResendValidationCode.ResendButton signUp>
             <Button variant="flat" color="primary" size="small">
               Resend the verification code
             </Button>
@@ -27,12 +30,12 @@ export const ResendValidationCodeBase = ({ classes }) => {
         <Grid item xs={12}>
           <SignInResendValidationCode.MessageSending>
             <Typography component="p">
-              ...sending to <Labels.Username />
+              ...sending to <UsernameLabel />
             </Typography>
           </SignInResendValidationCode.MessageSending>
           <SignInResendValidationCode.MessageSendingSuccess>
             <Typography component="p">
-              ...sent to <Labels.Username />
+              ...sent to <UsernameLabel />
             </Typography>
           </SignInResendValidationCode.MessageSendingSuccess>
 

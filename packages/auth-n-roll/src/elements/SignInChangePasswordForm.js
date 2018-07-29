@@ -86,7 +86,7 @@ class SignInChangePasswordFormBase extends React.Component {
   }
 
   handleCancel() {
-    this.props.authNRollActions.loginCancel()
+    this.props.authNRollActions.signInCancel()
   }
 
   render() {

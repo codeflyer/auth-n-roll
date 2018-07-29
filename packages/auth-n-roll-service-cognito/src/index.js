@@ -1,6 +1,8 @@
 const { CognitoIdentityCredentials } = require('aws-sdk')
 const CognitoIdentityServiceProvider = require('aws-sdk/clients/cognitoidentityserviceprovider')
 
+import { SignOut } from './SignOut'
+import { SignUp } from './SignUp'
 import { SignIn } from './SignIn'
 import { Refresh } from './Refresh'
 import { ConfirmSignUp } from './ConfirmSignUp'
@@ -30,6 +32,8 @@ export const ServiceCognito = stack => {
   })
 
   return {
+    signUp: SignUp.bind(null, cognito, stack),
+    signOut: SignOut.bind(null, cognito, stack),
     signIn: SignIn.bind(null, cognito, stack),
     refresh: Refresh.bind(null, cognito, stack),
     confirmSignUp: ConfirmSignUp.bind(null, cognito, stack),

@@ -27,7 +27,7 @@ Create your app
 import React from 'react'
 import { AuthNRollProvider, AuthProtected } from 'auth-n-roll'
 import { ServiceCognito } from 'auth-n-roll-service-cognito'
-import { SignInPage } from 'auth-n-roll-components-material-ui'
+import { SignInPage, SignUpPage } from 'auth-n-roll-components-material-ui'
 
 const awsStackData = {
   UserPoolClientId: 'A Key here',
@@ -39,8 +39,15 @@ const awsStackData = {
 class App extends React.Component {
   render() {
     return (
-      <AuthNRollProvider authService={ServiceCognito(awsStackData)}>
-        <AuthProtected signInFlowComponent={SignInPage}>
+      <AuthNRollProvider
+        authService={ServiceCognito(awsStackData)}
+        authService={ServiceCognito(stackData)}
+        onSignInCancel={props.onSignInCancel}
+        onSignUpCancel={props.onSignUpCancel}
+        signInFlowComponent={SignInPage}
+        signUpFlowComponent={SignUpPage}
+      >
+        <AuthProtected >
           This content is protected
         </AuthProtected>
       </AuthNRollProvider>

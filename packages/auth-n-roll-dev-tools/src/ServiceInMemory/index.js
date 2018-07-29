@@ -3,6 +3,7 @@ import {
 } from 'auth-n-roll'
 
 import { SignIn } from './SignIn'
+import { SignUp } from './SignUp'
 import { Refresh } from './Refresh'
 import { ResendValidationCode } from './ResendValidationCode'
 import { ConfirmSignUp } from './ConfirmSignUp'
@@ -44,12 +45,13 @@ export const ServiceInMemory = () => {
 
   const getLoggedUser = () => {
     return null
-    // {
-    //    username: 'davide'
-    // }
   }
 
   return {
+    signOut: () => {
+      console.log('In memory signout')
+    },
+    signUp: SignUp,
     signIn: SignIn,
     refresh: Refresh,
     resendValidationCode: ResendValidationCode,
