@@ -8,7 +8,7 @@ import { ServiceInMemory, ServiceSwitch } from 'auth-n-roll-dev-tools'
 import stackData from '../../../data/stack'
 
 import { ServiceCognito } from 'auth-n-roll-service-cognito'
-import { SignInPage } from 'auth-n-roll-components-material-ui'
+import { SignInPage, SignUpPage } from 'auth-n-roll-components-material-ui'
 
 const styles = {
   wrapper: { width: '300px' }
@@ -19,6 +19,16 @@ storiesOf('Demo', module)
       <AuthNRollProvider authService={ServiceInMemory()} debug>
         <div style={styles.wrapper}>
           <SignInPage/>
+          <ServiceSwitch />
+        </div>
+      </AuthNRollProvider>
+    )
+  })
+  .add('SignUp Page In Memory', () => {
+    return (
+      <AuthNRollProvider authService={ServiceInMemory()} debug>
+        <div style={styles.wrapper}>
+          <SignUpPage/>
           <ServiceSwitch />
         </div>
       </AuthNRollProvider>
@@ -42,7 +52,7 @@ storiesOf('Demo', module)
         debug
       >
         <div style={styles.wrapper}>
-          <AuthProtected signInFlowComponent={SignInPage}>This content is reserved</AuthProtected>
+          <AuthProtected signInFlowComponent={SignInPage} signUpFlowComponen={SignUpPage}>This content is reserved</AuthProtected>
           <ServiceSwitch />
         </div>
       </AuthNRollProvider>

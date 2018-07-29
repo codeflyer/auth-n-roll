@@ -1,0 +1,6 @@
+{
+  "UserPoolClientId": "636chdjkmiq58uesaoh4a5p2nr",
+  "UserPoolId": "eu-west-1_OzVvbDQeX",
+  "IdentityPoolId": "eu-west-1:35fbee58-d6f4-4e05-bf78-7530b6458820",
+  "ServerlessDeploymentBucketName": "ethplatform-dev-serverlessdeploymentbucket-z3357e69i9ld"
+}
