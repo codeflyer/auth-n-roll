@@ -7,12 +7,14 @@ import { SignInPage, SignUpPage } from 'auth-n-roll-components-material-ui'
 import { ServiceCognito } from 'auth-n-roll-service-cognito'
 
 import stackData from '../../../../data/stack'
-import {appSignInCancel, appSignUpCancel} from '../store/app/actions'
+import {appSignInCancel, appSignUpCancel, appSignIn, appSignOut} from '../store/app/actions'
 
 const AppAuth = (props) => {
   return (
     <AuthNRollProvider
       authService={ServiceCognito(stackData)}
+      onSignIn={props.onSignIn}
+      onSignOut={props.onSignOut}
       onSignInCancel={props.onSignInCancel}
       onSignUpCancel={props.onSignUpCancel}
       signInFlowComponent={SignInPage}
@@ -24,6 +26,8 @@ const AppAuth = (props) => {
 }
 
 const mapDispatchToProps = dispatch => ({
+  onSignIn: (user) => dispatch(appSignIn(user)),
+  onSignOut: () => dispatch(appSignOut()),
   onSignInCancel: () => dispatch(appSignInCancel()),
   onSignUpCancel: () => dispatch(appSignUpCancel())
 })

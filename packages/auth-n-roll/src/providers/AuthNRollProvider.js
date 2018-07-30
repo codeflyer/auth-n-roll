@@ -25,10 +25,19 @@ export class AuthNRollProvider extends React.Component {
       state: this.store.getDefaultState(),
       actions: {
         ...this.store.getActions(this.props),
-        signInCancel: props.onSignInCancel,
-        signUpCancel: props.onSignUpCancel
       }
     }
+
+    this.state.actions.signInCancel = () => {
+      this.state.actions.resetFlows()
+      props.onSignInCancel()
+    }
+
+    this.state.actions.signUpCancel = () => {
+      this.state.actions.resetFlows()
+      props.onSignUpCancel()
+    }
+
   }
 
   getState() {

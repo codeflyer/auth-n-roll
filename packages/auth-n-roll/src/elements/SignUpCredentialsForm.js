@@ -19,9 +19,9 @@ import { SignUpConfirmForm } from './SignUpConfirmForm'
 
 export const SignUpCredentialsWithFormik = withFormik({
   mapPropsToValues: props => ({
-    email: get(props, 'initialValues.email', 'davide.fiorello@nearform.com'),
-    password: get(props, 'initialValues.password', '123Pippo'),
-    passwordConfirm: get(props, 'initialValues.passwordConfirm', '123Pippo')
+    email: get(props, 'initialValues.email', ''),
+    password: get(props, 'initialValues.password', ''),
+    passwordConfirm: get(props, 'initialValues.passwordConfirm', '')
   }),
   validate: (values, props) => {
     const errors = {}

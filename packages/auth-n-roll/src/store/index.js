@@ -60,10 +60,10 @@ export class Store {
     } = this.authService
 
     return {
-      ...getUserActions(this),
-      ...getFlowsActions(this),
-      ...getResendValidationCodeActions(this),
-      ...getSignInActions(this),
+      ...getUserActions(this, props),
+      ...getFlowsActions(this, props),
+      ...getResendValidationCodeActions(this, props),
+      ...getSignInActions(this, props),
 
       // TODO These actions are currently used directly from the service, wrap it in an actions
       signUp,

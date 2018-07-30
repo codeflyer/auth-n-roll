@@ -2,7 +2,9 @@ export {
   AuthNRollFormButtonOnClick,
   AuthNRollFormButtonSubmit,
   AuthNRollFormField,
-  AuthNRollFormFieldPassword
+  AuthNRollFormFieldPassword,
+  RequireSignInButton,
+  RequireSignUpButton
 } from './consumers'
 
 export * from './contexts'

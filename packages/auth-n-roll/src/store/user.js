@@ -1,3 +1,4 @@
+import { getDefaultState as getDefaultFlowState } from './flows'
 let cookiePrefix = ''
 let refreshFunc
 let authService
@@ -60,26 +61,24 @@ async function refresh(store, user, authData) {
   }
 }
 
-async function setLoggedInUser(user, authData) {
+async function setLoggedInUser(props, user, authData) {
+  console.log('setLoggedInUser')
+  console.log(props)
   if (refreshFunc) clearTimeout(refreshFunc)
 
   await this.updateState({
     user,
     authData,
     isLoggedIn: true,
-    signIn: null
+    signIn: null,
+    ...getDefaultFlowState()
   })
   const refreshIn =
-    Math.max(
-      authData.Expires - Math.floor(Date.now() / 1000) - 10,
-      10
-    ) * 1000
+    Math.max(authData.Expires - Math.floor(Date.now() / 1000) - 10, 10) * 1000
 
-  refreshFunc = setTimeout(
-    () => refresh(this, user, authData),
-    refreshIn
-  )
+  refreshFunc = setTimeout(() => refresh(this, user, authData), refreshIn)
   storeUser(user, authData)
+  props.onSignIn && props.onSignIn({ user, authData })
 }
 
 function setUser(user) {
@@ -90,8 +89,7 @@ function setSignUpUser(signUpUser) {
   this.updateState({ signUpUser })
 }
 
-
-async function signOut(store) {
+async function signOut(props) {
   await authService.signOut()
 
   if (refreshFunc) clearTimeout(refreshFunc)
@@ -108,18 +106,20 @@ async function signOut(store) {
     isLoggedIn: false,
     signIn: null,
     refreshLastError: null,
-    isRehydrating: false,
+    isRehydrating: false
   })
+
+  props.onSignOut && props.onSignOut()
 }
 
-export function getActions(store) {
+export function getActions(store, props) {
   return {
     setUser: setUser.bind(store),
     setSignUpUser: setSignUpUser.bind(store),
-    setLoggedInUser: setLoggedInUser.bind(store),
+    setLoggedInUser: setLoggedInUser.bind(store, props),
     rehydrateUser: rehydrateUser.bind(store),
     storeUser: storeUser.bind(store),
-    signOut: signOut.bind(store)
+    signOut: signOut.bind(store, props)
   }
 }
 
@@ -127,7 +127,6 @@ function rehydrateUser() {
   if (!window.localStorage) return
 
   try {
-
     const user = JSON.parse(
       window.localStorage.getItem(`${cookiePrefix}auth-n-roll-user`)
     )
@@ -138,7 +137,10 @@ function rehydrateUser() {
     if (!user || !authData) return
 
     this.updateState({ isRehydrating: true })
-    if (authData.Expires && (authData.Expires - Math.floor(Date.now() / 1000) > 0)) {
+    if (
+      authData.Expires &&
+      authData.Expires - Math.floor(Date.now() / 1000) > 0
+    ) {
       return refresh(this, user, authData)
     } else {
       window.localStorage.removeItem(`${cookiePrefix}auth-n-roll-user`)
