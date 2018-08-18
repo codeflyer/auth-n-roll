@@ -2,7 +2,7 @@
   "name": "auth-n-roll-dev-tools",
   "version": "0.1.2",
   "description": "",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "node test/start.js",
     "clean": "rm -rf dist",
