@@ -4,9 +4,9 @@ import {
   VALIDATION_DATA_ERROR,
   USER_NOT_FOUND_ERROR,
   VALIDATION_CODE_MISMATCH_ERROR,
-  EXPIRED_VALIDATION_CODE_ERROR
+  EXPIRED_VALIDATION_CODE_ERROR,
+  GENERIC_ERROR
 } from 'auth-n-roll'
-import { GENERIC_ERROR } from '../../../auth-n-roll/src'
 
 export const ConfirmSignUp = async (username, confirmationCode) => {
   if (!confirmationCode || !username) {

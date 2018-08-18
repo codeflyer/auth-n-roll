@@ -1,4 +1,5 @@
-const { CognitoIdentityCredentials } = require('aws-sdk')
+const AWS = require('aws-sdk/lib/core.js')
+require('aws-sdk/lib/credentials/cognito_identity_credentials.js')
 const CognitoIdentityServiceProvider = require('aws-sdk/clients/cognitoidentityserviceprovider')
 
 import { SignOut } from './SignOut'
@@ -15,7 +16,7 @@ export const ServiceCognito = stack => {
     region: stack.Region,
     UserPoolId: stack.UserPoolId, // Your user pool id here
     IdentityPoolId: stack.IdentityPoolId,
-    credentials: new CognitoIdentityCredentials({
+    credentials: new AWS.CognitoIdentityCredentials({
       UserPoolId: stack.UserPoolId,
       IdentityPoolId: stack.IdentityPoolId,
       region: stack.Region
