@@ -75,3 +75,7 @@ A bunch of utility that can be used in the development environment. An InMemoryS
 
 ### [demo](./packages/demo/README.md)
 A demo application
+
+
+## Publish
+NPM_CONFIG_OTP=123456 lerna publish
