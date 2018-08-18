@@ -1,6 +1,6 @@
 {
   "name": "auth-n-roll-components-styled-components",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "",
   "main": "dist/index.js",
   "private": true,
@@ -17,7 +17,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "auth-n-roll": "^0.1.2",
-    "auth-n-roll-dev-tools": "^0.1.2",
+    "auth-n-roll-dev-tools": "^0.1.3",
     "clean-element": "^1.0.0",
     "prop-types": "^15.6.1",
     "react": "^16.4.0",

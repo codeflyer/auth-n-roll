@@ -1,6 +1,6 @@
 {
   "name": "demo",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "",
   "main": "index.js",
   "private": true,
@@ -16,8 +16,8 @@
     "@material-ui/core": "^1.4.2",
     "@material-ui/icons": "^2.0.0",
     "auth-n-roll": "^0.1.2",
-    "auth-n-roll-components-material-ui": "^0.1.2",
-    "auth-n-roll-dev-tools": "^0.1.2",
+    "auth-n-roll-components-material-ui": "^0.1.3",
+    "auth-n-roll-dev-tools": "^0.1.3",
     "auth-n-roll-service-cognito": "^0.1.2",
     "config": "^2.0.0",
     "csx": "^9.0.0",
