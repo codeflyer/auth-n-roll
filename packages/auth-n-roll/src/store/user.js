@@ -48,6 +48,8 @@ async function refresh(store, user, authData) {
       () => refresh(store, user, result.authData),
       refreshIn
     )
+
+    store.props && store.props.onSignIn && store.props.onSignIn({ user, authData: result.authData })
   } catch (e) {
     await store.updateState({
       user: null,
@@ -62,8 +64,6 @@ async function refresh(store, user, authData) {
 }
 
 async function setLoggedInUser(props, user, authData) {
-  console.log('setLoggedInUser')
-  console.log(props)
   if (refreshFunc) clearTimeout(refreshFunc)
 
   await this.updateState({

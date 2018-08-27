@@ -19,7 +19,8 @@ export class AuthNRollProvider extends React.Component {
       onStateUpdate: this.onStateUpdate.bind(this),
       authService: this.props.authService,
       debug: this.props.debug,
-      cookiePrefix: this.props.cookiePrefix
+      cookiePrefix: this.props.cookiePrefix,
+      props: this.props
     })
     this.state = {
       state: this.store.getDefaultState(),
@@ -56,6 +57,10 @@ export class AuthNRollProvider extends React.Component {
 
   componentDidMount() {
     this.state.actions.rehydrateUser()
+  }
+
+  componentDidUpdate() {
+    this.store.props = this.props
   }
 
   renderLoginProcess() {

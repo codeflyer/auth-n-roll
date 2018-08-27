@@ -23,11 +23,12 @@ import {
 import labels from './labels'
 
 export class Store {
-  constructor({ getState, onStateUpdate, authService, debug, cookiePrefix }) {
+  constructor({ getState, onStateUpdate, authService, debug, cookiePrefix, props }) {
     this.authService = authService
     this.getState = getState
     this.onStateUpdate = onStateUpdate
     this.debug = debug
+    this.props = props
     this.cookiePrefix = cookiePrefix
     setCookiePrefix(cookiePrefix)
     setAuthService(authService)

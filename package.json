@@ -2,7 +2,7 @@
   "scripts": {
     "lint": "eslint --ignore-path .gitignore **/*.js **/*.jsx",
     "test": "lerna run test",
-    "storybook": "lerna run build && start-storybook -p 6006 -c .storybook"
+    "storybook": "start-storybook -p 6006 -c .storybook"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.49",
