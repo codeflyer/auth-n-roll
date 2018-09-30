@@ -11,28 +11,28 @@ const styles = theme => ({
   }
 })
 
-export const ResendValidationCodeBase = ({ classes, signUp }) => {
+export const ResendValidationCodeBase = ({ classes, signUp, labels }) => {
   const UsernameLabel = signUp ? Labels.SignUpUsername : Labels.Username
 
   return (
     <SignInResendValidationCode>
       <Grid container className={classes.root} spacing={16}>
         <Grid item xs={12}>
-          <SignInResendValidationCode.ResendButton signUp>
+          <SignInResendValidationCode.ResendButton signUp={signUp}>
             <Button variant='flat' color='primary' size='small'>
-              Resend the verification code
+              {labels.RESEND_VALIDATION_CODE}
             </Button>
           </SignInResendValidationCode.ResendButton>
         </Grid>
         <Grid item xs={12}>
           <SignInResendValidationCode.MessageSending>
             <Typography component='p'>
-              ...sending to <UsernameLabel />
+              {labels.RESEND_VALIDATION_CODE_SENDING} <UsernameLabel />
             </Typography>
           </SignInResendValidationCode.MessageSending>
           <SignInResendValidationCode.MessageSendingSuccess>
             <Typography component='p'>
-              ...sent to <UsernameLabel />
+              {labels.RESEND_VALIDATION_CODE_SENT} <UsernameLabel />
             </Typography>
           </SignInResendValidationCode.MessageSendingSuccess>
 

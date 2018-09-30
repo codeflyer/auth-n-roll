@@ -13,21 +13,21 @@ export const SignUp = async (username, password) => {
     case USERNAME_EXISTS_ERROR:
       throw {
         code: USERNAME_EXISTS_ERROR,
-        message: 'SIGNUP_USERNAME_EXISTS_ERROR',
+        message: 'USERNAME_EXISTS_ERROR',
         user: { username }
       }
 
     case NOT_AUTHORIZED_ERROR:
       throw {
         code: NOT_AUTHORIZED_ERROR,
-        message: 'SIGNUP_NOT_AUTHORIZED_ERROR',
+        message: 'NOT_AUTHORIZED_ERROR',
         user: { username }
       }
 
     case INVALID_PASSWORD_ERROR:
       throw {
         code: INVALID_PASSWORD_ERROR,
-        message: 'SIGNUP_INVALID_PASSWORD_ERROR',
+        message: 'INVALID_PASSWORD_ERROR',
         user: { username: username }
       }
 

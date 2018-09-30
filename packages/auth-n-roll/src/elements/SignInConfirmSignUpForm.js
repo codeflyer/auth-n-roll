@@ -45,7 +45,7 @@ export const SignInConfirmSignUpWithFormik = withFormik({
       setSubmitting(false)
 
       props.authNRollActions.setSignInMessage({
-        message: sprintf(props.authNRoll.labels.SIGNIN_CONFIRMATION_SUCCESS, {
+        message: sprintf(props.authNRoll.labels.CONFIRMATION_SUCCESS, {
           user
         }),
         type: 'success',
@@ -62,9 +62,10 @@ export const SignInConfirmSignUpWithFormik = withFormik({
           props.authNRollActions.setSignInMessage({
             code: USER_NOT_FOUND_ERROR,
             message: sprintf(
-              props.authNRoll.labels.SIGNIN_CONFIRMATION_USER_NOT_FOUND,
+              props.authNRoll.labels.USER_NOT_FOUND_ERROR,
               { user: getUser(props.authNRoll) }
-            )
+            ),
+            from: 'confirm-sign-up-fail'
           })
           props.authNRollActions.setUser(null)
           props.authNRollActions.changeFlowIndex(

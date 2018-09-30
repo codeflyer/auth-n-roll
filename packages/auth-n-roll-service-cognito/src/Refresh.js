@@ -4,7 +4,7 @@ export const Refresh = async (cognito, stack, refreshToken) => {
   if (!refreshToken) {
     throw {
       code: VALIDATION_DATA_ERROR,
-      message: 'SIGNIN_VALIDATION_DATA_ERROR'
+      message: 'VALIDATION_DATA_ERROR'
     }
   }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { SignOut as AuthNRollSignOut } from 'auth-n-roll'
+import { SignOut as AuthNRollSignOut, withAuthNRoll } from 'auth-n-roll'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles/index'
 
@@ -9,11 +9,11 @@ const styles = theme => ({
   }
 })
 
-export const SignOutBase = ({ classes }) => {
+export const SignOutBase = ({ authNRoll }) => {
   return (
     <AuthNRollSignOut>
       <Button variant='flat' color='primary' size='small'>
-        SignOut
+        {authNRoll.labels.BUTTON_SIGNOUT}
       </Button>
     </AuthNRollSignOut>
   )
@@ -21,4 +21,4 @@ export const SignOutBase = ({ classes }) => {
 
 SignOutBase.defaultProps = {}
 
-export const SignOut = withStyles(styles)(SignOutBase)
+export const SignOut = withStyles(styles)(withAuthNRoll(SignOutBase))

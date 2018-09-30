@@ -1,5 +1,5 @@
 import React from 'react'
-import { SignInConfirmSignUpForm } from 'auth-n-roll'
+import { SignInConfirmSignUpForm, withAuthNRoll } from 'auth-n-roll'
 import { withStyles } from '@material-ui/core/styles/index'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -17,46 +17,45 @@ const styles = () => ({
   }
 })
 
-export const SignInConfirmSignUpBase = ({ classes }) => {
+export const SignInConfirmSignUpBase = ({ classes, authNRoll }) => {
   return (
     <Card>
       <CardContent>
         <SignInConfirmSignUpForm>
           <Typography gutterBottom variant='headline' component='h2'>
-            Confirm your code
+            {authNRoll.labels.TITLE_CONFIRM_SIGNUP_FORM}
           </Typography>
           <Typography component='p'>
-            The account is not verified yet, verify it using the code you
-            received by mail.
+            {authNRoll.labels.CONFIRM_CODE_MESSAGE}
           </Typography>
 
           <Grid container className={classes.root} spacing={16}>
             <Grid item xs={12}>
               <SignInConfirmSignUpForm.FieldValidationCode>
                 <InputField
-                  label='code'
+                  label={authNRoll.labels.CODE_LABEL}
                   IconComponent={VerifiedUserIcon}
-                  placeholder='Add your code'
+                  placeholder={authNRoll.labels.CODE_PLACEHOLDER}
                   autoComplete='off'
                 />
               </SignInConfirmSignUpForm.FieldValidationCode>
             </Grid>
             <Grid item xs={12}>
-              <ResendValidationCode />
+              <ResendValidationCode labels={authNRoll.labels}/>
             </Grid>
             <Grid item xs={12}>
               <Grid container className={classes.root} spacing={16}>
                 <Grid item xs={6}>
                   <SignInConfirmSignUpForm.ButtonSubmit>
                     <Button variant='contained' color='primary' fullWidth>
-                      Confirm
+                      {authNRoll.labels.BUTTON_CONFIRM}
                     </Button>
                   </SignInConfirmSignUpForm.ButtonSubmit>
                 </Grid>
                 <Grid item xs={6}>
                   <SignInConfirmSignUpForm.ButtonCancel>
                     <Button variant='contained' color='secondary' fullWidth>
-                      Cancel
+                      {authNRoll.labels.BUTTON_CANCEL}
                     </Button>
                   </SignInConfirmSignUpForm.ButtonCancel>
                 </Grid>
@@ -69,4 +68,4 @@ export const SignInConfirmSignUpBase = ({ classes }) => {
   )
 }
 
-export const SignInConfirmSignUp = withStyles(styles)(SignInConfirmSignUpBase)
+export const SignInConfirmSignUp = withStyles(styles)(withAuthNRoll(SignInConfirmSignUpBase))

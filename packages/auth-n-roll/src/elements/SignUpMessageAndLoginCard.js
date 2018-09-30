@@ -1,11 +1,12 @@
 import React from 'react'
 
 import { withAuthNRoll } from '../contexts'
-import { getSignUpMessage } from '../store/selectors'
+import { getSignInMessage, getSignUpMessage } from '../store/selectors'
+
 
 const titles = {
-  'change-password-forced': 'Change password failed',
-  'confirm-sign-up': 'User verified'
+  'change-password-forced': 'TITLE_CHANGE_PASSWORD_FAILED',
+  'confirm-sign-up': 'TITLE_USER_VERIFIED'
 }
 
 export const SignUpMessageAndLoginCard = ({ children }) => (
@@ -20,7 +21,7 @@ SignUpMessageAndLoginCard.Message = withAuthNRoll(({ authNRoll }) => {
 
 SignUpMessageAndLoginCard.Title = withAuthNRoll(({ authNRoll }) => {
   return (
-    <React.Fragment>{titles[getSignUpMessage(authNRoll).from] || ''}</React.Fragment>
+    <React.Fragment>{authNRoll.labels[titles[getSignUpMessage(authNRoll).from]] || ''}</React.Fragment>
   )
 })
 

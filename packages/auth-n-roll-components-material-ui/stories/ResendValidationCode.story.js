@@ -16,7 +16,7 @@ storiesOf('ComponentsMaterialUI/molecules/ResendValidationCode', module).add(
   'With connector',
   () => (
     <AuthNRollProvider authService={ServiceInMemory()}>
-      <ResendValidationCode user={user} />
+      <ResendValidationCode user={user} labels={{RESEND_VALIDATION_CODE: 'Send me a code'}}/>
     </AuthNRollProvider>
   )
 )

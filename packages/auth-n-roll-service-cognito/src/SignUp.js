@@ -34,19 +34,19 @@ export const SignUp = async (cognito, stack, username, password) => {
       case 'UsernameExistsException':
         throw {
           code: USERNAME_EXISTS_ERROR,
-          message: 'SIGNUP_USERNAME_EXISTS_ERROR',
+          message: 'USERNAME_EXISTS_ERROR',
           user: { username }
         }
       case 'NotAuthorizedException':
         throw {
           code: NOT_AUTHORIZED_ERROR,
-          message: 'SIGNUP_NOT_AUTHORIZED_ERROR',
+          message: 'NOT_AUTHORIZED_ERROR',
           user: { username }
         }
       case 'InvalidPasswordException':
         throw {
           code: USER_NOT_CONFIRMED_ERROR,
-          message: 'SIGNUP_INVALID_PASSWORD_ERROR',
+          message: 'INVALID_PASSWORD_ERROR',
           user: { username }
         }
       default:

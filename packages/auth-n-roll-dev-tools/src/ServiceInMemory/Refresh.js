@@ -11,7 +11,7 @@ export const Refresh = async (refreshToken) => {
     case NOT_AUTHORIZED_ERROR:
       throw {
         code: NOT_AUTHORIZED_ERROR,
-        message: 'SIGNIN_NOT_AUTHORIZED_ERROR'
+        message: 'NOT_AUTHORIZED_ERROR'
       }
 
     default:

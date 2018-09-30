@@ -1,5 +1,5 @@
 import React from 'react'
-import { SignInMessageAndReloginCard } from 'auth-n-roll'
+import { SignInMessageAndReloginCard, withAuthNRoll } from 'auth-n-roll'
 import { withStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -13,7 +13,7 @@ const styles = theme => ({
 })
 
 export const SignInMessageAndReloginBase = props => {
-  const { classes } = props
+  const { classes, authNRoll } = props
 
   return (
     <Card>
@@ -31,7 +31,7 @@ export const SignInMessageAndReloginBase = props => {
             <Grid item xs={12}>
               <SignInMessageAndReloginCard.RestartSignInButton>
                 <Button variant='contained' color='primary'>
-                  Back to sign in
+                  {authNRoll.labels.BUTTON_BACK_TO_SIGNIN}
                 </Button>
               </SignInMessageAndReloginCard.RestartSignInButton>
             </Grid>
@@ -43,5 +43,5 @@ export const SignInMessageAndReloginBase = props => {
 }
 
 export const SignInMessageAndRelogin = withStyles(styles)(
-  SignInMessageAndReloginBase
+  withAuthNRoll(SignInMessageAndReloginBase)
 )

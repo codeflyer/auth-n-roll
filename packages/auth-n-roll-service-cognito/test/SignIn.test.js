@@ -12,7 +12,7 @@ describe('SignIn', () => {
     } catch (e) {
       expect(e).toEqual({
         code: 'VALIDATION_DATA_ERROR',
-        message: 'SIGNIN_VALIDATION_DATA_ERROR'
+        message: 'VALIDATION_DATA_ERROR'
       })
     }
   })
@@ -25,7 +25,7 @@ describe('SignIn', () => {
     } catch (e) {
       expect(e).toEqual({
         code: 'VALIDATION_DATA_ERROR',
-        message: 'SIGNIN_VALIDATION_DATA_ERROR'
+        message: 'VALIDATION_DATA_ERROR'
       })
     }
   })
@@ -38,7 +38,7 @@ describe('SignIn', () => {
     } catch (e) {
       expect(e).toEqual({
         code: 'USER_NOT_FOUND_ERROR',
-        message: 'SIGNIN_USER_NOT_FOUND_ERROR',
+        message: 'USER_NOT_FOUND_ERROR',
         user: { username: 'some@test.it' }
       })
     }
@@ -52,7 +52,7 @@ describe('SignIn', () => {
     } catch (e) {
       expect(e).toEqual({
         code: 'NOT_AUTHORIZED_ERROR',
-        message: 'SIGNIN_NOT_AUTHORIZED_ERROR',
+        message: 'NOT_AUTHORIZED_ERROR',
         user: { username: 'davide@codeflyer.com' }
       })
     }
@@ -76,7 +76,7 @@ describe('SignIn', () => {
     } catch (e) {
       expect(e).toEqual({
         code: 'USER_NOT_CONFIRMED_ERROR',
-        message: 'SIGNIN_USER_NOT_CONFIRMED_ERROR',
+        message: 'USER_NOT_CONFIRMED_ERROR',
         user: { username: 'davide.fiorello@gmail.com' }
       })
     }

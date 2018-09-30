@@ -1,5 +1,5 @@
 import React from 'react'
-import { SignInChangePasswordForm } from 'auth-n-roll'
+import { SignInChangePasswordForm, withAuthNRoll } from 'auth-n-roll'
 import { withStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -17,27 +17,27 @@ const styles = theme => ({
 })
 
 export const SignInChangePasswordBase = props => {
-  const { classes } = props
+  const { classes, authNRoll } = props
 
   return (
     <Card>
       <CardContent>
         <SignInChangePasswordForm>
           <Typography gutterBottom variant='headline' component='h2'>
-            Change password
+            {authNRoll.labels.TITLE_CHANGE_PASSWORD_FORM}
           </Typography>
           <Grid container className={classes.root} spacing={16}>
             <Grid item xs={12}>
               <Typography component='p'>
-                It's your first login and a password change is required.
+                {authNRoll.labels.CHANGE_PASSWORD_FIRST_SIGNIN}
               </Typography>
             </Grid>
             <Grid item xs={12}>
               <SignInChangePasswordForm.FieldPassword>
                 <InputField
-                  label='Password'
+                  label={authNRoll.labels.PASSWORD_LABEL}
                   IconComponent={LockIcon}
-                  placeholder='Place your password'
+                  placeholder={authNRoll.labels.PASSWORD_PLACEHOLDER}
                   autoComplete='new-password'
                 />
               </SignInChangePasswordForm.FieldPassword>
@@ -45,9 +45,9 @@ export const SignInChangePasswordBase = props => {
             <Grid item xs={12}>
               <SignInChangePasswordForm.FieldPasswordConfirm>
                 <InputField
-                  label='Password Confirm'
+                  label={authNRoll.labels.PASSWORD_CONFIRM_LABEL}
                   IconComponent={LockIcon}
-                  placeholder='Verify your password'
+                  placeholder={authNRoll.labels.PASSWORD_CONFIRM_PLACEHOLDER}
                   autoComplete='new-password'
                 />
               </SignInChangePasswordForm.FieldPasswordConfirm>
@@ -56,14 +56,14 @@ export const SignInChangePasswordBase = props => {
               <Grid item xs={6}>
                 <SignInChangePasswordForm.ButtonSubmit>
                   <Button variant='contained' color='primary' fullWidth>
-                    Confirm
+                    {authNRoll.labels.BUTTON_CONFIRM}
                   </Button>
                 </SignInChangePasswordForm.ButtonSubmit>
               </Grid>
               <Grid item xs={6}>
                 <SignInChangePasswordForm.ButtonCancel>
                   <Button variant='contained' color='secondary' fullWidth>
-                    Cancel
+                    {authNRoll.labels.BUTTON_CANCEL}
                   </Button>
                 </SignInChangePasswordForm.ButtonCancel>
               </Grid>
@@ -75,4 +75,4 @@ export const SignInChangePasswordBase = props => {
   )
 }
 
-export const SignInChangePassword = withStyles(styles)(SignInChangePasswordBase)
+export const SignInChangePassword = withStyles(styles)(withAuthNRoll(SignInChangePasswordBase))

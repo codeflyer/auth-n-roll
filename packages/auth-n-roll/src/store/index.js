@@ -16,7 +16,7 @@ import {
   getDefaultState as getSignInDefaultState,
   getActions as getSignInActions
 } from './signIn'
-import labels from './labels'
+import createLabels from './labels'
 
 export class Store {
   constructor({ getState, onStateUpdate, authService, debug, cookiePrefix, props }) {
@@ -34,7 +34,7 @@ export class Store {
     return {
       authService: this.authService,
       debug: this.debug,
-      labels: labels,
+      labels: createLabels(this.props.translator),
 
       ...getUserDefaultState(),
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import { withFormik } from 'formik'
+import { sprintf } from 'sprintf-js'
 
 import { withAuthNRoll, FormContext } from '../contexts'
 import { getUser, getChallenge } from '../store/selectors'
@@ -22,11 +23,11 @@ export const SignInChangePasswordWithFormik = withFormik({
     const errors = {}
 
     if (!values.password) {
-      errors.password = 'Required'
+      errors.password = props.authNRoll.labels.FIELD_REQUIRED
     }
 
     if (!values.passwordConfirm) {
-      errors.passwordConfirm = 'Required'
+      errors.passwordConfirm = props.authNRoll.labels.FIELD_REQUIRED
     }
 
     if (
@@ -34,7 +35,7 @@ export const SignInChangePasswordWithFormik = withFormik({
       values.passwordConfirm &&
       values.password !== values.passwordConfirm
     ) {
-      errors.passwordConfirm = "The password don't match"
+      errors.passwordConfirm = props.authNRoll.labels.PWD_NOT_MATCH_ERROR
     }
     return errors
   },
@@ -60,7 +61,10 @@ export const SignInChangePasswordWithFormik = withFormik({
       switch (e.code) {
         case USER_NOT_FOUND_ERROR:
           props.authNRollActions.setSignInMessage({
-            message: `The user ${user.username} was not found`,
+            message:  sprintf(
+              props.authNRoll.labels.USER_NOT_FOUND_ERROR,
+              { user }
+            ),
             type: 'error',
             from: 'change-password-forced'
           })
