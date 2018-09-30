@@ -1,6 +1,6 @@
 {
   "name": "auth-n-roll-components-styled-components",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "",
   "main": "dist/index.js",
   "private": true,
@@ -16,8 +16,8 @@
   "author": "Davide Fiorello <davide@codeflyer.com> (http://github.com/codeflyer/)",
   "license": "Apache-2.0",
   "dependencies": {
-    "auth-n-roll": "^0.1.8",
-    "auth-n-roll-dev-tools": "^0.1.8",
+    "auth-n-roll": "^0.1.9",
+    "auth-n-roll-dev-tools": "^0.1.9",
     "clean-element": "^1.0.2",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
