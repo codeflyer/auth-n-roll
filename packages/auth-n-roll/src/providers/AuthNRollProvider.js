@@ -28,12 +28,12 @@ export class AuthNRollProvider extends React.Component {
 
     this.state.actions.signInCancel = () => {
       this.state.actions.resetFlows()
-      props.onSignInCancel()
+      props.onSignInCancel && props.onSignInCancel()
     }
 
     this.state.actions.signUpCancel = () => {
       this.state.actions.resetFlows()
-      props.onSignUpCancel()
+      props.onSignUpCancel && props.onSignUpCancel()
     }
   }
 
