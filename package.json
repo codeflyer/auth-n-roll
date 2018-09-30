@@ -1,7 +1,8 @@
 {
   "scripts": {
     "lint": "eslint --ext .js  --ignore-path .gitignore packages/",
-    "test": "lerna run test"
+    "test": "lerna run test",
+    "postinstall": "lerna bootstrap && lerna run build"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",

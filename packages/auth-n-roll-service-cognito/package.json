@@ -15,18 +15,18 @@
   "license": "Apache-2.0",
   "dependencies": {
     "auth-n-roll": "^0.1.4",
-    "aws-sdk": "^2.302.0"
+    "aws-sdk": "^2.325.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-rc.3",
-    "@babel/core": "^7.0.0-rc.3",
-    "@babel/plugin-proposal-class-properties": "^7.0.0-rc.3",
-    "@babel/preset-env": "^7.0.0-rc.3",
-    "@babel/preset-react": "^7.0.0-rc.3",
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^8.2.6",
-    "babel-loader": "^8.0.0-beta.3",
-    "jest": "^23.5.0",
-    "whatwg-fetch": "^2.0.4"
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.4",
+    "jest": "^23.6.0",
+    "whatwg-fetch": "^3.0.0"
   }
 }
