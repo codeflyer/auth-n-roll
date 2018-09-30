@@ -9,7 +9,8 @@ import {
   VALIDATION_CODE_MISMATCH_ERROR,
   EXPIRED_VALIDATION_CODE_ERROR,
   INVALID_PASSWORD_ERROR,
-  USERNAME_EXISTS_ERROR
+  USERNAME_EXISTS_ERROR,
+  RESET_PASSWORD_ERROR
 } from 'auth-n-roll'
 
 import { setState, getState } from './ServiceInMemory'
@@ -140,6 +141,21 @@ export class ServiceSwitch extends React.Component {
               name='resendValidationCodeResponse'
               checkValue={GENERIC_ERROR}
               label='Error'
+              update={this.handleUpdate}
+            />
+          </div>
+          <div>Reset PWS</div>
+          <div>
+            <SwitchButton
+              name='resetPassword'
+              checkValue={''}
+              label='Success'
+              update={this.handleUpdate}
+            />
+            <SwitchButton
+              name='resetPassword'
+              checkValue={RESET_PASSWORD_ERROR}
+              label='User not found'
               update={this.handleUpdate}
             />
           </div>

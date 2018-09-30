@@ -26,7 +26,7 @@ export function getActions(store) {
 
 async function resendValidationCode(isSignUp) {
   this.updateState({
-    resendValidationCodeState: Object.assign({}, this.state.resendCode, {
+    resendValidationCodeState: Object.assign({}, {
       sendingState: RESEND_VALIDATION_CODE_STATE_SENDING,
       error: null
     })
@@ -37,13 +37,13 @@ async function resendValidationCode(isSignUp) {
       isSignUp ? getSignUpUser(this.state).username : getUser(this.state).username
     )
     this.updateState({
-      resendValidationCodeState: Object.assign({}, this.state.resendCode, {
+      resendValidationCodeState: Object.assign({}, {
         sendingState: RESEND_VALIDATION_CODE_STATE_SENDING_SUCCESS
       })
     })
   } catch (e) {
     this.updateState({
-      resendValidationCodeState: Object.assign({}, this.state.resendCode, {
+      resendValidationCodeState: Object.assign({}, {
         sendingState: RESEND_VALIDATION_CODE_STATE_SENDING_ERROR,
         error: e.message
       })

@@ -26,7 +26,7 @@ export function getActions(store) {
 
 async function resetPassword(username) {
   this.updateState({
-    resetPasswordState: Object.assign({}, this.state.resendCode, {
+    resetPasswordState: Object.assign({}, {
       sendingState: RESET_PASSWORD_STATE_SENDING,
       error: null
     })
@@ -35,17 +35,18 @@ async function resetPassword(username) {
   try {
     await getAuthService(this.state).resetPassword(username)
     this.updateState({
-      resetPasswordState: Object.assign({}, this.state.resendCode, {
+      resetPasswordState: Object.assign({}, {
         sendingState: RESET_PASSWORD_STATE_SENDING_SUCCESS
       })
     })
   } catch (e) {
     this.updateState({
-      resetPasswordState: Object.assign({}, this.state.resendCode, {
+      resetPasswordState: Object.assign({}, {
         sendingState: RESET_PASSWORD_STATE_SENDING_ERROR,
         error: e.message
       })
     })
+    throw e
   }
 }
 

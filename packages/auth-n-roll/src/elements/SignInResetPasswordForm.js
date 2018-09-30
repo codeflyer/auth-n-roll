@@ -39,7 +39,6 @@ export const SignInResetPasswordWithFormik = withFormik({
       await props.authNRollActions.resetPassword(
         values.email
       )
-
       setSubmitting(false)
 
       props.authNRollActions.setSignInMessage({
