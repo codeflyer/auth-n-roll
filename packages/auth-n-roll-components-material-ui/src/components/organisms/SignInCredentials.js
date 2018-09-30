@@ -1,5 +1,5 @@
 import React from 'react'
-import { SignInCredentialForm, withAuthNRoll } from 'auth-n-roll'
+import { SignInCredentialForm, withAuthNRoll, hasSignup } from 'auth-n-roll'
 import { withStyles } from '@material-ui/core/styles/index'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -47,12 +47,13 @@ export const SignInCredentialsBase = ({ classes, authNRoll }) => {
               </SignInCredentialForm.FieldPassword>
             </Grid>
 
-            <Grid item xs={12}>
-              <SignInCredentialForm.RequestSignUp>
-                <Button>{authNRoll.labels.CREATE_NEW_ACCOUNT}</Button>
-              </SignInCredentialForm.RequestSignUp>
-            </Grid>
-
+            {hasSignup(authNRoll) && (
+              <Grid item xs={12}>
+                <SignInCredentialForm.RequestSignUp>
+                  <Button>{authNRoll.labels.CREATE_NEW_ACCOUNT}</Button>
+                </SignInCredentialForm.RequestSignUp>
+              </Grid>
+            )}
             <Grid item xs={12}>
               <Grid container className={classes.root} spacing={16}>
                 <Grid item xs={6}>
@@ -78,4 +79,6 @@ export const SignInCredentialsBase = ({ classes, authNRoll }) => {
   )
 }
 
-export const SignInCredentials = withStyles(styles)(withAuthNRoll(SignInCredentialsBase))
+export const SignInCredentials = withStyles(styles)(
+  withAuthNRoll(SignInCredentialsBase)
+)

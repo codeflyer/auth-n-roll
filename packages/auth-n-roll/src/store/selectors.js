@@ -1,5 +1,5 @@
 export { isLoggedIn, isRehydrating, getUser, getSignUpUser } from './user'
-export { getCurrentFlowIndex, getCurrentFlowAction } from './flows'
+export { getCurrentFlowIndex, getCurrentFlowAction, hasSignup } from './flows'
 export { getChallenge, getSignInMessage, getSignUpMessage } from './signIn'
 export {
   getResendValidationCodeSendingState,

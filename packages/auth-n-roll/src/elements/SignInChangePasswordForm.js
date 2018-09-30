@@ -61,7 +61,7 @@ export const SignInChangePasswordWithFormik = withFormik({
       switch (e.code) {
         case USER_NOT_FOUND_ERROR:
           props.authNRollActions.setSignInMessage({
-            message:  sprintf(
+            message: sprintf(
               props.authNRoll.labels.USER_NOT_FOUND_ERROR,
               { user }
             ),

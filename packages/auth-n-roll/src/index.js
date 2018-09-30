@@ -57,5 +57,6 @@ export {
   getResendValidationCodeSendingError,
   getResendValidationCodeSendingState,
   getSignInMessage,
-  getUser
+  getUser,
+  hasSignup
 } from './store/selectors'

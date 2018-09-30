@@ -1,8 +1,7 @@
 import React from 'react'
 
 import { withAuthNRoll } from '../contexts'
-import { getSignInMessage, getSignUpMessage } from '../store/selectors'
-
+import { getSignUpMessage } from '../store/selectors'
 
 const titles = {
   'change-password-forced': 'TITLE_CHANGE_PASSWORD_FAILED',

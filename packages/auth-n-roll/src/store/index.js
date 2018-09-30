@@ -36,6 +36,8 @@ export class Store {
       debug: this.debug,
       labels: createLabels(this.props.translator),
 
+      disabledFeatures: this.props.disabledFeatures || [],
+
       ...getUserDefaultState(),
 
       ...getFlowsDefaultState(),
