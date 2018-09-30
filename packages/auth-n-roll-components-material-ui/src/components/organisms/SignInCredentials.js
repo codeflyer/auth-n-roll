@@ -11,9 +11,12 @@ import LockIcon from '@material-ui/icons/Lock'
 
 import { InputField } from '../molecules/InputField'
 
-const styles = () => ({
+const styles = theme => ({
   root: {
     flexGrow: 1
+  },
+  actions: {
+    marginTop: '0px'
   }
 })
 
@@ -54,8 +57,15 @@ export const SignInCredentialsBase = ({ classes, authNRoll }) => {
                 </SignInCredentialForm.RequestSignUp>
               </Grid>
             )}
+
             <Grid item xs={12}>
-              <Grid container className={classes.root} spacing={16}>
+              <SignInCredentialForm.RequestResetPassword>
+                <Button>{authNRoll.labels.RESET_PASSWORD}</Button>
+              </SignInCredentialForm.RequestResetPassword>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Grid container className={classes.actions} spacing={16}>
                 <Grid item xs={6}>
                   <SignInCredentialForm.ButtonSubmit>
                     <Button variant='contained' color='primary' fullWidth>

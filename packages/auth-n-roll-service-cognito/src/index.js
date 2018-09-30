@@ -4,6 +4,7 @@ import { SignIn } from './SignIn'
 import { Refresh } from './Refresh'
 import { ConfirmSignUp } from './ConfirmSignUp'
 import { ResendConfirmationCode } from './ResendConfirmationCode'
+import { ResetPassword } from './ResetPassword'
 import { ChangePasswordForced } from './ChangePasswordForced'
 
 const AWS = require('aws-sdk/lib/core.js')
@@ -39,6 +40,7 @@ export const ServiceCognito = stack => {
     refresh: Refresh.bind(null, cognito, stack),
     confirmSignUp: ConfirmSignUp.bind(null, cognito, stack),
     resendConfirmationCode: ResendConfirmationCode.bind(null, cognito, stack),
+    resetPassword: ResetPassword.bind(null, cognito, stack),
     changePasswordForced: ChangePasswordForced.bind(null, cognito, stack)
   }
 }

@@ -4,6 +4,7 @@ import {
 
 import { SignIn } from './SignIn'
 import { SignUp } from './SignUp'
+import { ResetPassword } from './ResetPassword'
 import { Refresh } from './Refresh'
 import { ResendValidationCode } from './ResendValidationCode'
 import { ConfirmSignUp } from './ConfirmSignUp'
@@ -52,6 +53,7 @@ export const ServiceInMemory = () => {
       console.log('In memory signout') // eslint-disable-line
     },
     signUp: SignUp,
+    resetPassword: ResetPassword,
     signIn: SignIn,
     refresh: Refresh,
     resendValidationCode: ResendValidationCode,

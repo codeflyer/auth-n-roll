@@ -13,6 +13,9 @@ import { InputField } from '../molecules/InputField'
 const styles = theme => ({
   root: {
     flexGrow: 1
+  },
+  actions: {
+    marginTop: '20px'
   }
 })
 
@@ -52,7 +55,7 @@ export const SignInChangePasswordBase = props => {
                 />
               </SignInChangePasswordForm.FieldPasswordConfirm>
             </Grid>
-            <Grid container className={classes.root} spacing={16}>
+            <Grid container className={classes.actions} spacing={16}>
               <Grid item xs={6}>
                 <SignInChangePasswordForm.ButtonSubmit>
                   <Button variant='contained' color='primary' fullWidth>

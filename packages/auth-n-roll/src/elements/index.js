@@ -1,6 +1,7 @@
 export * from './SignInChangePasswordForm'
 export * from './SignInCredentialsForm'
 export * from './SignInConfirmSignUpForm'
+export * from './SignInResetPasswordForm'
 export * from './SignInResendValidationCode'
 export * from './SignInMessageAndReloginCard'
 export * from './SignUpCredentialsForm'

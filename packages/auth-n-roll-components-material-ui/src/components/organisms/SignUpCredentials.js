@@ -14,6 +14,9 @@ import { InputField } from '../molecules/InputField'
 const styles = theme => ({
   root: {
     flexGrow: 1
+  },
+  actions: {
+    marginTop: '0px'
   }
 })
 
@@ -63,7 +66,7 @@ export const SignUpCredentialsBase = ({ classes, authNRoll }) => {
               </SignUpCredentialForm.RequestSignIn>
             </Grid>
             <Grid item xs={12}>
-              <Grid container className={classes.root} spacing={16}>
+              <Grid container className={classes.actions} spacing={16}>
                 <Grid item xs={6}>
                   <SignUpCredentialForm.ButtonSubmit>
                     <Button variant='contained' color='primary' fullWidth>

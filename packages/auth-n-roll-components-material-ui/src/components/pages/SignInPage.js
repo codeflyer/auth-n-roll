@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles/index'
 
 import { SignInCredentials } from '../organisms/SignInCredentials'
 import { SignInChangePassword } from '../organisms/SignInChangePassword'
+import { SignInResetPassword } from '../organisms/SignInResetPassword'
 import { SignInConfirmSignUp } from '../organisms/SignInConfirmSignUp'
 import { SignInMessageAndRelogin } from '../organisms/SignInMessageAndRelogin'
 
@@ -26,6 +27,7 @@ export class SignInPageBase extends React.Component {
           <SignIn>
             <SignInCredentials index={SignIn.FLOW_STEP_CREDENTIALS} />
             <SignInChangePassword index={SignIn.FLOW_STEP_CHANGE_PASSWORD} />
+            <SignInResetPassword index={SignIn.FLOW_STEP_RESET_PASSWORD} />
             <SignInConfirmSignUp index={SignIn.FLOW_STEP_CONFIRM_CODE} />
             <SignInMessageAndRelogin
               index={SignIn.FLOW_STEP_MESSAGE_AND_RELOGIN}

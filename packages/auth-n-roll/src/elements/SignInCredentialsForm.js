@@ -73,6 +73,7 @@ class SignInCredentialFormBase extends React.Component {
 
     this.handleCancel = this.handleCancel.bind(this)
     this.handleRequestSignUp = this.handleRequestSignUp.bind(this)
+    this.handleRequestResetPassword = this.handleRequestResetPassword.bind(this)
   }
 
   handleCancel() {
@@ -83,10 +84,18 @@ class SignInCredentialFormBase extends React.Component {
     this.props.authNRollActions.requestSignUp()
   }
 
+  handleRequestResetPassword() {
+    this.props.authNRollActions.changeFlowIndex(SignIn.FLOW_STEP_RESET_PASSWORD)
+  }
+
   render() {
     return (
       <FormContext.Provider
-        value={Object.assign({}, this.props, { onCancel: this.handleCancel, onRequestSignUp: this.handleRequestSignUp })}
+        value={Object.assign({}, this.props, {
+          onCancel: this.handleCancel,
+          onRequestSignUp: this.handleRequestSignUp,
+          onRequestResetPassword: this.handleRequestResetPassword
+        })}
       >
         <form onSubmit={this.props.handleSubmit}>{this.props.children}</form>
       </FormContext.Provider>
@@ -109,6 +118,12 @@ SignInCredentialForm.FieldPassword = ({ children }) => (
 
 SignInCredentialForm.RequestSignUp = ({ children }) => (
   <AuthNRollFormButtonOnClick actionFunctionNameOnState='onRequestSignUp'>
+    {children}
+  </AuthNRollFormButtonOnClick>
+)
+
+SignInCredentialForm.RequestResetPassword = ({ children }) => (
+  <AuthNRollFormButtonOnClick actionFunctionNameOnState='onRequestResetPassword'>
     {children}
   </AuthNRollFormButtonOnClick>
 )

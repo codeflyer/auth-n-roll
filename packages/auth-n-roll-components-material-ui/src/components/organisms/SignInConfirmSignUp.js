@@ -11,9 +11,12 @@ import VerifiedUserIcon from '@material-ui/icons/VerifiedUser'
 import { InputField } from '../molecules/InputField'
 import { ResendValidationCode } from '../molecules/ResendValidationCode'
 
-const styles = () => ({
+const styles = theme => ({
   root: {
     flexGrow: 1
+  },
+  actions: {
+    marginTop: '0px'
   }
 })
 
@@ -44,7 +47,7 @@ export const SignInConfirmSignUpBase = ({ classes, authNRoll }) => {
               <ResendValidationCode labels={authNRoll.labels}/>
             </Grid>
             <Grid item xs={12}>
-              <Grid container className={classes.root} spacing={16}>
+              <Grid container className={classes.actions} spacing={16}>
                 <Grid item xs={6}>
                   <SignInConfirmSignUpForm.ButtonSubmit>
                     <Button variant='contained' color='primary' fullWidth>

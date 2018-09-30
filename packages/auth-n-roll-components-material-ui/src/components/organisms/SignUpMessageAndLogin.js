@@ -6,9 +6,13 @@ import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
+
 const styles = theme => ({
   root: {
     flexGrow: 1
+  },
+  actions: {
+    marginTop: '20px'
   }
 })
 
@@ -22,7 +26,7 @@ export const SignUpMessageAndLoginBase = props => {
           <Typography gutterBottom variant='headline' component='h2'>
             <SignUpMessageAndLoginCard.Title />
           </Typography>
-          <Grid container className={classes.root} spacing={16}>
+          <Grid container className={classes.actions} spacing={16}>
             <Grid item xs={12}>
               <Typography component='p'>
                 <SignUpMessageAndLoginCard.Message />

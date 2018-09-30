@@ -4,6 +4,7 @@ const _labels = {
   CONFIRMATION_SUCCESS: 'The user %(user.username)s was correctly verified.',
   USER_NOT_FOUND_ERROR: 'The user %(user.username)s was not found',
   USER_NOT_CONFIRMED_ERROR: 'The user %(user.username)s was not confirmed yet',
+  RESET_PASSWORD_SENT_TO_USER: 'A reset password link was sent to the address %(user.username)s',
   NOT_AUTHORIZED_ERROR: 'Incorrect username or password.',
   VALIDATION_DATA_ERROR: 'Username and password required',
   PWD_NOT_MATCH_ERROR: "The password doesn't match",
@@ -12,10 +13,12 @@ const _labels = {
   TITLE_CHANGE_PASSWORD_FAILED: 'Change password failed',
   TITLE_USER_VERIFIED: 'User verified',
   TITLE_USER_VERIFY_FAIL: 'Verification fail',
+  TITLE_RESET_PASSWORD_SUCCESS: 'Reset password',
   TITLE_SIGNIN_FORM: 'Sign In',
   TITLE_SIGNUP_FORM: 'Sign Up',
   TITLE_CHANGE_PASSWORD_FORM: 'Change password',
   TITLE_CONFIRM_SIGNUP_FORM: 'Confirm your code',
+  TITLE_RESET_PASSWORD_FORM: 'Reset password',
   EMAIL_LABEL: 'Email',
   EMAIL_PLACEHOLDER: 'Place here your username',
   CODE_LABEL: 'Code',
@@ -25,10 +28,12 @@ const _labels = {
   PASSWORD_CONFIRM_LABEL: 'Password confirm',
   PASSWORD_CONFIRM_PLACEHOLDER: 'Verify your password',
   CREATE_NEW_ACCOUNT: 'I don\'t have an account',
+  RESET_PASSWORD: 'I forgot my password',
   ALREADY_HAVE__ACCOUNT: 'I already have an account',
 
   CHANGE_PASSWORD_FIRST_SIGNIN: 'It\'s your first login and a password change is required.',
   CONFIRM_CODE_MESSAGE: 'The account is not verified yet, verify it using the code you received by mail.',
+  RESET_PASSWORD_MESSAGE: 'Your password will be reset and a new one sent to your email.',
   CONFIRM_CODE_MESSAGE_SENT: ' A message with the verification code was sent to',
   RESEND_VALIDATION_CODE: 'Resend the verification code',
   RESEND_VALIDATION_CODE_SENDING: '...sending to',
@@ -38,6 +43,7 @@ const _labels = {
   BUTTON_SIGNUP: 'Signup',
   BUTTON_CANCEL: 'Cancel',
   BUTTON_CONFIRM: 'Confirm',
+  BUTTON_RESET: 'Reset',
   BUTTON_BACK_TO_SIGNIN: 'Back to sign in'
 }
 

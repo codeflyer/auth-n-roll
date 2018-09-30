@@ -9,6 +9,9 @@ import Button from '@material-ui/core/Button'
 const styles = theme => ({
   root: {
     flexGrow: 1
+  },
+  actions: {
+    marginTop: '20px'
   }
 })
 
@@ -22,7 +25,7 @@ export const SignInMessageAndReloginBase = props => {
           <Typography gutterBottom variant='headline' component='h2'>
             <SignInMessageAndReloginCard.Title />
           </Typography>
-          <Grid container className={classes.root} spacing={16}>
+          <Grid container className={classes.actions} spacing={16}>
             <Grid item xs={12}>
               <Typography component='p'>
                 <SignInMessageAndReloginCard.Message />

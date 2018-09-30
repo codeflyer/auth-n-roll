@@ -30,7 +30,7 @@ class App extends React.Component {
         onSignUpCancel={this.handleSignUpCancel}
         signInFlowComponent={SignInPage}
         signUpFlowComponent={SignUpPage}
-        disabledFeatures={['signUp']}
+        disabledFeatures={[]}
       >
         <AuthProtected
         >

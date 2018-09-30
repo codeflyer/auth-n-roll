@@ -6,7 +6,8 @@ import { getSignInMessage } from '../store/selectors'
 const titles = {
   'change-password-forced': 'TITLE_CHANGE_PASSWORD_FAILED',
   'confirm-sign-up': 'TITLE_USER_VERIFIED',
-  'confirm-sign-up-fail': 'TITLE_USER_VERIFY_FAIL'
+  'confirm-sign-up-fail': 'TITLE_USER_VERIFY_FAIL',
+  'reset-password-success': 'TITLE_RESET_PASSWORD_SUCCESS'
 }
 
 export const SignInMessageAndReloginCard = ({ children }) => (

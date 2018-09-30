@@ -13,6 +13,10 @@ import {
   getActions as getResendValidationCodeActions
 } from './resendValidationCode'
 import {
+  getDefaultState as getResetPasswordDefaultState,
+  getActions as getResetPasswordActions
+} from './resetPassword'
+import {
   getDefaultState as getSignInDefaultState,
   getActions as getSignInActions
 } from './signIn'
@@ -44,6 +48,8 @@ export class Store {
 
       ...getResendValidationCodeDefaultState(),
 
+      ...getResetPasswordDefaultState(),
+
       ...getSignInDefaultState()
     }
   }
@@ -62,6 +68,7 @@ export class Store {
       ...getUserActions(this, props),
       ...getFlowsActions(this, props),
       ...getResendValidationCodeActions(this, props),
+      ...getResetPasswordActions(this, props),
       ...getSignInActions(this, props),
 
       // TODO These actions are currently used directly from the service, wrap it in an actions
