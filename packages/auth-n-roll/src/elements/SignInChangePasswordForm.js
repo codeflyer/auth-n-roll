@@ -1,20 +1,16 @@
 import React from 'react'
 import { withFormik } from 'formik'
+
 import { withAuthNRoll, FormContext } from '../contexts'
-
 import { getUser, getChallenge } from '../store/selectors'
-
 import {
   AuthNRollFormFieldPassword,
   AuthNRollFormButtonSubmit,
   AuthNRollFormButtonOnClick
 } from '../consumers'
-
 import { SignIn } from '../pages/SignIn'
 import {
-  USER_NOT_FOUND_ERROR,
-  GENERIC_ERROR,
-  INVALID_PASSWORD_ERROR
+  USER_NOT_FOUND_ERROR
 } from '../constants'
 
 export const SignInChangePasswordWithFormik = withFormik({
@@ -105,13 +101,13 @@ export const SignInChangePasswordForm = withAuthNRoll(
 )
 
 SignInChangePasswordForm.FieldPassword = ({ children }) => (
-  <AuthNRollFormFieldPassword id="password">
+  <AuthNRollFormFieldPassword id='password'>
     {children}
   </AuthNRollFormFieldPassword>
 )
 
 SignInChangePasswordForm.FieldPasswordConfirm = ({ children }) => (
-  <AuthNRollFormFieldPassword id="passwordConfirm">
+  <AuthNRollFormFieldPassword id='passwordConfirm'>
     {children}
   </AuthNRollFormFieldPassword>
 )
@@ -121,7 +117,7 @@ SignInChangePasswordForm.ButtonSubmit = ({ children }) => (
 )
 
 SignInChangePasswordForm.ButtonCancel = ({ children }) => (
-  <AuthNRollFormButtonOnClick actionFunctionNameOnState="onCancel">
+  <AuthNRollFormButtonOnClick actionFunctionNameOnState='onCancel'>
     {children}
   </AuthNRollFormButtonOnClick>
 )

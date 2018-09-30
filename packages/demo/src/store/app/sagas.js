@@ -1,16 +1,18 @@
-import logger from '../../adapters/logger'
-import { put } from 'redux-saga/effects'
 import { push } from 'react-router-redux'
 
-export function* appSignInCancelSaga() {
+import logger from '../../adapters/logger'
+
+import { put } from 'redux-saga/effects'
+
+export function * appSignInCancelSaga() {
   yield put(push('/'))
 }
 
-export function* appSignUpCancelSaga() {
+export function * appSignUpCancelSaga() {
   yield put(push('/'))
 }
 
-export function* appInitSaga() {
+export function * appInitSaga() {
   logger.info({ message: 'Init application', tags: ['INIT'] })
   logger.info({ message: 'Configure Amplify', tags: ['INIT'] })
 

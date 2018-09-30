@@ -1,5 +1,5 @@
 import React from 'react'
-import get from 'lodash/get'
+
 import { withAuthNRoll } from '../contexts'
 
 export const StateFilter = withAuthNRoll(

@@ -1,11 +1,11 @@
 import React from 'react'
-
 import { SignIn } from 'auth-n-roll'
+import { withStyles } from '@material-ui/core/styles/index'
+
 import { SignInCredentials } from '../organisms/SignInCredentials'
 import { SignInChangePassword } from '../organisms/SignInChangePassword'
 import { SignInConfirmSignUp } from '../organisms/SignInConfirmSignUp'
 import { SignInMessageAndRelogin } from '../organisms/SignInMessageAndRelogin'
-import { withStyles } from '@material-ui/core/styles/index'
 
 const styles = theme => ({
   root: {

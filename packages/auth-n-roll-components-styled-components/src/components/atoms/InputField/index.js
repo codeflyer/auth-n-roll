@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { keyframes } from 'styled-components'
+
 import { Box } from '../Box'
 import { Flex } from '../Flex'
 import { Input } from '../Input'
@@ -15,7 +16,7 @@ const fadeIn = keyframes`
   }
 `
 const labelStyles = {
-  animation: fadeIn + ' 0.3s'
+  animation: `${fadeIn} 0.3s`
 }
 
 const getInputStyles = showLabel => {

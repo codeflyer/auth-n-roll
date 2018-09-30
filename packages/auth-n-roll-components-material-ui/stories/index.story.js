@@ -1,15 +1,10 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-
 import { AuthNRollProvider, AuthProtected } from 'auth-n-roll'
 import { ServiceInMemory, ServiceSwitch } from 'auth-n-roll-dev-tools'
 
 import { SignInPage, SignUpPage, SignOut } from '../src'
-
-const styles = {
-  wrapper: { width: '300px' }
-}
 
 class App extends React.Component {
   constructor(props) {
@@ -33,10 +28,10 @@ class App extends React.Component {
         debug
         onSignInCancel={this.handleSignInCancel}
         onSignUpCancel={this.handleSignUpCancel}
+        signInFlowComponent={SignInPage}
+        signUpFlowComponent={SignUpPage}
       >
         <AuthProtected
-          signInFlowComponent={SignInPage}
-          signUpFlowComponent={SignUpPage}
         >
           This content is reserved
         </AuthProtected>

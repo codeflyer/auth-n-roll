@@ -27,32 +27,37 @@ class AuthProtectedBase extends React.Component {
   }
 
   componentDidMount() {
-    if(this.state.requireLogin && !getCurrentFlowAction(this.props.authNRoll)) {
+    if (this.state.requireLogin && !getCurrentFlowAction(this.props.authNRoll)) {
       this.props.authNRollActions.requestSignIn()
     }
   }
 
   componentDidUpdate() {
-    if(this.state.requireLogin && !getCurrentFlowAction(this.props.authNRoll)) {
+    if (this.state.requireLogin && !getCurrentFlowAction(this.props.authNRoll)) {
       this.props.authNRollActions.requestSignIn()
     }
   }
 
   componentWillUnmount() {
     this.props.authNRollActions.resetFlows()
-
   }
 
   render() {
+    const {requireLogin, isLoggedIn} = this.state
+    const {forceChildrenRender, children} = this.props
+    if (requireLogin && !isLoggedIn && !forceChildrenRender) {
+      return false
+    }
     return (
       <React.Fragment>
-        {this.props.children}
+        {children}
       </React.Fragment>
     )
   }
 }
 
 AuthProtectedBase.propTypes = {
+  forceChildrenRender: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { space } from 'styled-system'
+
 import theme from '../../theme'
 
 const size = props => {
@@ -79,7 +80,7 @@ export const Button = styled.button`
 
   &:hover {
     background-color: ${props =>
-      props.disabled ? null : props.theme.colors.darkBlue};
+    props.disabled ? null : props.theme.colors.darkBlue};
   }
 
   ${fullWidth} ${size} ${space} ${role};

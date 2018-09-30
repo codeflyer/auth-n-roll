@@ -4,22 +4,18 @@ import {
   getDefaultState as getUserDefaultState,
   getActions as getUserActions
 } from './user'
-
 import {
   getDefaultState as getFlowsDefaultState,
   getActions as getFlowsActions
 } from './flows'
-
 import {
   getDefaultState as getResendValidationCodeDefaultState,
   getActions as getResendValidationCodeActions
 } from './resendValidationCode'
-
 import {
   getDefaultState as getSignInDefaultState,
   getActions as getSignInActions
 } from './signIn'
-
 import labels from './labels'
 
 export class Store {

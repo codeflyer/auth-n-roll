@@ -59,4 +59,3 @@ export function getActions(store) {
 
 export const getCurrentFlowIndex = (state) => state.flows.index
 export const getCurrentFlowAction = (state) => state.flows.action
-

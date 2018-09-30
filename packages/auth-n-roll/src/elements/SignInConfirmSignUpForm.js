@@ -1,6 +1,7 @@
 import React from 'react'
 import { withFormik } from 'formik'
 import sprintf from 'sprintf'
+
 import { withAuthNRoll, FormContext } from '../contexts'
 import {
   AuthNRollFormField,
@@ -37,7 +38,7 @@ export const SignInConfirmSignUpWithFormik = withFormik({
     try {
       setSubmitting(true)
       const user = getUser(props.authNRoll)
-      const result = await props.authNRollActions.confirmSignUp(
+      await props.authNRollActions.confirmSignUp(
         user.username,
         values.code
       )
@@ -108,14 +109,14 @@ export const SignInConfirmSignUpForm = withAuthNRoll(
 )
 
 SignInConfirmSignUpForm.FieldValidationCode = ({ children }) => (
-  <AuthNRollFormField id="code">{children}</AuthNRollFormField>
+  <AuthNRollFormField id='code'>{children}</AuthNRollFormField>
 )
 SignInConfirmSignUpForm.ButtonSubmit = ({ children }) => (
   <AuthNRollFormButtonSubmit>{children}</AuthNRollFormButtonSubmit>
 )
 
 SignInConfirmSignUpForm.ButtonCancel = ({ children }) => (
-  <AuthNRollFormButtonOnClick actionFunctionNameOnState="onCancel">
+  <AuthNRollFormButtonOnClick actionFunctionNameOnState='onCancel'>
     {children}
   </AuthNRollFormButtonOnClick>
 )

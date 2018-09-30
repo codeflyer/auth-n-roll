@@ -1,6 +1,7 @@
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import { space, theme, propTypes } from 'styled-system'
 import PropTypes from 'prop-types'
+
 import defaultTheme from '../../theme'
 
 const borders = ({ color, theme }) => {

@@ -7,7 +7,7 @@ describe('Store', () => {
       expect.objectContaining({
         authService: expect.any(Object),
         debug: undefined,
-        flows: { index: null },
+        flows: { index: null, action: null },
         isLoggedIn: false,
         resendValidationCodeState: {
           error: null,

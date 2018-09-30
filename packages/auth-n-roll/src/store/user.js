@@ -112,7 +112,7 @@ async function signOut(props) {
   props.onSignOut && props.onSignOut()
 }
 
-export function getActions(store, props) {
+export function getActions(store, props = {}) {
   return {
     setUser: setUser.bind(store),
     setSignUpUser: setSignUpUser.bind(store),

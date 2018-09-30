@@ -1,11 +1,11 @@
-import { delay, getState } from './index'
-
 import {
   USER_NOT_FOUND_ERROR,
   GENERIC_ERROR,
   INVALID_PASSWORD_ERROR,
   VALIDATION_DATA_ERROR
 } from 'auth-n-roll'
+
+import { delay, getState } from './index'
 
 export const ChangePasswordForced = async (
   username,

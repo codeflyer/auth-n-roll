@@ -1,6 +1,7 @@
 import React from 'react'
 import { withFormik } from 'formik'
 import sprintf from 'sprintf'
+
 import { withAuthNRoll, FormContext } from '../contexts'
 import {
   AuthNRollFormField,
@@ -13,7 +14,7 @@ import {
   EXPIRED_VALIDATION_CODE_ERROR
 } from '../constants'
 import { SignUp } from '../pages/SignUp'
-import { getSignUpUser } from '../store/selectors'
+import { getSignUpUser, getUser } from '../store/selectors'
 
 export const SignUpConfirmWithFormik = withFormik({
   mapPropsToValues: props => ({ code: '' }),
@@ -30,7 +31,7 @@ export const SignUpConfirmWithFormik = withFormik({
     try {
       setSubmitting(true)
       const user = getSignUpUser(props.authNRoll)
-      const result = await props.authNRollActions.confirmSignUp(
+      await props.authNRollActions.confirmSignUp(
         user.username,
         values.code
       )
@@ -98,7 +99,7 @@ export const SignUpConfirmForm = withAuthNRoll(
 )
 
 SignUpConfirmForm.FieldValidationCode = ({ children }) => (
-  <AuthNRollFormField id="code">{children}</AuthNRollFormField>
+  <AuthNRollFormField id='code'>{children}</AuthNRollFormField>
 )
 
 SignUpConfirmForm.ButtonSubmit = ({ children }) => (
@@ -106,7 +107,7 @@ SignUpConfirmForm.ButtonSubmit = ({ children }) => (
 )
 
 SignUpConfirmForm.ButtonCancel = ({ children }) => (
-  <AuthNRollFormButtonOnClick actionFunctionNameOnState="onCancel">
+  <AuthNRollFormButtonOnClick actionFunctionNameOnState='onCancel'>
     {children}
   </AuthNRollFormButtonOnClick>
 )

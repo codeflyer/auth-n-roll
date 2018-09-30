@@ -9,13 +9,9 @@ import {
   AuthNRollFormButtonSubmit,
   AuthNRollFormButtonOnClick
 } from '../consumers'
-
 import { USERNAME_EXISTS_ERROR, INVALID_PASSWORD_ERROR } from '../constants'
-
 import { SignUp } from '../pages/SignUp'
-
 import { withAuthNRoll, FormContext } from '../contexts'
-import { SignUpConfirmForm } from './SignUpConfirmForm'
 
 export const SignUpCredentialsWithFormik = withFormik({
   mapPropsToValues: props => ({
@@ -121,15 +117,15 @@ export const SignUpCredentialForm = withAuthNRoll(
 )
 
 SignUpCredentialForm.FieldUsername = ({ children }) => (
-  <AuthNRollFormField id="email">{children}</AuthNRollFormField>
+  <AuthNRollFormField id='email'>{children}</AuthNRollFormField>
 )
 SignUpCredentialForm.FieldPassword = ({ children }) => (
-  <AuthNRollFormFieldPassword id="password">
+  <AuthNRollFormFieldPassword id='password'>
     {children}
   </AuthNRollFormFieldPassword>
 )
 SignUpCredentialForm.FieldPasswordConfirm = ({ children }) => (
-  <AuthNRollFormFieldPassword id="passwordConfirm">
+  <AuthNRollFormFieldPassword id='passwordConfirm'>
     {children}
   </AuthNRollFormFieldPassword>
 )
@@ -138,13 +134,13 @@ SignUpCredentialForm.ButtonSubmit = ({ children }) => (
 )
 
 SignUpCredentialForm.RequestSignIn = ({ children }) => (
-  <AuthNRollFormButtonOnClick actionFunctionNameOnState="onRequestSignIn">
+  <AuthNRollFormButtonOnClick actionFunctionNameOnState='onRequestSignIn'>
     {children}
   </AuthNRollFormButtonOnClick>
 )
 
 SignUpCredentialForm.ButtonCancel = ({ children }) => (
-  <AuthNRollFormButtonOnClick actionFunctionNameOnState="onCancel">
+  <AuthNRollFormButtonOnClick actionFunctionNameOnState='onCancel'>
     {children}
   </AuthNRollFormButtonOnClick>
 )

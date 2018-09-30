@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { space, color, propTypes } from 'styled-system'
 import cleanElement from 'clean-element'
-import icons from './icons.json'
+
 import theme from '../../theme'
+
+import icons from './icons.json'
 
 // Should be removed eventually after v1.0.0
 const aliases = {
@@ -51,7 +53,7 @@ const Base = ({ name, size, legacy, ...props }) => {
       viewBox={icon.viewBox}
       width={size}
       height={size}
-      fill="currentcolor"
+      fill='currentcolor'
     >
       <path d={icon.path}/>
     </CleanSvg>
@@ -81,10 +83,10 @@ const allKeys = Object.keys({
 Icon.propTypes = {
   name: ({ name }) => {
     if (aliases[name] && !icons[name] && !icons.legacy[name]) {
-      console.warn(
+      console.warn( // eslint-disable-line
         `Using '${name}' as an Icon name has been deprecated. Use '${
           aliases[name]
-          }' instead.`
+        }' instead.`
       )
     }
 

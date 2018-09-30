@@ -26,7 +26,7 @@ export const ChangePasswordForced = async (
         ClientId: stack.UserPoolClientId,
         ChallengeResponses: {
           NEW_PASSWORD: newPassword,
-          USERNAME: username,
+          USERNAME: username
         },
         Session: session
       })

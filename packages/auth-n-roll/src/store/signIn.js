@@ -1,4 +1,4 @@
-import { getDefaultState as getFlowsDefaultState, getFlowsDefaultSignInState } from './flows'
+import { getFlowsDefaultSignInState } from './flows'
 import { getDefaultState as getUserDefaultState } from './user'
 
 export function getDefaultState() {

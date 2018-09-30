@@ -23,7 +23,7 @@ const storeState = () => {
 }
 
 const restoreState = () => {
-  let stored = window.localStorage.getItem(STORAGE_KEY)
+  const stored = window.localStorage.getItem(STORAGE_KEY)
   if (stored) {
     try {
       state = JSON.parse(stored)
@@ -49,7 +49,7 @@ export const ServiceInMemory = () => {
 
   return {
     signOut: () => {
-      console.log('In memory signout')
+      console.log('In memory signout') // eslint-disable-line
     },
     signUp: SignUp,
     signIn: SignIn,

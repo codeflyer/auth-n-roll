@@ -1,5 +1,6 @@
 import React from 'react'
 import { AuthProtected } from 'auth-n-roll'
+
 import MainTemplate from '../../templates/Main'
 
 const AboutPage = () => (

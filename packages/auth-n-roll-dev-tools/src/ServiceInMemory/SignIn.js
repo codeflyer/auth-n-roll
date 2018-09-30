@@ -1,4 +1,3 @@
-import { delay, getState } from './index'
 import {
   USER_NOT_FOUND_ERROR,
   NOT_AUTHORIZED_ERROR,
@@ -6,6 +5,8 @@ import {
   FORCE_CHANGE_PASSWORD_CHALLENGE,
   SOFTWARE_TOKEN_MFA_CHALLENGE
 } from 'auth-n-roll'
+
+import { delay, getState } from './index'
 
 export const SignIn = async (username, password) => {
   await delay(1000)

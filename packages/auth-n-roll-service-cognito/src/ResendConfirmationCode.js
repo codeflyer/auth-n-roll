@@ -1,4 +1,4 @@
-import { GENERIC_ERROR } from 'auth-n-roll'
+import { GENERIC_ERROR, VALIDATION_DATA_ERROR } from 'auth-n-roll'
 
 export const ResendConfirmationCode = async (cognito, stack, username) => {
   if (!username) {

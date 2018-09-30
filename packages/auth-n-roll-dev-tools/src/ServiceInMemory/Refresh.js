@@ -1,7 +1,8 @@
-import { delay, getState } from './index'
 import {
-  NOT_AUTHORIZED_ERROR,
+  NOT_AUTHORIZED_ERROR
 } from 'auth-n-roll'
+
+import { delay, getState } from './index'
 
 export const Refresh = async (refreshToken) => {
   await delay(1000)

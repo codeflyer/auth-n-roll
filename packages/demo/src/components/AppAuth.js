@@ -1,7 +1,5 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
-
 import { AuthNRollProvider } from 'auth-n-roll'
 import { SignInPage, SignUpPage } from 'auth-n-roll-components-material-ui'
 import { ServiceCognito } from 'auth-n-roll-service-cognito'

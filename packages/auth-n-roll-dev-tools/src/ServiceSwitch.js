@@ -1,7 +1,4 @@
 import React from 'react'
-
-import { setState, getState } from './ServiceInMemory'
-
 import {
   USER_NOT_FOUND_ERROR,
   NOT_AUTHORIZED_ERROR,
@@ -11,10 +8,11 @@ import {
   GENERIC_ERROR,
   VALIDATION_CODE_MISMATCH_ERROR,
   EXPIRED_VALIDATION_CODE_ERROR,
-  UNMANAGED_ERROR,
   INVALID_PASSWORD_ERROR,
   USERNAME_EXISTS_ERROR
 } from 'auth-n-roll'
+
+import { setState, getState } from './ServiceInMemory'
 
 const styleButton = {
   height: '30px',
@@ -67,135 +65,135 @@ export class ServiceSwitch extends React.Component {
           <div>SignIn</div>
           <div>
             <SwitchButton
-              name="signinResponse"
+              name='signinResponse'
               checkValue={RESPONSE_SUCCESS}
-              label="OK"
+              label='OK'
               update={this.handleUpdate}
             />
             <SwitchButton
-              name="signinResponse"
+              name='signinResponse'
               checkValue={FORCE_CHANGE_PASSWORD_CHALLENGE}
-              label="Change PWD"
+              label='Change PWD'
               update={this.handleUpdate}
             />
             <SwitchButton
-              name="signinResponse"
+              name='signinResponse'
               checkValue={USER_NOT_FOUND_ERROR}
-              label="Not Found"
+              label='Not Found'
               update={this.handleUpdate}
             />
             <SwitchButton
-              name="signinResponse"
+              name='signinResponse'
               checkValue={NOT_AUTHORIZED_ERROR}
-              label="Not Auth"
+              label='Not Auth'
               update={this.handleUpdate}
             />
             <SwitchButton
-              name="signinResponse"
+              name='signinResponse'
               checkValue={USER_NOT_CONFIRMED_ERROR}
-              label="Not Confirmed"
+              label='Not Confirmed'
               update={this.handleUpdate}
             />
           </div>
           <div>Confirm Sign UP</div>
           <div>
             <SwitchButton
-              name="confirmSignUpResponse"
+              name='confirmSignUpResponse'
               checkValue={RESPONSE_SUCCESS}
-              label="Success"
+              label='Success'
               update={this.handleUpdate}
             />
             <SwitchButton
-              name="confirmSignUpResponse"
+              name='confirmSignUpResponse'
               checkValue={EXPIRED_VALIDATION_CODE_ERROR}
-              label="Code Expired"
+              label='Code Expired'
               update={this.handleUpdate}
             />
             <SwitchButton
-              name="confirmSignUpResponse"
+              name='confirmSignUpResponse'
               checkValue={USER_NOT_FOUND_ERROR}
-              label="User not found"
+              label='User not found'
               update={this.handleUpdate}
             />
             <SwitchButton
-              name="confirmSignUpResponse"
+              name='confirmSignUpResponse'
               checkValue={VALIDATION_CODE_MISMATCH_ERROR}
-              label="Code mismatch"
+              label='Code mismatch'
               update={this.handleUpdate}
             />
             <SwitchButton
-              name="confirmSignUpResponse"
+              name='confirmSignUpResponse'
               checkValue={GENERIC_ERROR}
-              label="Error"
+              label='Error'
               update={this.handleUpdate}
             />
           </div>
           <div>Resend Code</div>
           <div>
             <SwitchButton
-              name="resendValidationCodeResponse"
+              name='resendValidationCodeResponse'
               checkValue={RESPONSE_SUCCESS}
-              label="Success"
+              label='Success'
               update={this.handleUpdate}
             />
             <SwitchButton
-              name="resendValidationCodeResponse"
+              name='resendValidationCodeResponse'
               checkValue={GENERIC_ERROR}
-              label="Error"
+              label='Error'
               update={this.handleUpdate}
             />
           </div>
           <div>Force NEW PWD</div>
           <div>
             <SwitchButton
-              name="changePasswordForced"
+              name='changePasswordForced'
               checkValue={''}
-              label="Success"
+              label='Success'
               update={this.handleUpdate}
             />
             <SwitchButton
-              name="changePasswordForced"
+              name='changePasswordForced'
               checkValue={USER_NOT_FOUND_ERROR}
-              label="User not found"
+              label='User not found'
               update={this.handleUpdate}
             />
             <SwitchButton
-              name="changePasswordForced"
+              name='changePasswordForced'
               checkValue={INVALID_PASSWORD_ERROR}
-              label="Invalid password"
+              label='Invalid password'
               update={this.handleUpdate}
             />
             <SwitchButton
-              name="changePasswordForced"
+              name='changePasswordForced'
               checkValue={GENERIC_ERROR}
-              label="Error on change"
+              label='Error on change'
               update={this.handleUpdate}
             />
           </div>
           <div>SignUP</div>
           <div>
             <SwitchButton
-              name="signupResponse"
+              name='signupResponse'
               checkValue={''}
-              label="Success"
+              label='Success'
               update={this.handleUpdate}
             />
             <SwitchButton
-              name="signupResponse"
+              name='signupResponse'
               checkValue={USERNAME_EXISTS_ERROR}
-              label="User name exists"
+              label='User name exists'
               update={this.handleUpdate}
             />
             <SwitchButton
-              name="signupResponse"
+              name='signupResponse'
               checkValue={INVALID_PASSWORD_ERROR}
-              label="Invalid password"
+              label='Invalid password'
               update={this.handleUpdate}
             />
             <SwitchButton
-              name="signupResponse"
+              name='signupResponse'
               checkValue={GENERIC_ERROR}
-              label="Error on change"
+              label='Error on change'
               update={this.handleUpdate}
             />
           </div>

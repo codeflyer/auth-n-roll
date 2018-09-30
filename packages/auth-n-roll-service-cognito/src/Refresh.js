@@ -22,14 +22,14 @@ export const Refresh = async (cognito, stack, refreshToken) => {
     return {
       authData: Object.assign({}, result.AuthenticationResult, {
         Expires: Math.floor(Date.now() / 1000) + result.AuthenticationResult.ExpiresIn,
-        RefreshToken:refreshToken
+        RefreshToken: refreshToken
       }),
       challenge: result.ChallengeName ? result : null
     }
   } catch (err) {
     switch (err.code) {
       default:
-        throw { code: err.code, message: err.message, user: { username }, sourceError: err }
+        throw { code: err.code, message: err.message, sourceError: err }
     }
   }
 }

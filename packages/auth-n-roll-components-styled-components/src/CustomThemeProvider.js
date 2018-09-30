@@ -1,5 +1,4 @@
 import React from 'react'
-
 import styled, { ThemeProvider, injectGlobal } from 'styled-components'
 
 import theme from './theme'

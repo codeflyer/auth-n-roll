@@ -1,6 +1,7 @@
 import React from 'react'
-import { TextField } from '../atoms/TextField'
 import InputAdornment from '@material-ui/core/InputAdornment'
+
+import { TextField } from '../atoms/TextField'
 
 export const InputField = props => {
   const {
@@ -18,7 +19,7 @@ export const InputField = props => {
   if (IconComponent) {
     inputProps = {
       startAdornment: (
-        <InputAdornment position="start">
+        <InputAdornment position='start'>
           <IconComponent />
         </InputAdornment>
       )

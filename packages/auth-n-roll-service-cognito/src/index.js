@@ -1,7 +1,3 @@
-const AWS = require('aws-sdk/lib/core.js')
-require('aws-sdk/lib/credentials/cognito_identity_credentials.js')
-const CognitoIdentityServiceProvider = require('aws-sdk/clients/cognitoidentityserviceprovider')
-
 import { SignOut } from './SignOut'
 import { SignUp } from './SignUp'
 import { SignIn } from './SignIn'
@@ -9,6 +5,10 @@ import { Refresh } from './Refresh'
 import { ConfirmSignUp } from './ConfirmSignUp'
 import { ResendConfirmationCode } from './ResendConfirmationCode'
 import { ChangePasswordForced } from './ChangePasswordForced'
+
+const AWS = require('aws-sdk/lib/core.js')
+require('aws-sdk/lib/credentials/cognito_identity_credentials.js')
+const CognitoIdentityServiceProvider = require('aws-sdk/clients/cognitoidentityserviceprovider')
 
 export const ServiceCognito = stack => {
   const configData = {

@@ -5,11 +5,11 @@
   "main": "dist/index.js",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Warning: no test specified in auth-n-roll-components-styled-components\" && exit 0",
     "storybook": "start-storybook -p 6006 -c .storybook",
     "clean": "rm -rf dist",
-    "build": "babel --config-file ../../.babelrc -d dist src --copy-files",
-    "build:watch": "babel --config-file ../../.babelrc -d dist --watch src --copy-files",
+    "build": "babel -d dist src --ignore '**/*.test.js' --ignore '**/*.story.js' --copy-files",
+    "build:watch": "babel --watch-d dist src --ignore '**/*.test.js' --ignore '**/*.story.js' --copy-files",
     "prepublish": "npm run build"
   },
   "keywords": [],
@@ -19,18 +19,22 @@
     "auth-n-roll": "^0.1.4",
     "auth-n-roll-dev-tools": "^0.1.4",
     "clean-element": "^1.0.0",
-    "prop-types": "^15.6.1",
-    "react": "^16.4.0",
-    "styled-components": "^3.3.2",
-    "styled-system": "^2.2.5"
+    "prop-types": "^15.6.2",
+    "react": "^16.4.2",
+    "styled-components": "^3.4.5",
+    "styled-system": "^3.0.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.49",
-    "@babel/core": "^7.0.0-beta.48",
-    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.49",
-    "@babel/preset-env": "^7.0.0-beta.48",
-    "@babel/preset-react": "^7.0.0-beta.48",
+    "@babel/cli": "^7.0.0-rc.3",
+    "@babel/core": "^7.0.0-rc.3",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-rc.3",
+    "@babel/preset-env": "^7.0.0-rc.3",
+    "@babel/preset-react": "^7.0.0-rc.3",
     "babel-core": "^7.0.0-bridge.0",
-    "jest": "^23.1.0"
+    "babel-eslint": "^8.2.6",
+    "babel-loader": "^8.0.0-beta.3",
+    "jest": "^23.5.0",
+    "@storybook/addon-actions": "^4.0.0-alpha.16",
+    "@storybook/react": "^4.0.0-alpha.16"
   }
 }

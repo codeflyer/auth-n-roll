@@ -13,7 +13,6 @@ const styles = {
     padding: '5px',
     height: '30px',
     fontSize: '13px'
-
   }
 }
 
@@ -21,7 +20,10 @@ export const SwitchChangePanelBar = props => (
   <div style={styles.wrapper}>
     <div>
       {props.indexList.map(index => (
-        <button onClick={() => props.onClick(index)} style={Object.assign({}, styles.button, {fontWeight: index === props.currentIndex ? 'bold' : 'normal'})}>
+        <button
+          onClick={() => props.onClick(index)}
+          style={Object.assign({}, styles.button, { fontWeight: index === props.currentIndex ? 'bold' : 'normal' })}
+        >
           {index}
         </button>
       ))}

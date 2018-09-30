@@ -1,19 +1,18 @@
 import React from 'react'
-
 import { SignInChangePasswordForm } from 'auth-n-roll'
 
-import { Card, Box, Button, Heading, Text, Flex } from '../atoms/index'
+import { Card, Box, Button, Heading, Text } from '../atoms/index'
 import { InputField } from '../molecules/InputField'
 
 export const SignInChangePassword = () => {
   return (
     <Card
-      boxShadowSize="xl"
+      boxShadowSize='xl'
       borderWidth={1}
       borderRadius={6}
       p={2}
       m={0}
-      bg="white"
+      bg='white'
     >
       <SignInChangePasswordForm>
         <Heading.h3>Change password</Heading.h3>
@@ -23,18 +22,18 @@ export const SignInChangePassword = () => {
           <Box mb={3}>
             <SignInChangePasswordForm.FieldPassword>
               <InputField
-                label="Password"
-                iconName="lock"
-                placeholder="Place your password"
+                label='Password'
+                iconName='lock'
+                placeholder='Place your password'
               />
             </SignInChangePasswordForm.FieldPassword>
           </Box>
           <Box mb={3}>
             <SignInChangePasswordForm.FieldPasswordConfirm>
               <InputField
-                label="Password Confirm"
-                iconName="lock"
-                placeholder="Verify your password"
+                label='Password Confirm'
+                iconName='lock'
+                placeholder='Verify your password'
               />
             </SignInChangePasswordForm.FieldPasswordConfirm>
           </Box>

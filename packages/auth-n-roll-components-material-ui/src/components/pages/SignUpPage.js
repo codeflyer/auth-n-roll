@@ -1,10 +1,10 @@
 import React from 'react'
-
 import { SignUp } from 'auth-n-roll'
+import { withStyles } from '@material-ui/core/styles/index'
+
 import { SignUpCredentials } from '../organisms/SignUpCredentials'
 import { SignUpConfirm } from '../organisms/SignUpConfirm'
 import { SignUpMessageAndLogin } from '../organisms/SignUpMessageAndLogin'
-import { withStyles } from '@material-ui/core/styles/index'
 
 const styles = theme => ({
   root: {

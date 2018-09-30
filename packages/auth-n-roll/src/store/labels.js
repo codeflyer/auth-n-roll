@@ -1,6 +1,3 @@
-import { getUser } from './selectors'
-import { INVALID_PASSWORD_ERROR } from '../index'
-
 const _labels = {
   SIGNIN_CONFIRMATION_SUCCESS:
     'The user %(user.username)s was correctly verified.',
@@ -15,7 +12,7 @@ const _labels = {
   SIGNUP_VALIDATION_DATA_ERROR: 'Username and password required',
   SIGNUP_USERNAME_EXISTS_ERROR: 'Username exists',
   SIGNUP_NOT_AUTHORIZED_ERROR: 'Incorrect username or password.',
-  SIGNUP_INVALID_PASSWORD_ERROR: 'The password is incorrect',
+  SIGNUP_INVALID_PASSWORD_ERROR: 'The password is incorrect'
 }
 
 const labels = new Proxy(_labels, {

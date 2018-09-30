@@ -1,8 +1,10 @@
 import styled from 'styled-components'
-import { Box } from './Box'
-import theme from '../../theme'
 import PropTypes from 'prop-types'
 import { borderRadius, propTypes } from 'styled-system'
+
+import theme from '../../theme'
+
+import { Box } from './Box'
 
 const boxShadow = props => {
   const boxShadows = {
@@ -25,7 +27,7 @@ const boxShadow = props => {
 const boxBorder = props => ({
   border: `${props.borderWidth}px solid ${
     props.theme.colors[props.borderColor]
-    }`
+  }`
 })
 
 export const Card = styled(Box)`

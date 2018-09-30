@@ -1,14 +1,12 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-
 import { AuthNRollProvider, AuthProtected } from 'auth-n-roll'
-
 import { ServiceInMemory, ServiceSwitch } from 'auth-n-roll-dev-tools'
-import stackData from '../../../data/stack'
-
 import { ServiceCognito } from 'auth-n-roll-service-cognito'
 import { SignInPage, SignUpPage } from 'auth-n-roll-components-material-ui'
+
+import stackData from '../../../data/stack'
 
 const styles = {
   wrapper: { width: '300px' }

@@ -7,10 +7,9 @@ import {
   RESEND_VALIDATION_CODE_STATE_SENDING_ERROR,
   RESEND_VALIDATION_CODE_STATE_SENDING_SUCCESS
 } from '../constants'
+import { getResendValidationCodeSendingState, getResendValidationCodeSendingError } from '../store/selectors'
 
-import { getResendValidationCodeSendingState, getUser, getResendValidationCodeSendingError } from '../store/selectors'
-
-export const SignInResendValidationCode = ({children})=> <React.Fragment>{children}</React.Fragment>
+export const SignInResendValidationCode = ({children}) => <React.Fragment>{children}</React.Fragment>
 
 SignInResendValidationCode.ErrorMessage = withAuthNRoll(({ authNRoll }) => {
   return (

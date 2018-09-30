@@ -18,8 +18,8 @@ export default function createComponent(MaterialUIComponent, mapProps) {
         ...mapProps(this.props),
         ref: !isStateLess(MaterialUIComponent)
           ? el => {
-              this.component = el
-            }
+            this.component = el
+          }
           : null
       })
     }

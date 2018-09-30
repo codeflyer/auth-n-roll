@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { Box } from '../atoms/Box'
 import { InputField as InputFieldStyled} from '../atoms/InputField'
 import { Icon } from '../atoms/Icon'
@@ -13,7 +14,7 @@ export const InputField = props => {
         <Icon name={iconName} size={22}/>
         <Input
           id={id}
-          autoComplete="off"
+          autoComplete='off'
           color={authForm.touched[id] && authForm.errors[id] ? 'red' : null}
           placeholder={placeholder}
           label={label}
@@ -24,9 +25,9 @@ export const InputField = props => {
         />
       </InputFieldStyled>
       {authForm.touched[id] && authForm.errors[id] && (
-        <Text color="red" fontSize={1} mt={1}>
-            {authForm.errors[id]}
-          </Text>
+        <Text color='red' fontSize={1} mt={1}>
+          {authForm.errors[id]}
+        </Text>
       )}
     </Box>
   )

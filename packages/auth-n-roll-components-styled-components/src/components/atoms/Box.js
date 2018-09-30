@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { space, width, color, responsiveStyle } from 'styled-system'
+
 import theme from '../../theme'
 
 const align = responsiveStyle('text-align', 'align')

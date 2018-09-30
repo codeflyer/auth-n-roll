@@ -1,5 +1,3 @@
-import { delay, getState } from './index'
-
 import {
   VALIDATION_DATA_ERROR,
   USER_NOT_FOUND_ERROR,
@@ -7,6 +5,8 @@ import {
   EXPIRED_VALIDATION_CODE_ERROR,
   GENERIC_ERROR
 } from 'auth-n-roll'
+
+import { delay, getState } from './index'
 
 export const ConfirmSignUp = async (username, confirmationCode) => {
   if (!confirmationCode || !username) {

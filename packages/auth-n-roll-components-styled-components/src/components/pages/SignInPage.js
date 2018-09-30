@@ -1,8 +1,8 @@
 import React from 'react'
-
 import styled from 'styled-components'
-import theme from '../../theme'
 import { SignIn } from 'auth-n-roll'
+
+import theme from '../../theme'
 import { SignInCredentials } from '../organisms/SignInCredentials'
 import { SignInChangePassword } from '../organisms/SignInChangePassword'
 import { SignInConfirmSignUp } from '../organisms/SignInConfirmSignUp'

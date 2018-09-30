@@ -1,10 +1,12 @@
 import get from 'lodash/get'
+
 import {
   RESEND_VALIDATION_CODE_STATE_NOT_REQUESTED,
   RESEND_VALIDATION_CODE_STATE_SENDING,
   RESEND_VALIDATION_CODE_STATE_SENDING_ERROR,
   RESEND_VALIDATION_CODE_STATE_SENDING_SUCCESS
 } from '../constants'
+
 import { getAuthService, getUser, getSignUpUser } from './selectors'
 
 export function getDefaultState() {

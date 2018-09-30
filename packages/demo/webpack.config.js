@@ -1,5 +1,6 @@
-const { EnvironmentPlugin, DefinePlugin } = require('webpack')
 const { resolve } = require('path')
+
+const { EnvironmentPlugin, DefinePlugin } = require('webpack')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
@@ -47,12 +48,12 @@ module.exports = function(environment) {
     mode: environment === 'production' ? 'production' : 'development',
     plugins,
     resolve: {
-      extensions: ['.js', '.jsx']
+      extensions: ['.js']
     },
     module: {
       rules: [
         {
-          test: /\.jsx?$/,
+          test: /\.js?$/,
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
@@ -61,10 +62,6 @@ module.exports = function(environment) {
               plugins: ['@babel/plugin-proposal-object-rest-spread']
             }
           }
-        },
-        {
-          test: /\.md$/,
-          use: 'raw-loader'
         }
       ]
     },

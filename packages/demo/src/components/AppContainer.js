@@ -7,6 +7,7 @@ import { ConnectedRouter } from 'react-router-redux'
 import logger from '../adapters/logger'
 import { appInit } from '../store/app/actions'
 import { configureStore } from '../store'
+
 import AppAuth from './AppAuth'
 
 const history = createHistory({ basename: '/' })

@@ -1,6 +1,7 @@
 import Immutable from 'seamless-immutable'
 import { handleActions } from 'redux-actions'
-import { appInit, appSignIn, appSignOut, userSignIn } from './actions'
+
+import { appInit, appSignIn, appSignOut } from './actions'
 
 export const initialState = Immutable({
   isOnInit: false,

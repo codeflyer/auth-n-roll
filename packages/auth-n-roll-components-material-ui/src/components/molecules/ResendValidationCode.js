@@ -1,7 +1,5 @@
 import React from 'react'
-
 import { SignInResendValidationCode, Labels } from 'auth-n-roll'
-
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
@@ -16,31 +14,30 @@ const styles = theme => ({
 export const ResendValidationCodeBase = ({ classes, signUp }) => {
   const UsernameLabel = signUp ? Labels.SignUpUsername : Labels.Username
 
-
   return (
     <SignInResendValidationCode>
       <Grid container className={classes.root} spacing={16}>
         <Grid item xs={12}>
           <SignInResendValidationCode.ResendButton signUp>
-            <Button variant="flat" color="primary" size="small">
+            <Button variant='flat' color='primary' size='small'>
               Resend the verification code
             </Button>
           </SignInResendValidationCode.ResendButton>
         </Grid>
         <Grid item xs={12}>
           <SignInResendValidationCode.MessageSending>
-            <Typography component="p">
+            <Typography component='p'>
               ...sending to <UsernameLabel />
             </Typography>
           </SignInResendValidationCode.MessageSending>
           <SignInResendValidationCode.MessageSendingSuccess>
-            <Typography component="p">
+            <Typography component='p'>
               ...sent to <UsernameLabel />
             </Typography>
           </SignInResendValidationCode.MessageSendingSuccess>
 
           <SignInResendValidationCode.MessageSendingError>
-            <Typography component="p">
+            <Typography component='p'>
               <SignInResendValidationCode.ErrorMessage />
             </Typography>
           </SignInResendValidationCode.MessageSendingError>

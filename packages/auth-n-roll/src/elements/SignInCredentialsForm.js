@@ -9,11 +9,8 @@ import {
   AuthNRollFormButtonSubmit,
   AuthNRollFormButtonOnClick
 } from '../consumers'
-
 import { USER_NOT_CONFIRMED_ERROR } from '../constants'
-
 import { SignIn } from '../pages/SignIn'
-
 import { withAuthNRoll, FormContext } from '../contexts'
 
 export const SignInCredentialsWithFormik = withFormik({
@@ -65,7 +62,7 @@ export const SignInCredentialsWithFormik = withFormik({
         props.authNRollActions.changeFlowIndex(SignIn.FLOW_STEP_CONFIRM_CODE)
         return
       }
-      setErrors({ email: sprintf(props.authNRoll.labels[e.message], { user: e.user } ) })
+      setErrors({ email: sprintf(props.authNRoll.labels[e.message], { user: e.user }) })
     }
   }
 })
@@ -102,16 +99,16 @@ export const SignInCredentialForm = withAuthNRoll(
 )
 
 SignInCredentialForm.FieldUsername = ({ children }) => (
-  <AuthNRollFormField id="email">{children}</AuthNRollFormField>
+  <AuthNRollFormField id='email'>{children}</AuthNRollFormField>
 )
 SignInCredentialForm.FieldPassword = ({ children }) => (
-  <AuthNRollFormFieldPassword id="password">
+  <AuthNRollFormFieldPassword id='password'>
     {children}
   </AuthNRollFormFieldPassword>
 )
 
 SignInCredentialForm.RequestSignUp = ({ children }) => (
-  <AuthNRollFormButtonOnClick actionFunctionNameOnState="onRequestSignUp">
+  <AuthNRollFormButtonOnClick actionFunctionNameOnState='onRequestSignUp'>
     {children}
   </AuthNRollFormButtonOnClick>
 )
@@ -121,7 +118,7 @@ SignInCredentialForm.ButtonSubmit = ({ children }) => (
 )
 
 SignInCredentialForm.ButtonCancel = ({ children }) => (
-  <AuthNRollFormButtonOnClick actionFunctionNameOnState="onCancel">
+  <AuthNRollFormButtonOnClick actionFunctionNameOnState='onCancel'>
     {children}
   </AuthNRollFormButtonOnClick>
 )

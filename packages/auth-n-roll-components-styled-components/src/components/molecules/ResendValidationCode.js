@@ -1,7 +1,7 @@
 import React from 'react'
-
-import { Button, Box, Flex } from '../atoms'
 import { SignInResendValidationCode, Labels } from 'auth-n-roll'
+
+import { Button, Box } from '../atoms'
 
 export const ResendValidationCode = () => {
   return (
@@ -9,7 +9,7 @@ export const ResendValidationCode = () => {
       <SignInResendValidationCode>
         <Box>
           <SignInResendValidationCode.ResendButton>
-            <Button tertiary size="small">
+            <Button tertiary size='small'>
               Resend the verification code
             </Button>
           </SignInResendValidationCode.ResendButton>

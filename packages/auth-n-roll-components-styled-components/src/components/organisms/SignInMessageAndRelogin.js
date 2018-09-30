@@ -1,16 +1,17 @@
 import React from 'react'
 import { SignInMessageAndReloginCard } from 'auth-n-roll'
+
 import { Button, Card, Heading, Box } from '../atoms/index'
 
 export const SignInMessageAndRelogin = props => {
   return (
     <Card
-      boxShadowSize="xl"
+      boxShadowSize='xl'
       borderWidth={1}
       borderRadius={6}
       p={2}
       m={0}
-      bg="white"
+      bg='white'
     >
       <SignInMessageAndReloginCard>
         <Heading.h3>

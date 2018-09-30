@@ -1,8 +1,5 @@
 import React from 'react'
-
 import Button from '@material-ui/core/Button'
-import Menu from '@material-ui/core/Menu'
-import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Avatar from '@material-ui/core/Avatar'
@@ -15,15 +12,9 @@ import Grow from '@material-ui/core/Grow'
 import Paper from '@material-ui/core/Paper'
 import Popper from '@material-ui/core/Popper'
 import AddIcon from '@material-ui/icons/Person'
-
-import Typography from '@material-ui/core/Typography'
-import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles'
 import {
-  withAuthNRoll,
-  isLoggedIn,
-  RequireSignInButton,
-  RequireSignUpButton
+  withAuthNRoll
 } from 'auth-n-roll'
 
 const styles = {
@@ -65,19 +56,17 @@ export class UserAppBarWidgetBase extends React.Component {
   }
 
   render() {
-    const { anchorEl } = this.state
-
     return (
       <div>
         <Button
           mini
-          color="secondary"
-          variant="fab"
+          color='secondary'
+          variant='fab'
           buttonRef={node => {
             this.anchorEl = node
           }}
-          aria-owns={open ? 'menu-list-grow' : null}
-          aria-haspopup="true"
+          aria-owns={this.state.open ? 'menu-list-grow' : null}
+          aria-haspopup='true'
           onClick={this.handleToggle}
         >
           <AddIcon />
@@ -87,12 +76,12 @@ export class UserAppBarWidgetBase extends React.Component {
           anchorEl={this.anchorEl}
           transition
           disablePortal
-          placement="bottom-end"
+          placement='bottom-end'
         >
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}
-              id="menu-list-grow"
+              id='menu-list-grow'
               style={{
                 transformOrigin:
                   placement === 'bottom' ? 'right top' : 'right bottom'
@@ -105,7 +94,7 @@ export class UserAppBarWidgetBase extends React.Component {
                       <Avatar>
                         <ImageIcon />
                       </Avatar>
-                      <ListItemText primary="Photos" secondary="Jan 9, 2014" />
+                      <ListItemText primary='Photos' secondary='Jan 9, 2014' />
                     </ListItem>
                     <Divider />
                     <MenuList>

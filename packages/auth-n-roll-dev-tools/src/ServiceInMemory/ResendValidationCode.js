@@ -1,8 +1,8 @@
-import { delay, getState } from './index'
-
 import {
   GENERIC_ERROR
 } from 'auth-n-roll'
+
+import { delay, getState } from './index'
 
 export const ResendValidationCode = async username => {
   await delay(500)

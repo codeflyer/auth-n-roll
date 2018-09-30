@@ -1,5 +1,6 @@
-import { Text } from './Text'
 import theme from '../../theme'
+
+import { Text } from './Text'
 
 export const Heading = Text.withComponent('h3')
 

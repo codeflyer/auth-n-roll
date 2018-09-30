@@ -1,16 +1,18 @@
-import { isLoggedIn, getUser, getChallenge } from '../../src/store/user'
+import { isLoggedIn, getUser } from '../../src/store/user'
 import { createStore } from '../helpers/storeMock'
 
 describe('Store/user', () => {
   let localStorageValue
+  let mockRefreshMock
   beforeEach(() => {
-    localStorageValue = null
+    localStorageValue = {}
     const localStorageMock = {
-      getItem: () => localStorageValue,
-      setItem: (key, val) => (localStorageValue = val),
-      clear: () => (localStorageValue = null)
+      getItem: (key) => localStorageValue[key],
+      setItem: (key, val) => (localStorageValue[key] = val),
+      clear: (key) => (localStorageValue[key] = null)
     }
-    global.localStorage = localStorageMock
+    mockRefreshMock = jest.fn()
+    global.window.localStorage = localStorageMock
   })
 
   test('Defaults', () => {
@@ -32,10 +34,20 @@ describe('Store/user', () => {
   })
 
   test('rehydrateUser', async () => {
-    const store = createStore()
+    const expires = Math.floor(Date.now() / 1000) + 100
+    const store = createStore({ authService: { refresh: mockRefreshMock } })
     window.localStorage.setItem(
       'auth-n-roll-user',
       JSON.stringify({ username: 'davide' })
+    )
+    window.localStorage.setItem(
+      'auth-n-roll-auth-data',
+      JSON.stringify({ Expires: expires, RefreshToken: 'sometoken' })
+    )
+    mockRefreshMock.mockReturnValueOnce(
+      Promise.resolve({
+        authData: { Expires: expires + 1000, RefreshToken: 'anothertoken' }
+      })
     )
     await store.actions.rehydrateUser()
     expect(getUser(store.state)).toEqual({ username: 'davide' })
@@ -50,15 +62,28 @@ describe('Store/user', () => {
   })
 
   test('storeUser', async () => {
+    const expires = Math.floor(Date.now() / 1000) + 100
     const store = createStore()
-    await store.actions.setLoggedInUser({ username: 'davide' })
-    expect(localStorageValue).toBe(JSON.stringify({ username: 'davide' }))
+    await store.actions.setLoggedInUser(
+      { username: 'davide' },
+      { Expires: expires, RefreshToken: 'sometoken' }
+    )
+    expect(window.localStorage.getItem(`auth-n-roll-user`)).toBe(
+      JSON.stringify({ username: 'davide' })
+    )
+    expect(window.localStorage.getItem(`auth-n-roll-auth-data`)).toBe(
+      JSON.stringify({ Expires: expires, RefreshToken: 'sometoken' })
+    )
   })
 
   test('without the localstorage should not crash', async () => {
+    const expires = Math.floor(Date.now() / 1000) + 100
     global.localStorage = null
     const store = createStore()
-    await store.actions.setLoggedInUser({ username: 'davide' })
+    await store.actions.setLoggedInUser(
+      { username: 'davide' },
+      { Expires: expires, RefreshToken: 'sometoken' }
+    )
     await store.actions.rehydrateUser()
   })
 })

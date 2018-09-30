@@ -1,13 +1,6 @@
 import 'whatwg-fetch'
-import {
-  NOT_AUTHORIZED_ERROR,
-  USER_NOT_CONFIRMED_ERROR,
-  USER_NOT_FOUND_ERROR,
-  VALIDATION_DATA_ERROR
-} from 'auth-n-roll'
 
 import { ServiceCognito } from '../src'
-
 import stack from '../../../data/stack'
 
 describe('SignIn', () => {
@@ -76,7 +69,7 @@ describe('SignIn', () => {
     const service = ServiceCognito(stack)
     expect.assertions(1)
     try {
-      const result = await service.signIn(
+      await service.signIn(
         'davide.fiorello@gmail.com',
         'testTEST1234'
       )
@@ -103,7 +96,7 @@ describe('SignIn', () => {
       expect(result.authData.TokenType).toBe('Bearer')
       expect(result.user).toEqual({ username: 'davide.fiorello@nearform.com' })
     } catch (e) {
-      console.log(e)
+      console.log(e) // eslint-disable-line
     }
   })
 })

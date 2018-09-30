@@ -1,11 +1,6 @@
 import 'whatwg-fetch'
-import {
-  RESPONSE_SUCCESS,
-  GENERIC_ERROR
-} from 'auth-n-roll'
 
 import { ServiceCognito } from '../src'
-
 import stack from '../../../data/stack'
 
 describe('ConfirmSignUp', () => {

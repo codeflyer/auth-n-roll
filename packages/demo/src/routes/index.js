@@ -1,8 +1,8 @@
+import { renderRoutes } from 'react-router-config'
+
 import NotFoundPage from '../components/pages/NotFound'
 import HomePage from '../components/pages/Home'
 import AboutPage from '../components/pages/About'
-
-import { renderRoutes } from 'react-router-config'
 
 export const routes = [
   {

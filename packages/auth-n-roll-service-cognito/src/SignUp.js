@@ -28,7 +28,6 @@ export const SignUp = async (cognito, stack, username, password) => {
 
     const result = await cognito.signUp(params).promise()
 
-    console.log(result)
     return result
   } catch (err) {
     switch (err.code) {

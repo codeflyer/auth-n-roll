@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const AWS = require('aws-sdk')
 
 const stack = require('../../../data/stack')
@@ -25,7 +26,6 @@ async function deleteUser(username) {
 
 async function createUserAdmin(username) {
   try {
-
     const user = await cognitoidentityserviceprovider
       .adminCreateUser({
         UserPoolId: stack.UserPoolId /* required */,
@@ -49,7 +49,6 @@ async function createUserAdmin(username) {
 
 async function signUp(username) {
   try {
-
     const user = await cognitoidentityserviceprovider
       .signUp({
         ClientId: stack.UserPoolClientId /* required */,

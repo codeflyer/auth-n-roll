@@ -6,8 +6,8 @@ module.exports = {
   coverageReporters: ['text', 'html'],
   testMatch: ['**/*.test.js', '**/*.test.jsx'],
   transformIgnorePatterns: [
-    "node_modules/(?!(auth\-n\-roll))"
-  ],
+    'node_modules/(?!(auth-n-roll))'
+  ]
 //  moduleNameMapper: {
 //    "auth-n-roll": "<rootDir>/../auth-n-roll"
 //  }

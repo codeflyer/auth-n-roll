@@ -6,8 +6,8 @@
   "scripts": {
     "test": "node test/start.js",
     "clean": "rm -rf dist",
-    "build": "babel --config-file ../../.babelrc -d dist src",
-    "build:watch": "babel --config-file ../../.babelrc -d dist --watch src",
+    "build": "babel -d dist src --ignore '**/*.test.js' --ignore '**/*.story.js' --copy-files",
+    "build:watch": "babel --watch-d dist src --ignore '**/*.test.js' --ignore '**/*.story.js' --copy-files",
     "prepublish": "npm run build"
   },
   "author": "Davide Fiorello <davide@codeflyer.com> (http://github.com/codeflyer/)",
@@ -16,12 +16,14 @@
     "auth-n-roll": "^0.1.4"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.49",
-    "@babel/core": "^7.0.0-beta.48",
-    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.49",
-    "@babel/preset-env": "^7.0.0-beta.48",
-    "@babel/preset-react": "^7.0.0-beta.48",
+    "@babel/cli": "^7.0.0-rc.3",
+    "@babel/core": "^7.0.0-rc.3",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-rc.3",
+    "@babel/preset-env": "^7.0.0-rc.3",
+    "@babel/preset-react": "^7.0.0-rc.3",
     "babel-core": "^7.0.0-bridge.0",
-    "jest": "^23.1.0"
+    "babel-eslint": "^8.2.6",
+    "babel-loader": "^8.0.0-beta.3",
+    "jest": "^23.5.0"
   }
 }

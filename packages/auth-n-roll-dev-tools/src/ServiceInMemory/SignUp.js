@@ -1,9 +1,10 @@
-import { delay, getState } from './index'
 import {
   USERNAME_EXISTS_ERROR,
   NOT_AUTHORIZED_ERROR,
   INVALID_PASSWORD_ERROR
 } from 'auth-n-roll'
+
+import { delay, getState } from './index'
 
 export const SignUp = async (username, password) => {
   await delay(1000)

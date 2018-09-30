@@ -1,15 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import get from 'lodash/get'
 
 import { AuthNRollContext } from '../contexts'
 import { DebugPanel } from '../components/DebugPanel'
-
 import { Store } from '../store'
 import { FLOW_ACTIONS_SIGNIN, FLOW_ACTIONS_SIGNUP } from '../constants'
 import { isLoggedIn, getCurrentFlowAction } from '../store/selectors'
-
-const LOGGED_USER_KEY = 'logged_user_key'
 
 export class AuthNRollProvider extends React.Component {
   constructor(props) {
@@ -22,10 +18,11 @@ export class AuthNRollProvider extends React.Component {
       cookiePrefix: this.props.cookiePrefix,
       props: this.props
     })
+
     this.state = {
       state: this.store.getDefaultState(),
       actions: {
-        ...this.store.getActions(this.props),
+        ...this.store.getActions(this.props)
       }
     }
 
@@ -38,7 +35,6 @@ export class AuthNRollProvider extends React.Component {
       this.state.actions.resetFlows()
       props.onSignUpCancel()
     }
-
   }
 
   getState() {
@@ -59,9 +55,9 @@ export class AuthNRollProvider extends React.Component {
     this.state.actions.rehydrateUser()
   }
 
-  componentDidUpdate() {
-    this.store.props = this.props
-  }
+  // componentDidUpdate() {
+  //   this.store.props = this.props
+  // }
 
   renderLoginProcess() {
     const SignInFlowComponent = this.props.signInFlowComponent
@@ -70,9 +66,8 @@ export class AuthNRollProvider extends React.Component {
 
   renderSignupProcess() {
     const SignUpFlowComponent = this.props.signUpFlowComponent
-    if(SignUpFlowComponent) {
-
-    return <SignUpFlowComponent />
+    if (SignUpFlowComponent) {
+      return <SignUpFlowComponent />
     } else {
       return <div>NE</div>
     }
