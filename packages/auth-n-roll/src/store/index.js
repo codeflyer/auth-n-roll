@@ -19,7 +19,7 @@ import {
 import createLabels from './labels'
 
 export class Store {
-  constructor({ getState, onStateUpdate, authService, debug, cookiePrefix, props }) {
+  constructor({ getState, onStateUpdate, authService, debug, cookiePrefix, props = {} }) {
     this.authService = authService
     this.getState = getState
     this.onStateUpdate = onStateUpdate

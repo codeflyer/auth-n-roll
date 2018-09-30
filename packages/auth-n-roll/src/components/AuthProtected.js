@@ -43,9 +43,9 @@ class AuthProtectedBase extends React.Component {
   }
 
   render() {
-    const {requireLogin, isLoggedIn} = this.state
+    const {isLoggedIn} = this.state
     const {forceChildrenRender, children} = this.props
-    if (requireLogin && !isLoggedIn && !forceChildrenRender) {
+    if (!isLoggedIn && !forceChildrenRender) {
       return false
     }
     return (
