@@ -1,6 +1,6 @@
 {
   "name": "auth-n-roll-components-material-ui",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -17,8 +17,8 @@
   "dependencies": {
     "@material-ui/core": "^3.1.1",
     "@material-ui/icons": "^3.0.1",
-    "auth-n-roll": "^0.1.9",
-    "auth-n-roll-dev-tools": "^0.1.9",
+    "auth-n-roll": "^0.1.10",
+    "auth-n-roll-dev-tools": "^0.1.10",
     "clean-element": "^1.0.2",
     "prop-types": "^15.6.2",
     "react": "^16.5.2"
@@ -34,6 +34,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
+    "babel-polyfill": "^6.26.0",
     "jest": "^23.6.0"
   }
 }
