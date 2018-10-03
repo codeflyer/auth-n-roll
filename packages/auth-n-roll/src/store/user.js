@@ -24,6 +24,19 @@ export function getDefaultState() {
 async function refresh(store, user, authData) {
   if (refreshFunc) clearTimeout(refreshFunc)
 
+  if(store.props.disableRefresh) {
+    store.updateState({
+      user,
+      signUpUser: null,
+      authData: authData,
+      isLoggedIn: true,
+      signIn: null,
+      isRehydrating: false
+    })
+    return
+  }
+
+
   try {
     const result = await authService.refresh(authData.RefreshToken)
     window.localStorage.setItem(

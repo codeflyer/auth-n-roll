@@ -32,6 +32,7 @@ class App extends React.Component {
         signUpFlowComponent={SignUpPage}
         disabledFeatures={[]}
         additionalFeatures={['sendUsername']}
+        disableRefresh
       >
         <AuthProtected
         >

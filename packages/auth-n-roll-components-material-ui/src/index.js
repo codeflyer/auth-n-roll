@@ -1,4 +1,4 @@
-import 'babel-polyfill'
+// import 'babel-polyfill'
 
 export { SignInCredentials } from './components/organisms/SignInCredentials'
 export { SignInChangePassword } from './components/organisms/SignInChangePassword'

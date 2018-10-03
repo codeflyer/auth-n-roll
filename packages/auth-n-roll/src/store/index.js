@@ -41,6 +41,7 @@ export class Store {
       labels: createLabels(this.props.translator),
 
       signInWith: this.props.signInWith || 'username',
+      disableRefresh: this.props.disableRefresh || false,
       disabledFeatures: this.props.disabledFeatures || [],
       additionalFeatures: this.props.additionalFeatures || [],
       resetPasswordFields: this.props.resetPasswordFields || ['username', 'email'],
