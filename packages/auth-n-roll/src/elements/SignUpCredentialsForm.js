@@ -56,10 +56,7 @@ export const SignUpCredentialsWithFormik = withFormik({
     }
   ) => {
     try {
-      const result = await props.authNRollActions.signUp(
-        values.email,
-        values.password
-      )
+      const result = await props.authNRollActions.signUp(values)
       setSubmitting(false)
 
       props.authNRollActions.setSignUpUser({ username: values.email })

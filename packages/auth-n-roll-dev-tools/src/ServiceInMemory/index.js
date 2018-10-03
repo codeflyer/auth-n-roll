@@ -6,9 +6,10 @@ import { SignIn } from './SignIn'
 import { SignUp } from './SignUp'
 import { ResetPassword } from './ResetPassword'
 import { Refresh } from './Refresh'
-import { ResendValidationCode } from './ResendValidationCode'
+import { ResendConfirmationCode } from './ResendValidationCode'
 import { ConfirmSignUp } from './ConfirmSignUp'
 import { ChangePasswordForced } from './ChangePasswordForced'
+import { SendUsername } from './SendUsername'
 
 export const delay = time => new Promise(resolve => setTimeout(resolve, time))
 
@@ -56,9 +57,10 @@ export const ServiceInMemory = () => {
     resetPassword: ResetPassword,
     signIn: SignIn,
     refresh: Refresh,
-    resendValidationCode: ResendValidationCode,
+    resendConfirmationCode: ResendConfirmationCode,
     confirmSignUp: ConfirmSignUp,
     changePasswordForced: ChangePasswordForced,
+    sendUsername: SendUsername,
     getLoggedUser
   }
 }

@@ -13,7 +13,7 @@ describe('Store/resendValidationCode', () => {
 
   test('resendValidationCode Success', async () => {
     const resendValidationCodeMockPromise = jest.fn()
-    const store = createStore({authService: { resendValidationCode: resendValidationCodeMockPromise }})
+    const store = createStore({authService: { resendValidationCodeService: resendValidationCodeMockPromise }})
 
     let done
     const promise = new Promise((resolve, reject) => {
@@ -30,7 +30,7 @@ describe('Store/resendValidationCode', () => {
 
   test('resendValidationCode Error', async () => {
     const resendValidationCodeMockPromise = jest.fn()
-    const store = createStore({authService: { resendValidationCode: resendValidationCodeMockPromise }})
+    const store = createStore({authService: { resendValidationCodeService: resendValidationCodeMockPromise }})
 
     let error
     const promise = new Promise((resolve, reject) => {

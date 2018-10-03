@@ -10,9 +10,7 @@ import {
   AuthNRollFormButtonOnClick
 } from '../consumers'
 import { SignIn } from '../pages/SignIn'
-import {
-  USER_NOT_FOUND_ERROR
-} from '../constants'
+import { USER_NOT_FOUND_ERROR } from '../constants'
 
 export const SignInChangePasswordWithFormik = withFormik({
   mapPropsToValues: props => ({
@@ -49,11 +47,11 @@ export const SignInChangePasswordWithFormik = withFormik({
   ) => {
     const user = getUser(props.authNRoll)
     try {
-      const result = await props.authNRollActions.changePasswordForced(
-        user.username,
-        values.password,
-        getChallenge(props.authNRoll).Session
-      )
+      const result = await props.authNRollActions.changePasswordForced({
+        username: user.username,
+        password: values.password,
+        session: getChallenge(props.authNRoll).Session
+      })
 
       props.authNRollActions.setLoggedInUser(result.user, result.authData)
     } catch (e) {
@@ -61,15 +59,16 @@ export const SignInChangePasswordWithFormik = withFormik({
       switch (e.code) {
         case USER_NOT_FOUND_ERROR:
           props.authNRollActions.setSignInMessage({
-            message: sprintf(
-              props.authNRoll.labels.USER_NOT_FOUND_ERROR,
-              { user }
-            ),
+            message: sprintf(props.authNRoll.labels.USER_NOT_FOUND_ERROR, {
+              user
+            }),
             type: 'error',
             from: 'change-password-forced'
           })
           props.authNRollActions.setUser(null)
-          props.authNRollActions.changeFlowIndex(SignIn.FLOW_STEP_MESSAGE_AND_RELOGIN)
+          props.authNRollActions.changeFlowIndex(
+            SignIn.FLOW_STEP_MESSAGE_AND_RELOGIN
+          )
           return
         default:
           setErrors({ password: e.message })

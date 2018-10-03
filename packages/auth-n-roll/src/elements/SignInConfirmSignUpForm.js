@@ -27,21 +27,14 @@ export const SignInConfirmSignUpWithFormik = withFormik({
     return errors
   },
   // Submission handler
-  handleSubmit: async (
-    values,
-    {
-      props,
-      setSubmitting,
-      setErrors
-    }
-  ) => {
+  handleSubmit: async (values, { props, setSubmitting, setErrors }) => {
     try {
       setSubmitting(true)
       const user = getUser(props.authNRoll)
-      await props.authNRollActions.confirmSignUp(
-        user.username,
-        values.code
-      )
+      await props.authNRollActions.confirmSignUp({
+        username: user.username,
+        confirmationCode: values.code
+      })
       setSubmitting(false)
 
       props.authNRollActions.setSignInMessage({
@@ -61,10 +54,9 @@ export const SignInConfirmSignUpWithFormik = withFormik({
         case USER_NOT_FOUND_ERROR:
           props.authNRollActions.setSignInMessage({
             code: USER_NOT_FOUND_ERROR,
-            message: sprintf(
-              props.authNRoll.labels.USER_NOT_FOUND_ERROR,
-              { user: getUser(props.authNRoll) }
-            ),
+            message: sprintf(props.authNRoll.labels.USER_NOT_FOUND_ERROR, {
+              user: getUser(props.authNRoll)
+            }),
             from: 'confirm-sign-up-fail'
           })
           props.authNRollActions.setUser(null)

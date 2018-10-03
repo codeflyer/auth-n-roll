@@ -31,10 +31,10 @@ export const SignUpConfirmWithFormik = withFormik({
     try {
       setSubmitting(true)
       const user = getSignUpUser(props.authNRoll)
-      await props.authNRollActions.confirmSignUp(
-        user.username,
-        values.code
-      )
+      await props.authNRollActions.confirmSignUp({
+        username: user.username,
+        confirmationCode: values.code
+      })
       setSubmitting(false)
 
       props.authNRollActions.setSignUpMessage({
@@ -52,10 +52,9 @@ export const SignUpConfirmWithFormik = withFormik({
         case USER_NOT_FOUND_ERROR:
           props.authNRollActions.setSignUpMessage({
             code: USER_NOT_FOUND_ERROR,
-            message: sprintf(
-              props.authNRoll.labels.USER_NOT_FOUND_ERROR,
-              { user: getUser(props.authNRoll) }
-            )
+            message: sprintf(props.authNRoll.labels.USER_NOT_FOUND_ERROR, {
+              user: getUser(props.authNRoll)
+            })
           })
           props.authNRollActions.setUser(null)
           props.authNRollActions.changeFlowIndex(

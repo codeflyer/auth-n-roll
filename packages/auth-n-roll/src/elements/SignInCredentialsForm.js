@@ -12,20 +12,30 @@ import {
 import { USER_NOT_CONFIRMED_ERROR } from '../constants'
 import { SignIn } from '../pages/SignIn'
 import { withAuthNRoll, FormContext } from '../contexts'
+import { signInWith } from '../store/selectors'
 
 export const SignInCredentialsWithFormik = withFormik({
   mapPropsToValues: props => ({
     email: get(props, 'initialValues.email', ''),
+    username: get(props, 'initialValues.username', ''),
     password: get(props, 'initialValues.password', '')
   }),
   validate: (values, props) => {
+    const signWithEmail = signInWith(props.authNRoll) === 'email'
+
     const errors = {}
-    if (!values.email) {
-      errors.email = props.authNRoll.labels.FIELD_REQUIRED
-    } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-    ) {
-      errors.email = props.authNRoll.labels.INVALID_EMAIL
+    if (signWithEmail) {
+      if (!values.email) {
+        errors.email = props.authNRoll.labels.FIELD_REQUIRED
+      } else if (
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+      ) {
+        errors.email = props.authNRoll.labels.INVALID_EMAIL
+      }
+    } else {
+      if (!values.username) {
+        errors.username = props.authNRoll.labels.FIELD_REQUIRED
+      }
     }
     return errors
   },
@@ -38,12 +48,11 @@ export const SignInCredentialsWithFormik = withFormik({
       setErrors /* setValues, setStatus, and other goodies */
     }
   ) => {
+    const signWithEmail = signInWith(props.authNRoll) === 'email'
+
     try {
       props.authNRollActions.setChallenge({})
-      const result = await props.authNRollActions.signIn(
-        values.email,
-        values.password
-      )
+      const result = await props.authNRollActions.signIn(values)
       setSubmitting(false)
       // The user created using the command line requires a NEW_PASSWORD
       if (get(result, 'challenge.ChallengeName') === 'NEW_PASSWORD_REQUIRED') {
@@ -62,7 +71,12 @@ export const SignInCredentialsWithFormik = withFormik({
         props.authNRollActions.changeFlowIndex(SignIn.FLOW_STEP_CONFIRM_CODE)
         return
       }
-      setErrors({ email: sprintf(props.authNRoll.labels[e.message], { user: e.user }) })
+      setErrors({
+        [signWithEmail ? 'email' : 'username']: sprintf(
+          props.authNRoll.labels[e.message],
+          { user: e.user }
+        )
+      })
     }
   }
 })
@@ -74,6 +88,7 @@ class SignInCredentialFormBase extends React.Component {
     this.handleCancel = this.handleCancel.bind(this)
     this.handleRequestSignUp = this.handleRequestSignUp.bind(this)
     this.handleRequestResetPassword = this.handleRequestResetPassword.bind(this)
+    this.handleRequestSendUsername = this.handleRequestSendUsername.bind(this)
   }
 
   handleCancel() {
@@ -88,13 +103,18 @@ class SignInCredentialFormBase extends React.Component {
     this.props.authNRollActions.changeFlowIndex(SignIn.FLOW_STEP_RESET_PASSWORD)
   }
 
+  handleRequestSendUsername() {
+    this.props.authNRollActions.changeFlowIndex(SignIn.FLOW_STEP_SEND_USERNAME)
+  }
+
   render() {
     return (
       <FormContext.Provider
         value={Object.assign({}, this.props, {
           onCancel: this.handleCancel,
           onRequestSignUp: this.handleRequestSignUp,
-          onRequestResetPassword: this.handleRequestResetPassword
+          onRequestResetPassword: this.handleRequestResetPassword,
+          onRequestSendUsername: this.handleRequestSendUsername
         })}
       >
         <form onSubmit={this.props.handleSubmit}>{this.props.children}</form>
@@ -108,6 +128,9 @@ export const SignInCredentialForm = withAuthNRoll(
 )
 
 SignInCredentialForm.FieldUsername = ({ children }) => (
+  <AuthNRollFormField id='username'>{children}</AuthNRollFormField>
+)
+SignInCredentialForm.FieldEmail = ({ children }) => (
   <AuthNRollFormField id='email'>{children}</AuthNRollFormField>
 )
 SignInCredentialForm.FieldPassword = ({ children }) => (
@@ -124,6 +147,12 @@ SignInCredentialForm.RequestSignUp = ({ children }) => (
 
 SignInCredentialForm.RequestResetPassword = ({ children }) => (
   <AuthNRollFormButtonOnClick actionFunctionNameOnState='onRequestResetPassword'>
+    {children}
+  </AuthNRollFormButtonOnClick>
+)
+
+SignInCredentialForm.RequestSendUsername = ({ children }) => (
+  <AuthNRollFormButtonOnClick actionFunctionNameOnState='onRequestSendUsername'>
     {children}
   </AuthNRollFormButtonOnClick>
 )

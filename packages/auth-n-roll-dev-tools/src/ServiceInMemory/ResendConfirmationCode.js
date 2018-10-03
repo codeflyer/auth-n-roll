@@ -4,7 +4,10 @@ import {
 
 import { delay, getState } from './index'
 
-export const ResendValidationCode = async ({username}) => {
+export const ResendConfirmationCode = async (options) => {
+  const {username} = options
+  console.log('ResendValidationCode: ', options)
+
   await delay(500)
   switch (getState('resendValidationCodeResponse')) {
     case GENERIC_ERROR:

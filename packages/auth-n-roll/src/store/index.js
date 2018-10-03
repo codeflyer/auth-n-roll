@@ -40,7 +40,10 @@ export class Store {
       debug: this.debug,
       labels: createLabels(this.props.translator),
 
+      signInWith: this.props.signInWith || 'username',
       disabledFeatures: this.props.disabledFeatures || [],
+      additionalFeatures: this.props.additionalFeatures || [],
+      resetPasswordFields: this.props.resetPasswordFields || ['username', 'email'],
 
       ...getUserDefaultState(),
 
@@ -59,8 +62,9 @@ export class Store {
       signUp,
       signIn,
       confirmSignUp,
-      resendConfirmationCode,
+      resendValidationCode,
       changePasswordForced,
+      sendUsername,
       refresh
     } = this.authService
 
@@ -75,8 +79,9 @@ export class Store {
       signUp,
       signIn,
       confirmSignUp,
-      resendConfirmationCode,
+      resendValidationCodeService: resendValidationCode,
       changePasswordForced,
+      sendUsername,
       refresh
     }
   }

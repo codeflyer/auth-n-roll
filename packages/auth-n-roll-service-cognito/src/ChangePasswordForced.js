@@ -8,9 +8,11 @@ import {
 export const ChangePasswordForced = async (
   cognito,
   stack,
-  username,
-  newPassword,
-  session
+  {
+    username,
+    newPassword,
+    session
+  }
 ) => {
   if (!newPassword || !username || !session) {
     throw {

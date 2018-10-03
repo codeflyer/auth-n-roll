@@ -6,7 +6,9 @@ import {
 
 import { delay, getState } from './index'
 
-export const SignUp = async (username, password) => {
+export const SignUp = async (options) => {
+  const {username, password} = options
+  console.log('SignUp: ', options)
   await delay(1000)
 
   switch (getState('signupResponse')) {

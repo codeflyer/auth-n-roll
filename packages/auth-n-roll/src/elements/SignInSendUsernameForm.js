@@ -10,31 +10,20 @@ import {
 } from '../consumers'
 import { withAuthNRoll, FormContext } from '../contexts'
 import { SignIn } from '../pages/SignIn'
-import { getResetPasswordFields } from '../store/resetPassword'
 
-export const SignInResetPasswordWithFormik = withFormik({
+export const SignInSendUsernameWithFormik = withFormik({
   mapPropsToValues: props => ({
-    email: get(props, 'initialValues.email', ''),
-    username: get(props, 'initialValues.username', '')
+    email: get(props, 'initialValues.email', '')
   }),
   validate: (values, props) => {
-    const passwordFields = getResetPasswordFields(props.authNRoll)
     const errors = {}
-    if (passwordFields.includes('email')) {
-      if (!values.email) {
-        errors.email = props.authNRoll.labels.FIELD_REQUIRED
-      } else if (
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-      ) {
-        errors.email = props.authNRoll.labels.INVALID_EMAIL
-      }
+    if (!values.email) {
+      errors.email = props.authNRoll.labels.FIELD_REQUIRED
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+    ) {
+      errors.email = props.authNRoll.labels.INVALID_EMAIL
     }
-    if (passwordFields.includes('username')) {
-      if (!values.username) {
-        errors.username = props.authNRoll.labels.FIELD_REQUIRED
-      }
-    }
-
     return errors
   },
   // Submission handler
@@ -47,15 +36,15 @@ export const SignInResetPasswordWithFormik = withFormik({
     }
   ) => {
     try {
-      await props.authNRollActions.resetPassword(values)
+      await props.authNRollActions.sendUsername(values)
       setSubmitting(false)
 
       props.authNRollActions.setSignInMessage({
-        code: 'RESET_PASSWORD_SENT_TO_USER',
-        message: sprintf(props.authNRoll.labels.RESET_PASSWORD_SENT_TO_USER, {
-          user: { username: values.email }
+        code: 'USERNAME_SENT_TO_EMAIL',
+        message: sprintf(props.authNRoll.labels.USERNAME_SENT_TO_EMAIL, {
+          user: { email: values.email }
         }),
-        from: 'reset-password-success'
+        from: 'send-username-success'
       })
       props.authNRollActions.setUser(null)
       props.authNRollActions.changeFlowIndex(
@@ -70,7 +59,7 @@ export const SignInResetPasswordWithFormik = withFormik({
   }
 })
 
-class SignInResetPasswordFormBase extends React.Component {
+class SignInSendUsernameFormBase extends React.Component {
   constructor(props) {
     super(props)
 
@@ -95,23 +84,19 @@ class SignInResetPasswordFormBase extends React.Component {
   }
 }
 
-export const SignInResetPasswordForm = withAuthNRoll(
-  SignInResetPasswordWithFormik(SignInResetPasswordFormBase)
+export const SignInSendUsernameForm = withAuthNRoll(
+  SignInSendUsernameWithFormik(SignInSendUsernameFormBase)
 )
 
-SignInResetPasswordForm.FieldEmail = ({ children }) => (
+SignInSendUsernameForm.FieldUsername = ({ children }) => (
   <AuthNRollFormField id='email'>{children}</AuthNRollFormField>
 )
 
-SignInResetPasswordForm.FieldUsername = ({ children }) => (
-  <AuthNRollFormField id='username'>{children}</AuthNRollFormField>
-)
-
-SignInResetPasswordForm.ButtonSubmit = ({ children }) => (
+SignInSendUsernameForm.ButtonSubmit = ({ children }) => (
   <AuthNRollFormButtonSubmit>{children}</AuthNRollFormButtonSubmit>
 )
 
-SignInResetPasswordForm.ButtonCancel = ({ children }) => (
+SignInSendUsernameForm.ButtonCancel = ({ children }) => (
   <AuthNRollFormButtonOnClick actionFunctionNameOnState='onCancel'>
     {children}
   </AuthNRollFormButtonOnClick>

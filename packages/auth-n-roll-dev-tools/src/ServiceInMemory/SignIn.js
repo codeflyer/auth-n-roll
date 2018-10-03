@@ -8,7 +8,10 @@ import {
 
 import { delay, getState } from './index'
 
-export const SignIn = async (username, password) => {
+export const SignIn = async (options) => {
+  const {username, password} = options
+  console.log('SignIn: ', options)
+
   await delay(1000)
 
   switch (getState('signinResponse')) {

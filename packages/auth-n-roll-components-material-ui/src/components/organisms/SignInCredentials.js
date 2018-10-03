@@ -1,5 +1,10 @@
 import React from 'react'
-import { SignInCredentialForm, withAuthNRoll, hasSignup } from 'auth-n-roll'
+import {
+  SignInCredentialForm,
+  withAuthNRoll,
+  hasSignup,
+  canSendUsername
+} from 'auth-n-roll'
 import { withStyles } from '@material-ui/core/styles/index'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -7,7 +12,9 @@ import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import EmailIcon from '@material-ui/icons/Email'
+import VerifiedUserIcon from '@material-ui/icons/VerifiedUser'
 import LockIcon from '@material-ui/icons/Lock'
+import { signInWith } from 'auth-n-roll'
 
 import { InputField } from '../molecules/InputField'
 
@@ -21,6 +28,7 @@ const styles = theme => ({
 })
 
 export const SignInCredentialsBase = ({ classes, authNRoll }) => {
+  const signWithEmail = signInWith(authNRoll) === 'email'
   return (
     <Card>
       <CardContent>
@@ -29,16 +37,29 @@ export const SignInCredentialsBase = ({ classes, authNRoll }) => {
             {authNRoll.labels.TITLE_SIGNIN_FORM}
           </Typography>
           <Grid container className={classes.root} spacing={16}>
-            <Grid item xs={12}>
-              <SignInCredentialForm.FieldUsername>
-                <InputField
-                  label={authNRoll.labels.EMAIL_LABEL}
-                  iconName='email'
-                  IconComponent={EmailIcon}
-                  placeholder={authNRoll.labels.EMAIL_PLACEHOLDER}
-                />
-              </SignInCredentialForm.FieldUsername>
-            </Grid>
+            {signWithEmail ? (
+              <Grid item xs={12}>
+                <SignInCredentialForm.FieldEmail>
+                  <InputField
+                    label={authNRoll.labels.EMAIL_LABEL}
+                    iconName='email'
+                    IconComponent={EmailIcon}
+                    placeholder={authNRoll.labels.EMAIL_PLACEHOLDER}
+                  />
+                </SignInCredentialForm.FieldEmail>
+              </Grid>
+            ) : (
+              <Grid item xs={12}>
+                <SignInCredentialForm.FieldUsername>
+                  <InputField
+                    label={authNRoll.labels.USERNAME_LABEL}
+                    iconName='username'
+                    IconComponent={VerifiedUserIcon}
+                    placeholder={authNRoll.labels.USERNAME_PLACEHOLDER}
+                  />
+                </SignInCredentialForm.FieldUsername>
+              </Grid>
+            )}
             <Grid item xs={12}>
               <SignInCredentialForm.FieldPassword>
                 <InputField
@@ -55,6 +76,14 @@ export const SignInCredentialsBase = ({ classes, authNRoll }) => {
                 <SignInCredentialForm.RequestSignUp>
                   <Button>{authNRoll.labels.CREATE_NEW_ACCOUNT}</Button>
                 </SignInCredentialForm.RequestSignUp>
+              </Grid>
+            )}
+
+            {canSendUsername(authNRoll) && (
+              <Grid item xs={12}>
+                <SignInCredentialForm.RequestSendUsername>
+                  <Button>{authNRoll.labels.SEND_USERNAME}</Button>
+                </SignInCredentialForm.RequestSendUsername>
               </Grid>
             )}
 

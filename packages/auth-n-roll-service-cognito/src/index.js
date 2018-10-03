@@ -1,3 +1,5 @@
+import 'babel-polyfill'
+
 import { SignOut } from './SignOut'
 import { SignUp } from './SignUp'
 import { SignIn } from './SignIn'

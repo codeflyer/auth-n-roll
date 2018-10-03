@@ -18,6 +18,7 @@
   "dependencies": {
     "auth-n-roll": "^0.1.10",
     "auth-n-roll-dev-tools": "^0.1.10",
+    "babel-polyfill": "^6.26.0",
     "clean-element": "^1.0.2",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",

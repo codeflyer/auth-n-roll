@@ -7,6 +7,8 @@ import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import EmailIcon from '@material-ui/icons/Email'
+import VerifiedUserIcon from '@material-ui/icons/VerifiedUser'
+import { getResetPasswordFields } from 'auth-n-roll'
 
 import { InputField } from '../molecules/InputField'
 
@@ -20,7 +22,7 @@ const styles = theme => ({
 })
 export const SignInResetPasswordBase = props => {
   const { classes, authNRoll } = props
-
+  const passwordFields = getResetPasswordFields(props.authNRoll)
   return (
     <Card>
       <CardContent>
@@ -34,15 +36,28 @@ export const SignInResetPasswordBase = props => {
                 {authNRoll.labels.RESET_PASSWORD_MESSAGE}
               </Typography>
             </Grid>
-            <Grid item xs={12}>
-              <SignInResetPasswordForm.FieldUsername>
-                <InputField
-                  label={authNRoll.labels.EMAIL_LABEL}
-                  IconComponent={EmailIcon}
-                  placeholder={authNRoll.labels.EMAIL_PLACEHOLDER}
-                />
-              </SignInResetPasswordForm.FieldUsername>
-            </Grid>
+            {passwordFields.includes('email') && (
+              <Grid item xs={12}>
+                <SignInResetPasswordForm.FieldEmail>
+                  <InputField
+                    label={authNRoll.labels.EMAIL_LABEL}
+                    IconComponent={EmailIcon}
+                    placeholder={authNRoll.labels.EMAIL_PLACEHOLDER}
+                  />
+                </SignInResetPasswordForm.FieldEmail>
+              </Grid>
+            )}
+            {passwordFields.includes('username') && (
+              <Grid item xs={12}>
+                <SignInResetPasswordForm.FieldUsername>
+                  <InputField
+                    label={authNRoll.labels.USERNAME_LABEL}
+                    IconComponent={VerifiedUserIcon}
+                    placeholder={authNRoll.labels.USERNAME_PLACEHOLDER}
+                  />
+                </SignInResetPasswordForm.FieldUsername>
+              </Grid>
+            )}
             <Grid container className={classes.actions} spacing={16}>
               <Grid item xs={6}>
                 <SignInResetPasswordForm.ButtonSubmit>
@@ -66,4 +81,6 @@ export const SignInResetPasswordBase = props => {
   )
 }
 
-export const SignInResetPassword = withStyles(styles)(withAuthNRoll(SignInResetPasswordBase))
+export const SignInResetPassword = withStyles(styles)(
+  withAuthNRoll(SignInResetPasswordBase)
+)

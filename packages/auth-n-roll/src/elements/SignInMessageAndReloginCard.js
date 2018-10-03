@@ -7,7 +7,8 @@ const titles = {
   'change-password-forced': 'TITLE_CHANGE_PASSWORD_FAILED',
   'confirm-sign-up': 'TITLE_USER_VERIFIED',
   'confirm-sign-up-fail': 'TITLE_USER_VERIFY_FAIL',
-  'reset-password-success': 'TITLE_RESET_PASSWORD_SUCCESS'
+  'reset-password-success': 'TITLE_RESET_PASSWORD_SUCCESS',
+  'send-username-success': 'TITLE_SEND_USERNAME_SUCCESS'
 }
 
 export const SignInMessageAndReloginCard = ({ children }) => (
@@ -22,18 +23,22 @@ SignInMessageAndReloginCard.Message = withAuthNRoll(({ authNRoll }) => {
 
 SignInMessageAndReloginCard.Title = withAuthNRoll(({ authNRoll }) => {
   return (
-    <React.Fragment>{authNRoll.labels[titles[getSignInMessage(authNRoll).from]] || ''}</React.Fragment>
-  )
-})
-
-SignInMessageAndReloginCard.RestartSignInButton = withAuthNRoll(({ authNRoll, authNRollActions, children }) => {
-  return (
     <React.Fragment>
-      {React.Children.map(children, child =>
-        React.cloneElement(child, {
-          onClick: authNRollActions.restartSignIn
-        })
-      )}
+      {authNRoll.labels[titles[getSignInMessage(authNRoll).from]] || ''}
     </React.Fragment>
   )
 })
+
+SignInMessageAndReloginCard.RestartSignInButton = withAuthNRoll(
+  ({ authNRoll, authNRollActions, children }) => {
+    return (
+      <React.Fragment>
+        {React.Children.map(children, child =>
+          React.cloneElement(child, {
+            onClick: authNRollActions.restartSignIn
+          })
+        )}
+      </React.Fragment>
+    )
+  }
+)

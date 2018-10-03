@@ -53,3 +53,4 @@ async function resetPassword(username) {
 export const getResetPasswordSendingState = (state) => get(state, 'resetPasswordState.sendingState')
 
 export const getResetPasswordSendingError = (state) => get(state, 'resetPasswordState.error') || {}
+export const getResetPasswordFields = (state) => state.resetPasswordFields

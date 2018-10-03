@@ -8,7 +8,10 @@ import {
 
 import { delay, getState } from './index'
 
-export const ConfirmSignUp = async (username, confirmationCode) => {
+export const ConfirmSignUp = async (options) => {
+  const {username, confirmationCode} = options
+  console.log('ConfirmSignUp: ', options)
+
   if (!confirmationCode || !username) {
     throw {
       code: VALIDATION_DATA_ERROR,

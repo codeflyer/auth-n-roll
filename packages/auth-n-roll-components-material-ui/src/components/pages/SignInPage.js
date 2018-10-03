@@ -6,6 +6,7 @@ import { SignInCredentials } from '../organisms/SignInCredentials'
 import { SignInChangePassword } from '../organisms/SignInChangePassword'
 import { SignInResetPassword } from '../organisms/SignInResetPassword'
 import { SignInConfirmSignUp } from '../organisms/SignInConfirmSignUp'
+import { SignInSendUsername } from '../organisms/SignInSendUsername'
 import { SignInMessageAndRelogin } from '../organisms/SignInMessageAndRelogin'
 
 const styles = theme => ({
@@ -29,9 +30,8 @@ export class SignInPageBase extends React.Component {
             <SignInChangePassword index={SignIn.FLOW_STEP_CHANGE_PASSWORD} />
             <SignInResetPassword index={SignIn.FLOW_STEP_RESET_PASSWORD} />
             <SignInConfirmSignUp index={SignIn.FLOW_STEP_CONFIRM_CODE} />
-            <SignInMessageAndRelogin
-              index={SignIn.FLOW_STEP_MESSAGE_AND_RELOGIN}
-            />
+            <SignInSendUsername index={SignIn.FLOW_STEP_SEND_USERNAME} />
+            <SignInMessageAndRelogin index={SignIn.FLOW_STEP_MESSAGE_AND_RELOGIN} />
           </SignIn>
         </div>
       </div>

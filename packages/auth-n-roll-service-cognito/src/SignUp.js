@@ -5,7 +5,7 @@ import {
   USERNAME_EXISTS_ERROR
 } from 'auth-n-roll'
 
-export const SignUp = async (cognito, stack, username, password) => {
+export const SignUp = async (cognito, stack,{ username, password}) => {
   if (!username || !password) {
     throw {
       code: VALIDATION_DATA_ERROR,

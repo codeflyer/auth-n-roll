@@ -7,11 +7,10 @@ import {
 
 import { delay, getState } from './index'
 
-export const ChangePasswordForced = async (
-  username,
-  newPassword,
-  session
-) => {
+export const ChangePasswordForced = async options => {
+  const { username, newPassword, session } = options
+  console.log('ChangePasswordForced: ', options)
+
   if (session !== '1234567890') {
     throw {
       code: VALIDATION_DATA_ERROR,

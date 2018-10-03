@@ -9,8 +9,11 @@ import {
 export const ConfirmSignUp = async (
   cognito,
   stack,
+  {
+
   username,
   confirmationCode
+  }
 ) => {
   if (!confirmationCode || !username) {
     throw {

@@ -69,3 +69,4 @@ export const getChallenge = state => state.signIn.challenge
 
 export const getSignInMessage = state => state.signIn.message || {}
 export const getSignUpMessage = state => state.signUp.message || {}
+export const signInWith = state => state.signInWith

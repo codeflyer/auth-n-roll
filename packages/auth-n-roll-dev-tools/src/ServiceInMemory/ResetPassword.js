@@ -1,10 +1,11 @@
-import {
-  RESET_PASSWORD_ERROR
-} from 'auth-n-roll'
+import { RESET_PASSWORD_ERROR } from 'auth-n-roll'
 
 import { delay, getState } from './index'
 
-export const ResetPassword = async username => {
+export const ResetPassword = async options => {
+  const { username, email } = options
+  console.log('SignUp: ', options)
+
   await delay(500)
   switch (getState('resetPassword')) {
     case RESET_PASSWORD_ERROR:
