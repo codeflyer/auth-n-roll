@@ -9,7 +9,7 @@ import {
   AuthNRollFormButtonSubmit,
   AuthNRollFormButtonOnClick
 } from '../consumers'
-import { USER_NOT_CONFIRMED_ERROR } from '../constants'
+import { USER_NOT_CONFIRMED_ERROR, INVALID_PASSWORD_ERROR } from '../constants'
 import { SignIn } from '../pages/SignIn'
 import { withAuthNRoll, FormContext } from '../contexts'
 import { signInWith } from '../store/selectors'
