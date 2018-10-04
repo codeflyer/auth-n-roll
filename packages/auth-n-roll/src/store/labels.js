@@ -4,6 +4,7 @@ const _labels = {
   INVALID_USERNAME: 'Invalid username',
   CONFIRMATION_SUCCESS: 'The user %(user.username)s was correctly verified.',
   USER_NOT_FOUND_ERROR: 'The user %(user.username)s was not found',
+  INVALID_PASSWORD_ERROR: 'The password is not valid',
   USER_NOT_CONFIRMED_ERROR: 'The user %(user.username)s was not confirmed yet',
   USERNAME_SENT_TO_EMAIL: 'The username was sent to the email %(user.email)s',
   RESET_PASSWORD_SENT_TO_USER: 'A reset password link was sent to the address %(user.username)s',

@@ -71,6 +71,13 @@ export const SignInCredentialsWithFormik = withFormik({
         props.authNRollActions.changeFlowIndex(SignIn.FLOW_STEP_CONFIRM_CODE)
         return
       }
+      if (e.code === INVALID_PASSWORD_ERROR) {
+        setErrors({password: sprintf(
+          props.authNRoll.labels[e.message],
+          { user: e.user }
+        )})
+        return
+      }
       setErrors({
         [signWithEmail ? 'email' : 'username']: sprintf(
           props.authNRoll.labels[e.message],
