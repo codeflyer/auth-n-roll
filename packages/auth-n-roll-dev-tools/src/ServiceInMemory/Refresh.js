@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   NOT_AUTHORIZED_ERROR
 } from 'auth-n-roll'

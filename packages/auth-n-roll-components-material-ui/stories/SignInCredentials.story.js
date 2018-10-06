@@ -7,18 +7,18 @@ import { ServiceInMemory } from '../../auth-n-roll-dev-tools'
 
 storiesOf('ComponentsMaterialUI/SignInCredentialsWithFormik', module)
   .add(
-  'Default',
-  () => (
-    <AuthNRollProvider authService={ServiceInMemory()}>
-      <SignInCredentials />
-    </AuthNRollProvider>
+    'Default',
+    () => (
+      <AuthNRollProvider authService={ServiceInMemory()}>
+        <SignInCredentials />
+      </AuthNRollProvider>
+    )
   )
-)
   .add(
-  'With send username',
-  () => (
-    <AuthNRollProvider authService={ServiceInMemory()} additionalFeatures={['sendUsername']}>
-      <SignInCredentials />
-    </AuthNRollProvider>
+    'With send username',
+    () => (
+      <AuthNRollProvider authService={ServiceInMemory()} additionalFeatures={['sendUsername']}>
+        <SignInCredentials />
+      </AuthNRollProvider>
+    )
   )
-)

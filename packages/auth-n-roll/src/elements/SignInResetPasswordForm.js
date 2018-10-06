@@ -11,6 +11,7 @@ import {
 import { withAuthNRoll, FormContext } from '../contexts'
 import { SignIn } from '../pages/SignIn'
 import { getResetPasswordFields } from '../store/resetPassword'
+import { EMAIL_AND_USER_DONT_MATCH_ERROR, USER_NOT_FOUND_ERROR } from '../constants'
 
 export const SignInResetPasswordWithFormik = withFormik({
   mapPropsToValues: props => ({
@@ -63,6 +64,21 @@ export const SignInResetPasswordWithFormik = withFormik({
       )
     } catch (e) {
       setSubmitting(false)
+      if (e.code === USER_NOT_FOUND_ERROR) {
+        setErrors({username: sprintf(
+          props.authNRoll.labels[e.message],
+          { user: e.user }
+        )})
+        return
+      }
+
+      if (e.code === EMAIL_AND_USER_DONT_MATCH_ERROR) {
+        setErrors({email: sprintf(
+          props.authNRoll.labels[e.message],
+          { user: e.user }
+        )})
+        return
+      }
       setErrors({
         email: sprintf(props.authNRoll.labels[e.message], { user: e.user })
       })

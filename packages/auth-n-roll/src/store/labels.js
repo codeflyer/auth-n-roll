@@ -4,6 +4,8 @@ const _labels = {
   INVALID_USERNAME: 'Invalid username',
   CONFIRMATION_SUCCESS: 'The user %(user.username)s was correctly verified.',
   USER_NOT_FOUND_ERROR: 'The user %(user.username)s was not found',
+  EMAIL_NOT_FOUND_ERROR: 'The email %(user.email)s was not found',
+  EMAIL_AND_USER_DONT_MATCH_ERROR: 'The email don\'t belong to the user',
   INVALID_PASSWORD_ERROR: 'The password is not valid',
   USER_NOT_CONFIRMED_ERROR: 'The user %(user.username)s was not confirmed yet',
   USERNAME_SENT_TO_EMAIL: 'The username was sent to the email %(user.email)s',
@@ -53,6 +55,7 @@ const _labels = {
   BUTTON_CANCEL: 'Cancel',
   BUTTON_CONFIRM: 'Confirm',
   BUTTON_RESET: 'Reset',
+  BUTTON_SEND: 'Send',
   BUTTON_BACK_TO_SIGNIN: 'Back to sign in'
 }
 

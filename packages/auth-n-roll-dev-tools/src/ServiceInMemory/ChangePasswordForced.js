@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   USER_NOT_FOUND_ERROR,
   GENERIC_ERROR,

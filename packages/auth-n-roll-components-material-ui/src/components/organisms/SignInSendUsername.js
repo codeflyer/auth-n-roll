@@ -47,7 +47,7 @@ export const SignInSendUsernameBase = props => {
               <Grid item xs={6}>
                 <SignInSendUsernameForm.ButtonSubmit>
                   <Button variant='contained' color='primary' fullWidth>
-                    {authNRoll.labels.BUTTON_RESET}
+                    {authNRoll.labels.BUTTON_SEND}
                   </Button>
                 </SignInSendUsernameForm.ButtonSubmit>
               </Grid>

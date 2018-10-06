@@ -1,9 +1,10 @@
+/* eslint-disable no-console */
 import { RESET_PASSWORD_ERROR } from 'auth-n-roll'
 
 import { delay, getState } from './index'
 
 export const ResetPassword = async options => {
-  const { username, email } = options
+  const { username } = options
   console.log('SignUp: ', options)
 
   await delay(500)

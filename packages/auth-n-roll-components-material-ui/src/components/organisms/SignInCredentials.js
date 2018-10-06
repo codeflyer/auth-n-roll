@@ -3,7 +3,8 @@ import {
   SignInCredentialForm,
   withAuthNRoll,
   hasSignup,
-  canSendUsername
+  canSendUsername,
+  signInWith
 } from 'auth-n-roll'
 import { withStyles } from '@material-ui/core/styles/index'
 import Card from '@material-ui/core/Card'
@@ -14,7 +15,6 @@ import Typography from '@material-ui/core/Typography'
 import EmailIcon from '@material-ui/icons/Email'
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser'
 import LockIcon from '@material-ui/icons/Lock'
-import { signInWith } from 'auth-n-roll'
 
 import { InputField } from '../molecules/InputField'
 

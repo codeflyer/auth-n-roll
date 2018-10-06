@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   VALIDATION_DATA_ERROR,
   USER_NOT_FOUND_ERROR,

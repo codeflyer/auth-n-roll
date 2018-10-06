@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { SEND_USERNAME_ERROR } from 'auth-n-roll'
 
 import { delay, getState } from './index'

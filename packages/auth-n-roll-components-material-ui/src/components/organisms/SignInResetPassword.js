@@ -1,5 +1,5 @@
 import React from 'react'
-import { SignInResetPasswordForm, withAuthNRoll } from 'auth-n-roll'
+import { SignInResetPasswordForm, withAuthNRoll, getResetPasswordFields } from 'auth-n-roll'
 import { withStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import EmailIcon from '@material-ui/icons/Email'
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser'
-import { getResetPasswordFields } from 'auth-n-roll'
 
 import { InputField } from '../molecules/InputField'
 

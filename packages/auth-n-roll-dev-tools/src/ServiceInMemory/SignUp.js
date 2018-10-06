@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   USERNAME_EXISTS_ERROR,
   NOT_AUTHORIZED_ERROR,
@@ -6,8 +7,8 @@ import {
 
 import { delay, getState } from './index'
 
-export const SignUp = async (options) => {
-  const {username, password} = options
+export const SignUp = async options => {
+  const { username } = options
   console.log('SignUp: ', options)
   await delay(1000)
 

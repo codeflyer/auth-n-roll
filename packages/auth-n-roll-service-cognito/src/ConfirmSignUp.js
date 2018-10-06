@@ -11,8 +11,8 @@ export const ConfirmSignUp = async (
   stack,
   {
 
-  username,
-  confirmationCode
+    username,
+    confirmationCode
   }
 ) => {
   if (!confirmationCode || !username) {

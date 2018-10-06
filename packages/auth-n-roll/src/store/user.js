@@ -24,7 +24,7 @@ export function getDefaultState() {
 async function refresh(store, user, authData) {
   if (refreshFunc) clearTimeout(refreshFunc)
 
-  if(store.props.disableRefresh) {
+  if (store.props.disableRefresh) {
     store.updateState({
       user,
       signUpUser: null,
@@ -35,7 +35,6 @@ async function refresh(store, user, authData) {
     })
     return
   }
-
 
   try {
     const result = await authService.refresh(authData.RefreshToken)
