@@ -11,6 +11,8 @@ import { SignInMessageAndRelogin } from '../organisms/SignInMessageAndRelogin'
 
 const styles = theme => ({
   root: {
+    position: 'fixed',
+    zIndex: '100',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

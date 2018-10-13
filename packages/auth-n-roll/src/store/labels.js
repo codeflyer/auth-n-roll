@@ -14,6 +14,7 @@ const _labels = {
   VALIDATION_DATA_ERROR: 'Username and password required',
   PWD_NOT_MATCH_ERROR: "The password doesn't match",
   USERNAME_EXISTS_ERROR: 'Username exists',
+  EMAIL_EXISTS_ERROR: 'Email exists',
 
   TITLE_CHANGE_PASSWORD_FAILED: 'Change password failed',
   TITLE_USER_VERIFIED: 'User verified',
