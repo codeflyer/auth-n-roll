@@ -1,4 +1,5 @@
 import { getDefaultState as getDefaultFlowState } from './flows'
+
 let cookiePrefix = ''
 let refreshFunc
 let authService
