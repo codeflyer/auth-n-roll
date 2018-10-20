@@ -101,9 +101,7 @@ function setSignUpUser(signUpUser) {
   this.updateState({ signUpUser })
 }
 
-async function signOut(props) {
-  await authService.signOut()
-
+async function resetSessionAndUser(props) {
   if (refreshFunc) clearTimeout(refreshFunc)
 
   if (window.localStorage) {
@@ -120,6 +118,12 @@ async function signOut(props) {
     refreshLastError: null,
     isRehydrating: false
   })
+}
+
+async function signOut(props) {
+  await authService.signOut()
+
+  resetSessionAndUser(props)
 
   props.onSignOut && props.onSignOut()
 }
@@ -131,7 +135,8 @@ export function getActions(store, props = {}) {
     setLoggedInUser: setLoggedInUser.bind(store, props),
     rehydrateUser: rehydrateUser.bind(store),
     storeUser: storeUser.bind(store),
-    signOut: signOut.bind(store, props)
+    signOut: signOut.bind(store, props),
+    resetSessionAndUser: resetSessionAndUser.bind(store, props)
   }
 }
 
