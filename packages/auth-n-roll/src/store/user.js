@@ -101,7 +101,7 @@ function setSignUpUser(signUpUser) {
   this.updateState({ signUpUser })
 }
 
-async function resetSessionAndUser(props) {
+async function resetSessionAndUser() {
   if (refreshFunc) clearTimeout(refreshFunc)
 
   if (window.localStorage) {
@@ -123,7 +123,7 @@ async function resetSessionAndUser(props) {
 async function signOut(props) {
   await authService.signOut()
 
-  resetSessionAndUser(props)
+  resetSessionAndUser.call(this)
 
   props.onSignOut && props.onSignOut()
 }
