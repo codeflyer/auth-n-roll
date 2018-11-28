@@ -22,7 +22,7 @@ class AuthProtectedBase extends React.Component {
     const isLogged = isLoggedIn(nextProps.authNRoll)
     return {
       isLoggedIn: isLogged,
-      requireLogin: !prevState.requireLogin && !isLogged
+      requireLogin: !isLogged
     }
   }
 
