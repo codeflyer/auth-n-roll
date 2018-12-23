@@ -1,4 +1,5 @@
-import { getDefaultState as getDefaultFlowState } from './flows'
+import jsonwebtoken from 'jsonwebtoken'
+import {getDefaultState as getDefaultFlowState} from './flows'
 
 let cookiePrefix = ''
 let refreshFunc
@@ -62,7 +63,7 @@ async function refresh(store, user, authData) {
       refreshIn
     )
 
-    store.props && store.props.onSignIn && store.props.onSignIn({ user, authData: result.authData })
+    store.props && store.props.onSignIn && store.props.onSignIn({user, authData: result.authData})
   } catch (e) {
     await store.updateState({
       user: null,
@@ -91,15 +92,15 @@ async function setLoggedInUser(props, user, authData) {
 
   refreshFunc = setTimeout(() => refresh(this, user, authData), refreshIn)
   storeUser(user, authData)
-  props.onSignIn && props.onSignIn({ user, authData })
+  props.onSignIn && props.onSignIn({user, authData})
 }
 
 function setUser(user) {
-  this.updateState({ user })
+  this.updateState({user})
 }
 
 function setSignUpUser(signUpUser) {
-  this.updateState({ signUpUser })
+  this.updateState({signUpUser})
 }
 
 async function resetSessionAndUser() {
@@ -153,11 +154,10 @@ function rehydrateUser() {
     )
 
     if (!user || !authData) return
-
-    this.updateState({ isRehydrating: true })
+    const JWT = jsonwebtoken.decode(authData.AccessToken)
+    this.updateState({isRehydrating: true})
     if (
-      authData.Expires &&
-      authData.Expires - Math.floor(Date.now() / 1000) > 0
+      JWT.exp > (new Date()).getTime() / 1000
     ) {
       return refresh(this, user, authData)
     } else {
@@ -165,7 +165,7 @@ function rehydrateUser() {
       window.localStorage.removeItem(`${cookiePrefix}auth-n-roll-auth-data`)
     }
   } catch (e) {
-    this.updateState({ isRehydrating: false })
+    this.updateState({isRehydrating: false})
   }
 }
 
