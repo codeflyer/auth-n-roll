@@ -1,6 +1,6 @@
 {
   "name": "auth-n-roll-dev-tools",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   "author": "Davide Fiorello <davide@codeflyer.com> (http://github.com/codeflyer/)",
   "license": "Apache-2.0",
   "dependencies": {
-    "auth-n-roll": "^0.1.20",
+    "auth-n-roll": "^0.1.21",
     "babel-polyfill": "^6.26.0"
   },
   "devDependencies": {
